@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+    <!-- 使用xml方法设置SlidingMenu -->
+
+    <com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
+        xmlns:sliding="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slidingmenulayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        sliding:behindWidth="190dp"
+        sliding:fadeDegree="0.35"
+        sliding:fadeEnabled="true"
+        sliding:selectorEnabled="true"
+        sliding:touchModeAbove="fullscreen"
+        sliding:viewAbove="@layout/custom_title"
+        sliding:viewBehind="@layout/myview" />
+
+</RelativeLayout>
