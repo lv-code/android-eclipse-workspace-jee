@@ -27,10 +27,12 @@ public class MainActivity extends Activity {
 	TextView tv;
 	Button btn;
 	// ListView相关
-	private static final String[] strs = new String[] { "Handler详细机制", "HttpClient联系",
-			"解析XML", "侧边栏字母导航", "Fragment ViewPager碎片管理", "滑动菜单demo" };
-	private static final String[] desc = new String[] {"第一个小例子完成，但是不理解意思呢？？？",
-		"编写HttpClientTools","从网上找个小例子练习","从网上找的字母检索例子","需要不断练习", "SlidingMenu从github" };
+	private static final String[] strs = new String[] { "Handler详细机制",
+			"HttpClient联系", "解析XML", "侧边栏字母导航", "Fragment ViewPager碎片管理",
+			"滑动菜单demo", "又上角的圆圈demo" };
+	private static final String[] desc = new String[] { "第一个小例子完成，但是不理解意思呢？？？",
+			"编写HttpClientTools", "从网上找个小例子练习", "从网上找的字母检索例子", "需要不断练习",
+			"SlidingMenu从github", "badge from github" };
 	private ListView lv;
 
 	// end
@@ -45,8 +47,8 @@ public class MainActivity extends Activity {
 		// 启动activity时，不自动弹出软键盘
 		MyHelper.setSoftInputMode(this);
 		init();
-//		initListView1();
-		 initListView2();
+		// initListView1();
+		initListView2();
 	}
 
 	private void init() {
@@ -109,7 +111,8 @@ public class MainActivity extends Activity {
 				bundle.putString("from", "from MainActivity item 0 click");
 				break;
 			case 1:
-				intent.setClass(getApplicationContext(), HttpClientActivity.class);
+				intent.setClass(getApplicationContext(),
+						HttpClientActivity.class);
 				break;
 			case 2:
 				intent.setClass(getApplicationContext(), ParseXML.class);
@@ -123,11 +126,14 @@ public class MainActivity extends Activity {
 			case 5:
 				intent.setClass(getApplicationContext(), SlidingMenuDemo.class);
 				break;
+			case 6:
+				intent.setClass(getApplicationContext(), ViewBadgerDemo.class);
+				break;
 			default:
 				break;
 			}
-			
-			if (null == intent) 
+
+			if (null == intent)
 				setTitle("你点击了第" + position + "行"); // 点击屏幕后显示第几行
 			intent.putExtras(bundle);
 			startActivity(intent);
