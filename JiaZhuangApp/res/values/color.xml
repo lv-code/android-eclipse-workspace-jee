@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 标题栏 -->
+    <color name="title_bar_bg">#aaaaaa</color>
+    <color name="title_text">#ffffff</color>
+    <!-- 流程 -->
+    <color name="flow_listview_bg">#7d8289</color>
+    <color name="flow_listview_item_bg">#6f7783</color>
+    <color name="flow_listview_item_text">#fff</color>
+    <color name="style_blue">#1122ff</color>
+    <color name="bottom_item_line_color">#111111</color>
+    <color name="title_color_white">#ffffff</color>
+    <color name="title_button_color_gray">#e5e9ec</color>
+    <color name="bottom_item_text_selector">#585858</color>
+    <color name="login_bg">#ccc</color>
+    <color name="login_white">#fff</color>
+
+</resources>
