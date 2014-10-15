@@ -3,12 +3,47 @@
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="#ddd" >
+<RelativeLayout
+    android:id="@+id/my_title_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/title_bar_bg"
+    android:layout_alignParentTop="true"
+    android:orientation="horizontal">
 
+    <Button
+        android:id="@+id/head_TitleBackBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/back_60x60"
+        android:onClick="goBack"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/head_center_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="流程"
+        android:textColor="@color/title_text" />
+
+    <Button
+        android:id="@+id/title_right_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/title_right_btn"
+        android:gravity="center" />
+</RelativeLayout>
     <LinearLayout
         android:id="@+id/topline"
         android:layout_width="fill_parent"
         android:layout_height="36dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/my_title_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="#00aaaaaa"

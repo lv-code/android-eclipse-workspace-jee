@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,13 +23,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class FlowActivity extends Activity {
@@ -47,11 +44,10 @@ public class FlowActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// 自定义Activity标题栏
-		CustomTitleBar.getTitleBar(this, "装修流程");
+		MyHelper.setNoTitle(FlowActivity.this);
 		// 给返回按钮绑定监听器
-		goBack();
 		setContentView(R.layout.activity_flow);
+		goBack();
 		flow_name = (TextView)findViewById(R.id.flow_name);
 		
 		initSlidingMenu();
@@ -68,7 +64,9 @@ public class FlowActivity extends Activity {
 		badge1.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
 		badge1.show(true);
 		
-		View target2 = mPage0.findViewById(R.id.ImageView0);
+		LayoutInflater mLi = LayoutInflater.from(this);
+		View view1 = mLi.inflate(R.layout.flow_page0, null);
+		View target2 = view1.findViewById(R.id.ImageView0);
 		BadgeView badge2 = new BadgeView(this, target2);
 		badge2.setText("99");
 		badge2.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
@@ -125,6 +123,7 @@ public class FlowActivity extends Activity {
 		menu.setMenu(R.layout.flow_slidingmenu_fragment);
 
 		// 给titlebar添加按钮
+		/*
 		Button titleRightBtn = new Button(this);
 		titleRightBtn.setBackgroundResource(R.drawable.title_right_btn);
 		// titleRightBtn.setBackgroundColor(R.color.style_blue);
@@ -134,9 +133,10 @@ public class FlowActivity extends Activity {
 		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
 		titleRightBtn.setLayoutParams(params);
 
-		RelativeLayout titleBar = (RelativeLayout) findViewById(R.id.titleBar);
-		titleBar.addView(titleRightBtn);
-		titleRightBtn.setOnClickListener(new OnClickListener() {
+		myTitleBar.addView(titleRightBtn);
+		 */
+		Button title_right_btn = (Button) findViewById(R.id.title_right_btn);
+		title_right_btn.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
