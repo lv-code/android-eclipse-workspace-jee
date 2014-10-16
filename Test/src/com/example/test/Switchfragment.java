@@ -44,7 +44,7 @@ public class Switchfragment extends FragmentActivity implements OnClickListener 
      */  
     Fragment1 oneFragment;  
     Fragment2 twoFragment;  
-    Fragment3 threeFragment;  
+    FragmentTest threeFragment;  
     Fragment4 fourFragment;  
     FragmentTest testFragment;
       
@@ -75,7 +75,7 @@ public class Switchfragment extends FragmentActivity implements OnClickListener 
         fragmentList=new ArrayList<Fragment>();  
         oneFragment=new Fragment1();  
         twoFragment=new Fragment2();  
-        threeFragment=new Fragment3();  
+        threeFragment=FragmentTest.newInstance("这是一个测试fragment from threeFragment"); 
         testFragment=FragmentTest.newInstance("这是一个测试fragment");
           
         fragmentList.add(oneFragment);  
