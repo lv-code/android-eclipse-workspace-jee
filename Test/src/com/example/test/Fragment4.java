@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ThreeFragment extends Fragment {
+public class Fragment4 extends Fragment {
 
-	public ThreeFragment() {
+	public Fragment4() {
 		// TODO Auto-generated constructor stub
 	}
 	

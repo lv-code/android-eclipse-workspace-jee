@@ -66,8 +66,11 @@ public class MyHelper {
 				"content://com.paad.earthquake/earthquakes/");
 	}
 
-	public static void fullScreen() {
+	public static void setNoTitle() {
 		mActivity.requestWindowFeature(Window.FEATURE_NO_TITLE);// 去掉标题栏
+	}
+	
+	public static void fullScreen() {
 		mActivity.getWindow().setFlags(
 				WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN); // 全屏显示

@@ -69,7 +69,7 @@
             android:label="@string/title_activity_sliding_menu" >
         </activity>
         <activity
-            android:name=".ViewBadgerDemo"
+            android:name=".FragmentTest"
             android:label="@string/title_activity_badge_view_demo" >
         </activity>
         <activity

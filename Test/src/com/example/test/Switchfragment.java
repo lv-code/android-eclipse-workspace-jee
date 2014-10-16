@@ -42,10 +42,11 @@ public class Switchfragment extends FragmentActivity implements OnClickListener 
     /** 
      * 四个Fragment（页面） 
      */  
-    OneFragment oneFragment;  
-    TwoFragment twoFragment;  
-    ThreeFragment threeFragment;  
-    FourFragment fourFragment;  
+    Fragment1 oneFragment;  
+    Fragment2 twoFragment;  
+    Fragment3 threeFragment;  
+    Fragment4 fourFragment;  
+    FragmentTest testFragment;
       
     //覆盖层  
     ImageView imageviewOvertab;  
@@ -72,15 +73,15 @@ public class Switchfragment extends FragmentActivity implements OnClickListener 
         mViewPager=(ViewPager) findViewById(R.id.viewpager);  
           
         fragmentList=new ArrayList<Fragment>();  
-        oneFragment=new OneFragment();  
-        twoFragment=new TwoFragment();  
-        threeFragment=new ThreeFragment();  
-        fourFragment=new FourFragment();  
+        oneFragment=new Fragment1();  
+        twoFragment=new Fragment2();  
+        threeFragment=new Fragment3();  
+        testFragment=FragmentTest.newInstance("这是一个测试fragment");
           
         fragmentList.add(oneFragment);  
         fragmentList.add(twoFragment);  
         fragmentList.add(threeFragment);  
-        fragmentList.add(fourFragment);  
+        fragmentList.add(testFragment);
           
         screenWidth=getResources().getDisplayMetrics().widthPixels;  
           

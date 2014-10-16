@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
 				intent.setClass(getApplicationContext(), SlidingMenuDemo.class);
 				break;
 			case 6:
-				intent.setClass(getApplicationContext(), ViewBadgerDemo.class);
+				intent.setClass(getApplicationContext(), FragmentTest.class);
 				break;
 			default:
 				break;

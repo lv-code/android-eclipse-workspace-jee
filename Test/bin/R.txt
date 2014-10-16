@@ -424,9 +424,9 @@ int layout activity_main 0x7f03001b
 int layout activity_parse_xml 0x7f03001c
 int layout activity_side_bar_test 0x7f03001d
 int layout activity_view_badger_test 0x7f03001e
-int layout activity_viewbadger_demo 0x7f03001f
-int layout custom_title 0x7f030020
-int layout demos 0x7f030021
+int layout custom_title 0x7f03001f
+int layout demos 0x7f030020
+int layout fragment_test 0x7f030021
 int layout iconlist 0x7f030022
 int layout left_drawer_fragment 0x7f030023
 int layout linear_layout 0x7f030024
