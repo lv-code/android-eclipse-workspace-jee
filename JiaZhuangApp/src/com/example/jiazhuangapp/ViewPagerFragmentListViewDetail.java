@@ -1,6 +1,8 @@
 package com.example.jiazhuangapp;
 
 
+import com.readystatesoftware.viewbadger.BadgeView;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,6 +25,12 @@ public class ViewPagerFragmentListViewDetail extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		
+		View target1 = getActivity().findViewById(R.id.textview01);
+		BadgeView badge1 = new BadgeView(getActivity(), target1);
+		badge1.setText("1");
+		badge1.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+		badge1.show(true);
 	}
 
 }

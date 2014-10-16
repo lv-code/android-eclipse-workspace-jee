@@ -16,5 +16,7 @@
     <color name="bottom_item_text_selector">#585858</color>
     <color name="login_bg">#ccc</color>
     <color name="login_white">#fff</color>
+    <!-- 个人中心 -->
+    <color name="userinfo_bg">#c8c8c8</color>
 
 </resources>

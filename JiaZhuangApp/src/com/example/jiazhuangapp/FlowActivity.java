@@ -2,21 +2,21 @@ package com.example.jiazhuangapp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.readystatesoftware.viewbadger.BadgeView;
 
-import android.app.ActionBar.LayoutParams;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,20 +25,21 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class FlowActivity extends Activity {
+public class FlowActivity extends FragmentActivity {
 	Context context = FlowActivity.this;
-	private ViewPager mViewPager;
-	private ImageView mPage0;
-	private ImageView mPage1;
-	private ImageView mPage2;
-	private int currIndex = 0;
+	List<Fragment> fragmentList = new ArrayList<Fragment>();
+	Fragment fragment1, fragment2, fragment3;
+	private ViewPager viewpager;
+	private ImageView page0;
+	private ImageView page1;
+	private ImageView page2;
+	public int currIndex = 0;
 	private SlidingMenu menu;
-	//进度名称
+	// 进度名称
 	private TextView flow_name;
 
 	@Override
@@ -48,40 +49,25 @@ public class FlowActivity extends Activity {
 		// 给返回按钮绑定监听器
 		setContentView(R.layout.activity_flow);
 		goBack();
-		flow_name = (TextView)findViewById(R.id.flow_name);
-		
+		flow_name = (TextView) findViewById(R.id.flow_name);
+
 		initSlidingMenu();
 		initListView();
 		initViewPager();
-		initViewBadger();
-	}
-
-	public void initViewBadger() {
-
-		View target1 = findViewById(R.id.flow_name);
-		BadgeView badge1 = new BadgeView(this, target1);
-		badge1.setText("1");
-		badge1.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-		badge1.show(true);
 		
-		LayoutInflater mLi = LayoutInflater.from(this);
-		View view1 = mLi.inflate(R.layout.flow_page0, null);
-		View target2 = view1.findViewById(R.id.ImageView0);
-		BadgeView badge2 = new BadgeView(this, target2);
-		badge2.setText("99");
-		badge2.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-		badge2.show(true);
 	}
 
+
+//抽屉导航--侧边栏的列表数据
 	public void initListView() {
 		final String[] mListImage = { "flow_1_qianqi", "flow_2_kaigongzhunbei",
 				"flow_3_kaigong", "flow_4_shuidian", "flow_5_niwa",
 				"flow_6_mugong", "flow_7_youqi", "flow_8_anzhuang" };
 		final String[] mListTitle = { "前期", "开工准备", "开工", "水电", "泥瓦", "木工",
 				"油漆", "安装" };
-		ListView lv_simpleAdapter;
+		ListView listview;
 		ArrayList<Map<String, Object>> mData = new ArrayList<Map<String, Object>>();
-		lv_simpleAdapter = (ListView) findViewById(R.id.right_drawer);
+		listview = (ListView) findViewById(R.id.right_drawer);
 		Resources res = context.getResources();
 		int length = mListTitle.length;
 		for (int i = 0; i < length; i++) {
@@ -95,15 +81,15 @@ public class FlowActivity extends Activity {
 		SimpleAdapter adapter = new SimpleAdapter(this, mData,
 				R.layout.flow_listview_item, new String[] { "image", "title" },
 				new int[] { R.id.itemImage, R.id.itemTitle });
-		lv_simpleAdapter.setAdapter(adapter);
-		lv_simpleAdapter.setOnItemClickListener(new OnItemClickListener() {
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
 				flow_name.setText(mListTitle[position]);
 				menu.showContent();
-//				Toast.makeText(context, "您选择了标题：" + mListTitle[position],
-//						Toast.LENGTH_LONG).show();
+				// Toast.makeText(context, "您选择了标题：" + mListTitle[position],
+				// Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -124,16 +110,16 @@ public class FlowActivity extends Activity {
 
 		// 给titlebar添加按钮
 		/*
-		Button titleRightBtn = new Button(this);
-		titleRightBtn.setBackgroundResource(R.drawable.title_right_btn);
-		// titleRightBtn.setBackgroundColor(R.color.style_blue);
-		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-		params.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-		titleRightBtn.setLayoutParams(params);
-
-		myTitleBar.addView(titleRightBtn);
+		 * Button titleRightBtn = new Button(this);
+		 * titleRightBtn.setBackgroundResource(R.drawable.title_right_btn);
+		 * titleRightBtn.setBackgroundColor(R.color.style_blue);
+		 * RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+		 * LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		 * params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,
+		 * RelativeLayout.TRUE); params.addRule(RelativeLayout.ALIGN_PARENT_TOP,
+		 * RelativeLayout.TRUE); titleRightBtn.setLayoutParams(params);
+		 * 
+		 * myTitleBar.addView(titleRightBtn);
 		 */
 		Button title_right_btn = (Button) findViewById(R.id.title_right_btn);
 		title_right_btn.setOnClickListener(new OnClickListener() {
@@ -149,74 +135,51 @@ public class FlowActivity extends Activity {
 	}
 
 	public void initViewPager() {
-		mViewPager = (ViewPager) findViewById(R.id.flow_viewpager);
-		mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+		viewpager = (ViewPager) findViewById(R.id.flow_viewpager);
+		// 设置每个tab对应的 fragment
+		// fragment1 = new UserinfoActivity();
+		fragment1 = FragmentTest.newInstance("测试Fragment1");
+		fragment2 = FragmentTest.newInstance("测试Fragment2");
+		fragment3 = FragmentTest.newInstance("测试Fragment3");
 
-		mPage0 = (ImageView) findViewById(R.id.page0);
-		mPage1 = (ImageView) findViewById(R.id.page1);
-		mPage2 = (ImageView) findViewById(R.id.page2);
+		fragmentList.add(fragment1);
+		fragmentList.add(fragment2);
+		fragmentList.add(fragment3);
+		viewpager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),
+				fragmentList));
+		viewpager.setCurrentItem(0);
 
-		// 将要分页显示的View装入数组中
-		LayoutInflater mLi = LayoutInflater.from(this);
-		View view1 = mLi.inflate(R.layout.flow_page0, null);
-		View view2 = mLi.inflate(R.layout.flow_page1, null);
-		View view3 = mLi.inflate(R.layout.flow_page2, null);
+		page0 = (ImageView) findViewById(R.id.page0);
+		page1 = (ImageView) findViewById(R.id.page1);
+		page2 = (ImageView) findViewById(R.id.page2);
 
-		// 每个页面的view数据
-		final ArrayList<View> views = new ArrayList<View>();
-		views.add(view1);
-		views.add(view2);
-		views.add(view3);
-		// 填充ViewPager的数据适配器
-		PagerAdapter mPagerAdapter = new PagerAdapter() {
-
-			@Override
-			public boolean isViewFromObject(View arg0, Object arg1) {
-				return arg0 == arg1;
-			}
-
-			@Override
-			public int getCount() {
-				return views.size();
-			}
-
-			@Override
-			public void destroyItem(View container, int position, Object object) {
-				((ViewPager) container).removeView(views.get(position));
-			}
-
-			@Override
-			public Object instantiateItem(View container, int position) {
-				((ViewPager) container).addView(views.get(position));
-				return views.get(position);
-			}
-		};
-
-		mViewPager.setAdapter(mPagerAdapter);
+		viewpager.setOnPageChangeListener(new MyOnPageChangeListener());
 	}
 
+	//定义内部类
 	public class MyOnPageChangeListener implements OnPageChangeListener {
+
 		@Override
 		public void onPageSelected(int arg0) {
 			switch (arg0) {
 			case 0:
-				mPage0.setImageDrawable(getResources().getDrawable(
+				page0.setImageDrawable(getResources().getDrawable(
 						R.drawable.page_now));
-				mPage1.setImageDrawable(getResources().getDrawable(
+				page1.setImageDrawable(getResources().getDrawable(
 						R.drawable.page));
 				break;
 			case 1:
-				mPage1.setImageDrawable(getResources().getDrawable(
+				page1.setImageDrawable(getResources().getDrawable(
 						R.drawable.page_now));
-				mPage0.setImageDrawable(getResources().getDrawable(
+				page0.setImageDrawable(getResources().getDrawable(
 						R.drawable.page));
-				mPage2.setImageDrawable(getResources().getDrawable(
+				page2.setImageDrawable(getResources().getDrawable(
 						R.drawable.page));
 				break;
 			case 2:
-				mPage2.setImageDrawable(getResources().getDrawable(
+				page2.setImageDrawable(getResources().getDrawable(
 						R.drawable.page_now));
-				mPage1.setImageDrawable(getResources().getDrawable(
+				page1.setImageDrawable(getResources().getDrawable(
 						R.drawable.page));
 				break;
 
@@ -224,7 +187,7 @@ public class FlowActivity extends Activity {
 			currIndex = arg0;
 			// animation.setFillAfter(true);// True:图片停在动画结束位置
 			// animation.setDuration(300);
-			// mPageImg.startAnimation(animation);
+			// pageImg.startAnimation(animation);
 		}
 
 		@Override
@@ -233,6 +196,41 @@ public class FlowActivity extends Activity {
 
 		@Override
 		public void onPageScrollStateChanged(int arg0) {
+		}
+	}
+
+	/**
+	 * 定义适配器
+	 * 
+	 */
+	public class MyPagerAdapter extends FragmentPagerAdapter {
+
+		private List<Fragment> fragmentList;
+
+		public MyPagerAdapter(FragmentManager fm) {
+			super(fm);
+		}
+
+		public MyPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+			super(fm);
+			this.fragmentList = fragmentList;
+		}
+
+		/**
+		 * 得到每个页面
+		 */
+		@Override
+		public Fragment getItem(int arg0) {
+			return (fragmentList == null || fragmentList.size() == 0) ? null
+					: fragmentList.get(arg0);
+		}
+
+		/**
+		 * 页面的总个数
+		 */
+		@Override
+		public int getCount() {
+			return fragmentList == null ? 0 : fragmentList.size();
 		}
 	}
 

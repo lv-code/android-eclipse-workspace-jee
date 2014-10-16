@@ -3,6 +3,8 @@ package com.example.jiazhuangapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.readystatesoftware.viewbadger.BadgeView;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,7 +25,7 @@ import android.widget.Toast;
 
 public class LjljActivity extends FragmentActivity {
 	Context context;
-	private ViewPager vp;
+	private ViewPager mViewPager;
 	private TextView textView1, textView2, textView3;
 	/** 页面list **/
 	List<Fragment> fragmentList = new ArrayList<Fragment>();
@@ -57,8 +59,8 @@ public class LjljActivity extends FragmentActivity {
 		setContentView(R.layout.activity_ljlj);
 		// InitImageView();
 		// Log.i("break point 1", "11111");
-		InitTextView();
-		InitViewPager();
+		initTextView();
+		initViewPager();
 		// initListView2();
 	}
 
@@ -100,7 +102,7 @@ public class LjljActivity extends FragmentActivity {
 		// ViewPagerFragmentListViewDetail FB = new
 		// ViewPagerFragmentListViewDetail();
 		// fragmentList.set(1, FB);
-		// vp.setCurrentItem(2);
+		// mViewPager.setCurrentItem(2);
 		// Bundle args = new Bundle();
 		// // args.putString("code", smenu.getCode());
 		// args.putString("code", "123code");
@@ -129,7 +131,7 @@ public class LjljActivity extends FragmentActivity {
 	}
 
 	// 初始化标头
-	private void InitTextView() {
+	private void initTextView() {
 		textView1 = (TextView) findViewById(R.id.text1);
 		textView2 = (TextView) findViewById(R.id.text2);
 		textView3 = (TextView) findViewById(R.id.text3);
@@ -139,8 +141,25 @@ public class LjljActivity extends FragmentActivity {
 		textView3.setOnClickListener(new MyOnClickListener(2));
 	}
 
-	public void InitViewPager() {
-		vp = (ViewPager) findViewById(R.id.viewPager);
+	// 头标点击监听
+	private class MyOnClickListener implements OnClickListener {
+		private int index = 0;
+
+		public MyOnClickListener(int i) {
+			index = i;
+		}
+
+		public void onClick(View v) {
+			if (3 != index) {
+				mViewPager.setCurrentItem(index);
+				setDefaultBackgroundColor(index);
+			}
+		}
+
+	}
+
+	public void initViewPager() {
+		mViewPager = (ViewPager) findViewById(R.id.viewPager);
 		// 设置每个tab对应的 fragment
 		fragment1 = new ViewPagerFragment("@我的fragment", 1);
 		fragmentList.add(fragment1);
@@ -157,30 +176,13 @@ public class LjljActivity extends FragmentActivity {
 		// titleList.add("title 2 ");
 		// titleList.add("title 3 ");
 
-		// vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),
+		// mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),
 		// fragmentList, titleList));
-		vp.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),
+		mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),
 				fragmentList, null));
-		vp.setCurrentItem(0);
+		mViewPager.setCurrentItem(0);
 		textView1.setBackgroundColor(Color.parseColor("#7ba853"));
-		vp.setOnPageChangeListener(new MyOnPageChangeListener());
-	}
-
-	// 头标点击监听
-	private class MyOnClickListener implements OnClickListener {
-		private int index = 0;
-
-		public MyOnClickListener(int i) {
-			index = i;
-		}
-
-		public void onClick(View v) {
-			if (3 != index) {
-				vp.setCurrentItem(index);
-				setDefaultBackgroundColor(index);
-			}
-		}
-
+		mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 	}
 
 	// 用于初始化和还原背景色
@@ -244,7 +246,7 @@ public class LjljActivity extends FragmentActivity {
 			 * animation.setFillAfter(true);// True:图片停在动画结束位置
 			 * animation.setDuration(300); imageView.startAnimation(animation);
 			 * Toast.makeText(LjljActivity.this, "您选择了"+
-			 * vp.getCurrentItem()+"页卡", Toast.LENGTH_SHORT).show(); //
+			 * mViewPager.getCurrentItem()+"页卡", Toast.LENGTH_SHORT).show(); //
 			 */
 		}
 

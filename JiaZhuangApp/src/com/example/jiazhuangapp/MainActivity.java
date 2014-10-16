@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	private ImageView imgV0, imgV1;
-	Context context = MainActivity.this; 
+	Context context = MainActivity.this;
+	//否是要求登陆
+	int requestLogin = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,15 @@ public class MainActivity extends Activity {
 	
 	//判断是否登陆
 	public void goLogin(View v) {
-		Intent intent = new Intent(context, LoginActivity.class);
+		Intent intent = new Intent();
+		if(1==requestLogin){
+		intent.setClass(context, LoginActivity.class);
+		}else{
+		intent.setClass(context, UserinfoActivity.class);
+		}
 		startActivity(intent);
+		//若已经登陆跳至用户中心
+		
     }
 	
     protected void onStart() {  
