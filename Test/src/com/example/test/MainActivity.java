@@ -29,10 +29,10 @@ public class MainActivity extends Activity {
 	// ListView相关
 	private static final String[] strs = new String[] { "Handler详细机制",
 			"HttpClient联系", "解析XML", "侧边栏字母导航", "Fragment ViewPager碎片管理",
-			"滑动菜单demo", "又上角的圆圈demo" };
+			"滑动菜单demo", "又上角的圆圈demo", "ListFragment实例" };
 	private static final String[] desc = new String[] { "第一个小例子完成，但是不理解意思呢？？？",
 			"编写HttpClientTools", "从网上找个小例子练习", "从网上找的字母检索例子", "需要不断练习",
-			"SlidingMenu从github", "badge from github" };
+			"SlidingMenu从github", "badge from github","网上例子" };
 	private ListView lv;
 
 	// end
@@ -127,8 +127,10 @@ public class MainActivity extends Activity {
 				intent.setClass(getApplicationContext(), SlidingMenuDemo.class);
 				break;
 			case 6:
-				intent.setClass(getApplicationContext(), FragmentTest.class);
+				intent.setClass(getApplicationContext(), ViewBadgerTest.class);
 				break;
+			case 7:
+				intent.setClass(getApplicationContext(), ListFragmentDemo.class);
 			default:
 				break;
 			}

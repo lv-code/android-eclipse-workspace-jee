@@ -27,5 +27,7 @@
     <string name="title_activity_sliding_menu">SlidingMenu</string>
     <string name="title_activity_badge_view_demo">BadgeViewDemo</string>
     <string name="title_activity_view_badger_test">ViewBadgerTest</string>
+    <string name="title_activity_door_fragment">DoorFragmentActivity</string>
+    <string name="title_activity_list_fragment_demo">ListFragmentDemo</string>
 
 </resources>

@@ -12,36 +12,36 @@ public final class R {
 		public static final int icon = 0x7f020059;
 	}
 	public static final class id {
-		public static final int anim1_target = 0x7f060055;
-		public static final int anim2_target = 0x7f060056;
-		public static final int badge = 0x7f06007b;
-		public static final int click_target = 0x7f060059;
-		public static final int colour_target = 0x7f060054;
-		public static final int custom_target = 0x7f060057;
-		public static final int default_label = 0x7f06004e;
-		public static final int default_target = 0x7f06004d;
-		public static final int frame_group_target = 0x7f060085;
-		public static final int frame_target = 0x7f06007f;
-		public static final int increment_target = 0x7f06005a;
-		public static final int linear_group_target = 0x7f060083;
-		public static final int linear_target = 0x7f06007c;
-		public static final int position_target = 0x7f060053;
-		public static final int relative_group_target = 0x7f060084;
-		public static final int relative_label = 0x7f06007d;
-		public static final int relative_target = 0x7f06007e;
-		public static final int tab1 = 0x7f060065;
-		public static final int tab2 = 0x7f060066;
-		public static final int tab3 = 0x7f060067;
-		public static final int tab_btn = 0x7f060058;
-		public static final int tableLayout1 = 0x7f060080;
-		public static final int tableRow1 = 0x7f060081;
-		public static final int table_target = 0x7f060082;
-		public static final int tablerow_group_target = 0x7f060086;
+		public static final int anim1_target = 0x7f060057;
+		public static final int anim2_target = 0x7f060058;
+		public static final int badge = 0x7f06007d;
+		public static final int click_target = 0x7f06005b;
+		public static final int colour_target = 0x7f060056;
+		public static final int custom_target = 0x7f060059;
+		public static final int default_label = 0x7f060050;
+		public static final int default_target = 0x7f06004f;
+		public static final int frame_group_target = 0x7f060087;
+		public static final int frame_target = 0x7f060081;
+		public static final int increment_target = 0x7f06005c;
+		public static final int linear_group_target = 0x7f060085;
+		public static final int linear_target = 0x7f06007e;
+		public static final int position_target = 0x7f060055;
+		public static final int relative_group_target = 0x7f060086;
+		public static final int relative_label = 0x7f06007f;
+		public static final int relative_target = 0x7f060080;
+		public static final int tab1 = 0x7f060067;
+		public static final int tab2 = 0x7f060068;
+		public static final int tab3 = 0x7f060069;
+		public static final int tab_btn = 0x7f06005a;
+		public static final int tableLayout1 = 0x7f060082;
+		public static final int tableRow1 = 0x7f060083;
+		public static final int table_target = 0x7f060084;
+		public static final int tablerow_group_target = 0x7f060088;
 	}
 	public static final class layout {
-		public static final int demos = 0x7f030020;
-		public static final int main = 0x7f030027;
-		public static final int tests = 0x7f03002f;
+		public static final int demos = 0x7f030021;
+		public static final int main = 0x7f030028;
+		public static final int tests = 0x7f030030;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f050000;
