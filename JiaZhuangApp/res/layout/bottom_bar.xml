@@ -16,7 +16,7 @@
             android:layout_height="fill_parent"
             android:layout_gravity="fill"
             android:layout_weight="1.0"
-            android:contentDescription="中间"
+            android:clickable="true"
             android:scaleType="centerCrop"
             android:src="@drawable/icon_msg" />
 
@@ -25,7 +25,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1.0"
-            android:contentDescription="中间"
+            android:clickable="true"
             android:gravity="center"
             android:onClick="goHome"
             android:scaleType="center"
@@ -38,7 +38,6 @@
             android:layout_gravity="bottom"
             android:layout_weight="1.0"
             android:clickable="true"
-            android:contentDescription="中间"
             android:onClick="goLogin"
             android:scaleType="center"
             android:src="@drawable/icon_me" />
@@ -52,11 +51,12 @@
         android:background="#ffffff" >
 
         <TextView
-            android:id="@+id/text1"
+            android:id="@+id/txtMsg"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1.0"
             android:gravity="center"
+            android:clickable="true"       
             android:text="消息"
             android:textColor="#333333"
             android:textSize="15dp" />

@@ -42,7 +42,7 @@ public class FragmentTest extends Fragment {
         Log.d(TAG, "TestFragment-----onCreateView");  
         Bundle args = getArguments();  
         hello = args != null ? args.getString("hello") : defaultHello;  
-        View view = inflater.inflate(R.layout.fragment_test, container, false);  
+        View view = inflater.inflate(R.layout.flow_fragment, container, false);  
         TextView viewhello = (TextView) view.findViewById(R.id.tv);  
         viewhello.setText(hello); 
         View target = view.findViewById(R.id.ImageView0);

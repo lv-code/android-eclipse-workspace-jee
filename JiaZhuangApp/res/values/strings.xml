@@ -24,5 +24,6 @@
     <string name="title_activity_whats_new">WhatsNewActivity</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_userinfo">UserinfoActivity</string>
+    <string name="title_activity_chat">ChatActivity</string>
 
 </resources>
