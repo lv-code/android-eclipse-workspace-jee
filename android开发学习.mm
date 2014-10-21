@@ -10,7 +10,7 @@
 <node CREATED="1409638671094" ID="ID_1625732950" MODIFIED="1409638673445" TEXT="R.java"/>
 <node CREATED="1409638799982" ID="ID_378022476" MODIFIED="1409638801264" TEXT="AndroidManifest.xml"/>
 </node>
-<node CREATED="1410242179472" FOLDED="true" ID="ID_1820114744" MODIFIED="1413188136339" POSITION="right" TEXT="&#x6559;&#x7a0b;&#x8d44;&#x6599;">
+<node CREATED="1410242179472" FOLDED="true" ID="ID_1820114744" MODIFIED="1413613922875" POSITION="right" TEXT="&#x6559;&#x7a0b;&#x8d44;&#x6599;">
 <node CREATED="1410340964079" ID="ID_581907366" MODIFIED="1410340968938" TEXT="&#x5b98;&#x65b9;&#x6587;&#x6863;">
 <node CREATED="1410340969748" ID="ID_469152824" MODIFIED="1410340970998" TEXT="http://www.jcodecraeer.com/a/anzhuokaifa/developer/2013/0512/1235.html"/>
 <node CREATED="1410340983558" ID="ID_759609183" MODIFIED="1410340984584" TEXT="http://developer.android.com/intl/zh-cn/training/basics/actionbar/index.html"/>
@@ -76,8 +76,14 @@
 <node CREATED="1413164745167" ID="ID_1878718379" MODIFIED="1413164766734" TEXT="github&#x4e0a;&#x7684;&#x5927;&#x795e;&#x6574;&#x7406;&#x7684;&#x9ad8;&#x8d28;&#x91cf;&#x6559;&#x7a0b;">
 <node CREATED="1413164767600" ID="ID_1469582467" MODIFIED="1413164768686" TEXT="http://bxbxbai.github.io/2014/10/07/android-develop-resource/"/>
 </node>
+<node CREATED="1413603933359" ID="ID_1266320305" MODIFIED="1413603956151" TEXT="iteye&#x79fb;&#x52a8;&#x5f00;&#x53d1;lanmu">
+<node CREATED="1413603956916" ID="ID_1436124764" MODIFIED="1413603958080" TEXT="http://www.iteye.com/forums/tag/Android"/>
+<node CREATED="1413603958615" ID="ID_519769556" MODIFIED="1413603990232" TEXT="&#x597d;&#x5904;&#x662f;&#x63d0;&#x4f9b;&#x7684;&#x6e90;&#x7801;&#x4e0d;&#x7528;&#x6ce8;&#x518c;&#x5c31;&#x80fd;&#x4e0b;&#x8f7d;">
+<icon BUILTIN="messagebox_warning"/>
 </node>
-<node CREATED="1409710428498" FOLDED="true" ID="ID_335244332" MODIFIED="1411117732848" POSITION="right" TEXT="ubuntu &#x5f00;&#x53d1;&#x73af;&#x5883;&#x642d;&#x5efa;">
+</node>
+</node>
+<node CREATED="1409710428498" FOLDED="true" ID="ID_335244332" MODIFIED="1413596702940" POSITION="right" TEXT="ubuntu &#x5f00;&#x53d1;&#x73af;&#x5883;&#x642d;&#x5efa;">
 <node CREATED="1409710451374" FOLDED="true" ID="ID_1790404944" MODIFIED="1410415233631" TEXT="&#x4e0b;&#x8f7d;ecplise">
 <node CREATED="1409710489398" ID="ID_1147048393" MODIFIED="1409712455151" TEXT="&#x7248;&#x672c; java EE Luna"/>
 <node CREATED="1409710475156" ID="ID_1478917026" MODIFIED="1409724417815" TEXT="aria2c -s 4 http://mirrors.neusoft.edu.cn/eclipse/technology/epp/downloads/release/luna/R/eclipse-jee-luna-R-linux-gtk.tar.gz"/>
@@ -113,7 +119,7 @@
 <node CREATED="1410837800232" ID="ID_969638602" MODIFIED="1410837801353" TEXT="http://blog.csdn.net/jiabinjlu/article/details/6921008"/>
 </node>
 </node>
-<node CREATED="1410336073380" ID="ID_1455174415" MODIFIED="1413427658421" POSITION="right" TEXT="&#x57fa;&#x672c;&#x63a7;&#x4ef6;&#x5b66;&#x4e60;">
+<node CREATED="1410336073380" FOLDED="true" ID="ID_1455174415" MODIFIED="1413875413486" POSITION="right" TEXT="&#x57fa;&#x672c;&#x63a7;&#x4ef6;&#x5b66;&#x4e60;">
 <node CREATED="1410336098584" FOLDED="true" ID="ID_1876359007" MODIFIED="1410855169849" TEXT="EditText">
 <node CREATED="1410337533095" ID="ID_302129127" MODIFIED="1410337534327" TEXT="http://www.jcodecraeer.com/a/anzhuokaifa/developer/2013/0511/1234.html"/>
 <node CREATED="1410336145994" ID="ID_1086247872" MODIFIED="1410336146699" TEXT="android:id=&quot;@+id/edit_message&quot;">
@@ -123,13 +129,16 @@
 <node CREATED="1410336157418" ID="ID_1629965469" MODIFIED="1410336161055" TEXT="&#x9ed8;&#x8ba4;&#x63d0;&#x793a;"/>
 </node>
 </node>
-<node CREATED="1410849464180" FOLDED="true" ID="ID_570479534" MODIFIED="1412921721148" TEXT="ListView&#x548c;Adapter">
+<node CREATED="1410849464180" FOLDED="true" ID="ID_570479534" MODIFIED="1413596734747" TEXT="ListView&#x548c;Adapter">
 <node CREATED="1410849490451" ID="ID_984002618" MODIFIED="1410856190392" TEXT="http://www.cnblogs.com/noTice520/archive/2011/12/05/2276379.html"/>
 <node CREATED="1410850462848" FOLDED="true" ID="ID_1652134183" MODIFIED="1410850541454" TEXT="&#x901a;&#x8fc7;&#x6307;&#x5b9a;android.R.layout.simple_list_item_checked&#x8fd9;&#x4e2a;&#x8d44;&#x6e90;&#xff0c;&#x5b9e;&#x73b0;&#x5e26;&#x9009;&#x62e9;&#x6846;&#x7684;ListView">
 <node CREATED="1410850475532" ID="ID_1114967412" MODIFIED="1410850476526" TEXT="lv.setAdapter"/>
 <node CREATED="1410850478423" ID="ID_1392924701" MODIFIED="1410850488712" TEXT="lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);"/>
 </node>
 <node CREATED="1410850542982" ID="ID_809701124" MODIFIED="1410850559964" TEXT="setOnItemClickListener"/>
+</node>
+<node CREATED="1413596712749" FOLDED="true" ID="ID_549634766" MODIFIED="1413596736210" TEXT="listview&#x52a0;&#x8f7d;&#x6027;&#x80fd;&#x4f18;&#x5316;ViewHolder">
+<node CREATED="1413596724702" ID="ID_1391735291" MODIFIED="1413596726038" TEXT="http://blog.csdn.net/jacman/article/details/7087995"/>
 </node>
 <node CREATED="1410856366531" FOLDED="true" ID="ID_1422994985" MODIFIED="1410856377921" TEXT="android:gravity&#x5c5e;&#x6027;&#x4ecb;&#x7ecd;&#x53ca;&#x6548;&#x679c;&#x56fe;">
 <node CREATED="1410856372107" ID="ID_297821741" MODIFIED="1410856372945" TEXT="http://blog.csdn.net/aminfo/article/details/7784229"/>
@@ -144,7 +153,6 @@
 <node CREATED="1411021481606" FOLDED="true" ID="ID_1051332726" MODIFIED="1412921717460" TEXT="&#x5e26;&#x8fd4;&#x56de;&#x6309;&#x94ae;&#x7684;&#x81ea;&#x5b9a;&#x4e49;&#x6807;&#x9898;&#x680f;">
 <node CREATED="1411021488144" ID="ID_199045805" MODIFIED="1411021491649" TEXT="http://blog.csdn.net/cappuccinolau/article/details/7901553"/>
 </node>
-<node CREATED="1411026861628" ID="ID_1030060427" MODIFIED="1411026863009" TEXT="FragmentActivity"/>
 <node CREATED="1411624784335" FOLDED="true" ID="ID_1000726589" MODIFIED="1412921718315" TEXT="Linkify+&#x6b63;&#x5219;">
 <node CREATED="1411624810334" ID="ID_253385494" MODIFIED="1411624811354" TEXT="http://www.cnblogs.com/ryan1012/archive/2011/07/12/2104087.html"/>
 </node>
@@ -161,7 +169,14 @@
 <node CREATED="1409815726328" ID="ID_532762673" MODIFIED="1409815727396" TEXT="Activity&#x672c;&#x8eab;&#x4f5c;&#x4e3a;&#x4e8b;&#x4ef6;&#x76d1;&#x542c;&#x5668;"/>
 <node CREATED="1409815733872" ID="ID_1521102182" MODIFIED="1409815734737" TEXT="&#x5916;&#x90e8;&#x7c7b;&#x4f5c;&#x4e3a;&#x76d1;&#x542c;&#x5668;"/>
 </node>
-<node CREATED="1411187867511" ID="ID_40186165" MODIFIED="1413427661851" TEXT="ViewPager fragment">
+<node CREATED="1413448915366" FOLDED="true" ID="ID_943529986" MODIFIED="1413513158724" TEXT="Fragment">
+<node CREATED="1413448918594" ID="ID_1829116377" MODIFIED="1413448919503" TEXT="Fragment &#x5c31;&#x53ef;&#x4ee5;&#x628a;&#x5b83;&#x5f53;&#x4f5c;&#x4e00;&#x4e2a;view , &#x53ea;&#x4e0d;&#x8fc7;&#x8fd9;&#x4e2a;view &#x4e0e; activity&#x4e00;&#x6837;&#x6709;&#x4e86;&#x751f;&#x547d;&#x5468;&#x671f;&#x51fd;&#x6570;"/>
+</node>
+<node CREATED="1411026861628" ID="ID_1030060427" MODIFIED="1411026863009" TEXT="FragmentActivity"/>
+<node CREATED="1413448573962" FOLDED="true" ID="ID_1195119270" MODIFIED="1413513161369" TEXT="ListFragment">
+<node CREATED="1413448570017" ID="ID_1214800706" MODIFIED="1413448572031" TEXT="http://blog.csdn.net/heng615975867/article/details/12304115"/>
+</node>
+<node CREATED="1411187867511" FOLDED="true" ID="ID_40186165" MODIFIED="1413513163746" TEXT="ViewPager fragment">
 <node CREATED="1411187882913" ID="ID_425913972" MODIFIED="1411187885590" TEXT="http://www.cnblogs.com/bavariama/archive/2013/02/01/2888596.html"/>
 <node CREATED="1413427673224" ID="ID_1546246416" MODIFIED="1413427673903" TEXT="http://blog.csdn.net/lizhenmingdirk/article/details/13631813"/>
 <node CREATED="1413427712703" ID="ID_520593566" MODIFIED="1413427713954" TEXT="ViewPager&#x5e94;&#x8be5;&#x548c;Fragment&#x4e00;&#x8d77;&#x4f7f;&#x7528;&#x65f6;&#xff0c;&#x6b64;&#x65f6;ViewPager&#x7684;&#x9002;&#x914d;&#x5668;&#x662f;FragmentPagerAdapter&#xff0c;&#x5f53;&#x4f60;&#x5b9e;&#x73b0;&#x4e00;&#x4e2a;FragmentPagerAdapter,&#x4f60;&#x5fc5;&#x987b;&#x81f3;&#x5c11;&#x8986;&#x76d6;&#x4ee5;&#x4e0b;&#x65b9;&#x6cd5;">
@@ -172,6 +187,10 @@
 <node CREATED="1413431489484" ID="ID_738056422" MODIFIED="1413431490752" TEXT="&#x53ea;&#x4fdd;&#x7559;&#x5f53;&#x524d;&#x9875;&#x9762;&#xff0c;&#x5f53;&#x9875;&#x9762;&#x79bb;&#x5f00;&#x89c6;&#x7ebf;&#x540e;&#xff0c;&#x5c31;&#x4f1a;&#x88ab;&#x6d88;&#x9664;&#xff0c;&#x91ca;&#x653e;&#x5176;&#x8d44;&#x6e90;"/>
 <node CREATED="1413431501990" ID="ID_912274535" MODIFIED="1413431505015" TEXT="&#x597d;&#x5904;&#x5c31;&#x662f;&#x5f53;&#x62e5;&#x6709;&#x5927;&#x91cf;&#x7684;&#x9875;&#x9762;&#x65f6;&#xff0c;&#x4e0d;&#x5fc5;&#x5728;&#x5185;&#x5b58;&#x4e2d;&#x5360;&#x7528;&#x5927;&#x91cf;&#x7684;&#x5185;&#x5b58;"/>
 </node>
+<node CREATED="1413443053102" ID="ID_1138508049" MODIFIED="1413443054389" TEXT="FragmentPagerAdapter">
+<node CREATED="1413443066365" ID="ID_444186815" MODIFIED="1413443067294" TEXT="&#x8fd9;&#x79cd;pager&#x5341;&#x5206;&#x9002;&#x7528;&#x4e8e;&#x6709;&#x4e00;&#x4e9b;&#x9759;&#x6001;fragment"/>
+<node CREATED="1413443083374" ID="ID_1230109146" MODIFIED="1413443084628" TEXT="&#x4f8b;&#x5982;&#x4e00;&#x7ec4;tabs&#xff0c;&#x7684;&#x65f6;&#x5019;&#x4f7f;&#x7528;&#x3002;&#x6bcf;&#x4e2a;&#x9875;&#x9762;&#x5bf9;&#x5e94;&#x7684;Fragment&#x5f53;&#x7528;&#x6237;&#x53ef;&#x4ee5;&#x8bbf;&#x95ee;&#x7684;&#x65f6;&#x5019;&#x4f1a;&#x4e00;&#x76f4;&#x5b58;&#x5728;&#x5185;&#x5b58;&#x4e2d;"/>
+</node>
 </node>
 <node CREATED="1411117738325" FOLDED="true" ID="ID_473529758" MODIFIED="1412921714555" TEXT=" Android&#x4e2d;ViewPager&#x4f7f;&#x7528;FragmentPagerAdapter&#xff08;&#x5e95;&#x90e8;&#x5706;&#x70b9;&#xff09;">
 <node CREATED="1411117746089" ID="ID_1483329201" MODIFIED="1411117747002" TEXT="http://blog.csdn.net/heng615975867/article/details/21950921"/>
@@ -179,7 +198,7 @@
 <node CREATED="1411970818258" FOLDED="true" ID="ID_1493618863" MODIFIED="1412921692581" TEXT="Handler&#x8be6;&#x7ec6;&#x673a;&#x5236;">
 <node CREATED="1411970826758" ID="ID_469252107" MODIFIED="1411970828251" TEXT="http://blog.sina.com.cn/s/blog_624012330100rkkr.html"/>
 </node>
-<node CREATED="1412921693776" ID="ID_1605292720" MODIFIED="1412921710068" TEXT="seekbar">
+<node CREATED="1412921693776" FOLDED="true" ID="ID_1605292720" MODIFIED="1413513165249" TEXT="seekbar">
 <icon BUILTIN="idea"/>
 <node CREATED="1412921698878" ID="ID_1446571195" MODIFIED="1412921700118" TEXT="http://blog.sina.com.cn/s/blog_7dbac12501016b2h.html"/>
 <node CREATED="1412921748041" ID="ID_136166519" MODIFIED="1413427709501" TEXT="http://blog.csdn.net/brokge/article/details/9713041ViewPager&#x5e94;&#x8be5;&#x548c;Fragment&#x4e00;&#x8d77;&#x4f7f;&#x7528;&#x65f6;&#xff0c;&#x6b64;&#x65f6;ViewPager&#x7684;&#x9002;&#x914d;&#x5668;&#x662f;FragmentPagerAdapter&#xff0c;&#x5f53;&#x4f60;&#x5b9e;&#x73b0;&#x4e00;&#x4e2a;FragmentPagerAdapter,&#x4f60;&#x5fc5;&#x987b;&#x81f3;&#x5c11;&#x8986;&#x76d6;&#x4ee5;&#x4e0b;&#x65b9;&#x6cd5;"/>
@@ -373,6 +392,31 @@
 </node>
 <node CREATED="1412818555047" FOLDED="true" ID="ID_101306231" MODIFIED="1413188155145" POSITION="right" TEXT="Android-&#x9a8c;&#x8bc1;&#x7f51;&#x7edc;&#x662f;&#x5426;&#x53ef;&#x7528;">
 <node CREATED="1412818569246" ID="ID_492373583" MODIFIED="1412818570627" TEXT="http://www.linuxidc.com/Linux/2012-05/61247.htm"/>
+</node>
+<node CREATED="1413613929051" FOLDED="true" ID="ID_1909293067" MODIFIED="1413875421970" POSITION="right" TEXT="Android &#x8c03;&#x7528;Camera&#x548c;&#x76f8;&#x518c;">
+<node CREATED="1413613937656" ID="ID_109379158" MODIFIED="1413613938525" TEXT="http://blog.csdn.net/wangjia55/article/details/8066930"/>
+</node>
+<node CREATED="1413617340653" ID="ID_451452305" MODIFIED="1413617349942" POSITION="right" TEXT="Java&#x57fa;&#x7840;&#x77e5;&#x8bc6;">
+<node CREATED="1413617350775" ID="ID_1573675666" MODIFIED="1413617351757" TEXT="JAVA&#x4e2d;String&#x4e0e;StringBuffer&#x7684;&#x533a;&#x522b;">
+<node CREATED="1413617355860" ID="ID_430007652" MODIFIED="1413617356794" TEXT="http://blog.csdn.net/yirentianran/article/details/2871417"/>
+</node>
+<node CREATED="1413618117237" ID="ID_1353059827" MODIFIED="1413618126970" TEXT="StringBuffer&#x7528;&#x6cd5;">
+<node CREATED="1413618127690" ID="ID_561329019" MODIFIED="1413618135714" TEXT="http://blog.csdn.net/randomnet/article/details/7464677"/>
+</node>
+</node>
+<node CREATED="1413619846771" ID="ID_331119365" MODIFIED="1413619857233" POSITION="right" TEXT="Gson&#x89e3;&#x6790;JSON">
+<node CREATED="1413619862907" ID="ID_929423109" MODIFIED="1413619863614" TEXT="http://blog.csdn.net/jdsjlzx/article/details/7678184"/>
+</node>
+<node CREATED="1413873199152" ID="ID_918599058" MODIFIED="1413873200404" POSITION="right" TEXT="Android&#x5a92;&#x4f53;&#x7684;&#x4e00;&#x4e9b;&#x4f7f;&#x7528;&#x603b;&#x7ed3;">
+<node CREATED="1413873206623" ID="ID_430535514" MODIFIED="1413873207353" TEXT="http://blog.csdn.net/yidan923/article/details/7329109"/>
+</node>
+<node CREATED="1413875429368" ID="ID_155647889" MODIFIED="1413875444380" POSITION="right" TEXT="Adapter&#x9002;&#x914d;&#x5668;">
+<node CREATED="1413875444367" ID="ID_1254619234" MODIFIED="1413875463609" TEXT="SimpleCursorAdapter">
+<node CREATED="1413875441587" ID="ID_477589590" MODIFIED="1413875443252" TEXT="http://www.cnblogs.com/over140/archive/2011/03/14/1983184.html"/>
+</node>
+</node>
+<node CREATED="1413875916915" ID="ID_1957924155" MODIFIED="1413875919396" POSITION="right" TEXT="Loader">
+<node CREATED="1413875920560" ID="ID_1003236371" MODIFIED="1413875921703" TEXT="http://www.cnblogs.com/jisheng/archive/2013/01/09/2852553.html"/>
 </node>
 <node CREATED="1412905269759" FOLDED="true" ID="ID_9724203" MODIFIED="1412991902269" POSITION="left" TEXT="&#x9762;&#x8bd5;&#x9898;">
 <node CREATED="1412905275493" ID="ID_528760133" MODIFIED="1412905276725" TEXT="http://www.shenglei.org/android/664.html"/>
