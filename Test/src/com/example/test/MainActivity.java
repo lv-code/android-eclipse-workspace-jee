@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -27,16 +25,17 @@ public class MainActivity extends Activity {
 	TextView tv;
 	Button btn;
 	// ListView相关
-	private static final String[] strs = new String[] { "Handler详细机制",
-			"HttpClient联系", "解析XML", "侧边栏字母导航", "Fragment ViewPager碎片管理",
-			"滑动菜单demo", "又上角的圆圈demo", "ListFragment实例" };
-	private static final String[] desc = new String[] { "第一个小例子完成，但是不理解意思呢？？？",
-			"编写HttpClientTools", "从网上找个小例子练习", "从网上找的字母检索例子", "需要不断练习",
-			"SlidingMenu从github", "badge from github","网上例子" };
+	private static String[] strs;
+	private static String[] desc;
+	/*
+	 * 为了去除警告：Class is a raw type. References to generic type Class<T> should be
+	 * parameterized 把ArrayList<Class> 改为 ArrayList<Class<?>>，使用“泛型通配符”
+	 */
+	private static ArrayList<Class<?>> arraylist = new ArrayList<Class<?>>();
+
 	private ListView lv;
 
 	// end
-
 	// 初始化自定义工具类
 	// MyHelper myHelper = new MyHelper(this);
 
@@ -52,28 +51,24 @@ public class MainActivity extends Activity {
 	}
 
 	private void init() {
-		btn = (Button) findViewById(R.id.button1);
+		strs = new String[] { "Handler详细机制", "HttpClient联系", "解析XML",
+				"侧边栏字母导航", "Fragment ViewPager碎片管理", "滑动菜单demo", "又上角的圆圈demo",
+				"ListFragment实例", "Activity切换效果","调用Camera和相册","获取本机中所有图片" };
+		desc = new String[] { "第一个小例子完成，但是不理解意思呢？？？", "编写HttpClientTools",
+				"从网上找个小例子练习", "从网上找的字母检索例子", "需要不断练习", "SlidingMenu从github",
+				"badge from github", "网上例子", "新建res/anim","需要配置AndroidManifext","本示例演示如何在Android中使用加载器(Loader)来实现获取本机中的所有图片，并进行查看图片的效果。" };
+		arraylist.add(HandlerActivity.class);
+		arraylist.add(HttpClientActivity.class);
+		arraylist.add(ParseXML.class);
+		arraylist.add(SideBarTest.class);
+		arraylist.add(Switchfragment.class);
+		arraylist.add(SlidingMenuDemo.class);
+		arraylist.add(ViewBadgerTest.class);
+		arraylist.add(ListFragmentDemo.class);
+		arraylist.add(TransitionActivity.class);
+		arraylist.add(CameraShow.class);
+		arraylist.add(LoadMyDevicePhoto.class);
 
-		MyButton listener = new MyButton();
-		// btn.setOnClickListener(listener);
-
-	}
-
-	private void initListView1() {
-		// 得到ListView对象的引用
-		lv = (ListView) findViewById(R.id.lv);
-		// 为ListView设置Adapter来绑定数据
-		lv.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, strs));
-		// lv.setAdapter(new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_checked, strs));
-		// lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-		// lv.setAdapter(new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_multiple_choice, strs));
-		// lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-		lv.setOnItemClickListener(new MyOnItemClickListener());
 	}
 
 	private void initListView2() {
@@ -105,50 +100,14 @@ public class MainActivity extends Activity {
 				long id) {
 			Intent intent = new Intent();
 			Bundle bundle = new Bundle();
-			switch (position) {
-			case 0:
-				intent.setClass(getApplicationContext(), HandlerActivity.class);
+			intent.setClass(getApplicationContext(), arraylist.get(position));
+			if (0 == position) {
 				bundle.putString("from", "from MainActivity item 0 click");
-				break;
-			case 1:
-				intent.setClass(getApplicationContext(),
-						HttpClientActivity.class);
-				break;
-			case 2:
-				intent.setClass(getApplicationContext(), ParseXML.class);
-				break;
-			case 3:
-				intent.setClass(getApplicationContext(), SideBarTest.class);
-				break;
-			case 4:
-				intent.setClass(getApplicationContext(), Switchfragment.class);
-				break;
-			case 5:
-				intent.setClass(getApplicationContext(), SlidingMenuDemo.class);
-				break;
-			case 6:
-				intent.setClass(getApplicationContext(), ViewBadgerTest.class);
-				break;
-			case 7:
-				intent.setClass(getApplicationContext(), ListFragmentDemo.class);
-			default:
-				break;
 			}
-
-			if (null == intent)
-				setTitle("你点击了第" + position + "行"); // 点击屏幕后显示第几行
 			intent.putExtras(bundle);
+
 			startActivity(intent);
-
-		}
-	}
-
-	class MyButton implements OnClickListener {
-
-		public void onClick(View v) {
-			Intent intent = new Intent();
-			intent.setClass(MainActivity.this, CustomTitleBarActivity.class);
-			startActivity(intent);
+			setTitle("你点击了第" + position + "行");
 		}
 	}
 

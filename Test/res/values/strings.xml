@@ -29,5 +29,9 @@
     <string name="title_activity_view_badger_test">ViewBadgerTest</string>
     <string name="title_activity_door_fragment">DoorFragmentActivity</string>
     <string name="title_activity_list_fragment_demo">ListFragmentDemo</string>
+    <string name="title_activity_transition">TransitionActivity</string>
+    <string name="title_activity_transition_next">TransitionNextActivity</string>
+    <string name="title_activity_camera_show">CameraShowActivity</string>
+    <string name="title_activity_load_my_device_photo">LoadMyDevicePhoto</string>
 
 </resources>
