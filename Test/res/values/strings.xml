@@ -33,5 +33,7 @@
     <string name="title_activity_transition_next">TransitionNextActivity</string>
     <string name="title_activity_camera_show">CameraShowActivity</string>
     <string name="title_activity_load_my_device_photo">LoadMyDevicePhoto</string>
+    <string name="title_activity_loadmore">Loadmore</string>
+    <string name="title_activity_list_more_test">ListMoreTest</string>
 
 </resources>

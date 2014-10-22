@@ -11,11 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Button;
 
 /*
  * Handler: 联系了Activity之间使用Bundle和Intent传值；
@@ -53,10 +53,14 @@ public class MainActivity extends Activity {
 	private void init() {
 		strs = new String[] { "Handler详细机制", "HttpClient联系", "解析XML",
 				"侧边栏字母导航", "Fragment ViewPager碎片管理", "滑动菜单demo", "又上角的圆圈demo",
-				"ListFragment实例", "Activity切换效果","调用Camera和相册","获取本机中所有图片" };
+				"ListFragment实例", "Activity切换效果", "调用Camera和相册", "获取本机中所有图片",
+				"ListView加载更多","ListView分页" };
 		desc = new String[] { "第一个小例子完成，但是不理解意思呢？？？", "编写HttpClientTools",
 				"从网上找个小例子练习", "从网上找的字母检索例子", "需要不断练习", "SlidingMenu从github",
-				"badge from github", "网上例子", "新建res/anim","需要配置AndroidManifext","本示例演示如何在Android中使用加载器(Loader)来实现获取本机中的所有图片，并进行查看图片的效果。" };
+				"badge from github", "网上例子", "新建res/anim",
+				"需要配置AndroidManifext",
+				"本示例演示如何在Android中使用加载器(Loader)来实现获取本机中的所有图片，并进行查看图片的效果。",
+				"小demo","用BaseAdapter" };
 		arraylist.add(HandlerActivity.class);
 		arraylist.add(HttpClientActivity.class);
 		arraylist.add(ParseXML.class);
@@ -68,6 +72,8 @@ public class MainActivity extends Activity {
 		arraylist.add(TransitionActivity.class);
 		arraylist.add(CameraShow.class);
 		arraylist.add(LoadMyDevicePhoto.class);
+		arraylist.add(Loadmore.class);
+		arraylist.add(ListMoreTest.class);
 
 	}
 
@@ -82,7 +88,7 @@ public class MainActivity extends Activity {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("itemTitle", "标题：" + strs[i]);
 			map.put("itemText", "描述：" + desc[i]);
-			map.put("itemImage", R.drawable.xin);
+//			map.put("itemImage", R.drawable.xin);
 			listItem.add(map);
 		}
 

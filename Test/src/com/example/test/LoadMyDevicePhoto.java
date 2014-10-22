@@ -25,12 +25,6 @@ import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 
 /**
  * Android实现获取本机中所有图片
- * @Description: Android实现获取本机中所有图片
- * @FileName: MyDevicePhotoActivity.java 
- * @Package com.device.photo 
- * @Author Hanyonglu
- * @Date 2012-5-10 下午04:43:55 
- * @Version V1.0
  */
 public class LoadMyDevicePhoto extends FragmentActivity implements LoaderCallbacks<Cursor>{
 	private Bitmap bitmap = null;

@@ -45,7 +45,6 @@ public class Switchfragment extends FragmentActivity implements OnClickListener 
     Fragment1 oneFragment;  
     Fragment2 twoFragment;  
     FragmentTest threeFragment;  
-    Fragment4 fourFragment;  
     FragmentTest testFragment;
       
     //覆盖层  

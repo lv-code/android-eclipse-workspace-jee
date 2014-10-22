@@ -98,6 +98,14 @@
             android:name=".LoadMyDevicePhoto"
             android:label="@string/title_activity_load_my_device_photo" >
         </activity>
+        <activity
+            android:name=".Loadmore"
+            android:label="@string/title_activity_loadmore" >
+        </activity>
+        <activity
+            android:name=".ListMoreTest"
+            android:label="@string/title_activity_list_more_test" >
+        </activity>
     </application>
 
 </manifest>
