@@ -30,11 +30,12 @@
 
         <ImageView
             android:id="@+id/iv_userhead"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:background="#333"
+            android:src="@drawable/touxiang_youbian_1"
+            android:scaleType="fitCenter"
             android:focusable="false" />
 
         <TextView
@@ -43,14 +44,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/iv_userhead"
-            android:background="#aaa"
+            android:background="@drawable/chat_text_content_right"
             android:clickable="true"
             android:focusable="true"
             android:gravity="left|center"
             android:lineSpacingExtra="2dp"
-            android:minHeight="50dp"
+            android:minHeight="62dp"
             android:text="你好，北京！"
-            android:textColor="#ff000000"
+            android:textColor="#fff"
             android:textSize="15sp" />
 
         <TextView

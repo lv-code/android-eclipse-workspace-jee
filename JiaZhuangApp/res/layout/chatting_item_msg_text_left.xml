@@ -26,11 +26,12 @@
 
         <ImageView
             android:id="@+id/iv_userhead"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="#999"
+            android:src="@drawable/touxiang_zuobian_1"
+            android:scaleType="fitCenter"
             android:clickable="true"
             android:onClick="head_xiaohei" />
 
@@ -39,9 +40,12 @@
             style="@style/chat_content_date_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="62dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_userhead"
-            android:background="#111" />
+            android:textColor="#fff"
+            android:hint="左边的文字"
+            android:background="@drawable/chat_text_content_left" />
 
         <TextView
             android:id="@+id/tv_username"
