@@ -70,13 +70,15 @@ public class LoadMyDevicePhoto extends FragmentActivity implements LoaderCallbac
     @Override
     public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
     	// 为了查看信息，需要用到CursorLoader。
+    	String sortOrder = MediaStore.Images.Media.DISPLAY_NAME + " LIMIT 5";
+//    	String sortOrder = null;
     	CursorLoader cursorLoader = new CursorLoader(
     			this, 
     			MediaStore.Images.Media.EXTERNAL_CONTENT_URI, 
     			STORE_IMAGES, 
     			null, 
     			null, 
-    			null);
+    			sortOrder);
     	return cursorLoader;
     }
     
