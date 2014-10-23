@@ -35,5 +35,6 @@
     <string name="title_activity_load_my_device_photo">LoadMyDevicePhoto</string>
     <string name="title_activity_loadmore">Loadmore</string>
     <string name="title_activity_list_more_test">ListMoreTest</string>
+    <string name="title_activity_thumbnail">Thumbnail</string>
 
 </resources>

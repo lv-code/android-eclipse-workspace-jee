@@ -36,6 +36,7 @@ public class LoadMyDevicePhoto extends FragmentActivity implements LoaderCallbac
 	private static final String[] STORE_IMAGES = {
         MediaStore.Images.Media.DISPLAY_NAME,
         MediaStore.Images.Media.LATITUDE,
+        MediaStore.Images.Thumbnails.DATA,
         MediaStore.Images.Media.LONGITUDE,
         MediaStore.Images.Media._ID
 	};
@@ -54,7 +55,7 @@ public class LoadMyDevicePhoto extends FragmentActivity implements LoaderCallbac
         		null, 
         		STORE_IMAGES, 
 //        		new String[] {STORE_IMAGES[0], STORE_IMAGES[1]},
-        		new int[] { R.id.item_title, R.id.item_value}, 
+        		new int[] { R.id.item_title, R.id.item_value, R.id.item_thumb}, 
         		0 //这个标志用来决定该适配器的行为，不带该参数的已经弃用
         		);
         
@@ -64,7 +65,7 @@ public class LoadMyDevicePhoto extends FragmentActivity implements LoaderCallbac
         getSupportLoaderManager().initLoader(0, null, this);
         
         // 单击显示图片
-        listView.setOnItemClickListener(new ShowItemImageOnClickListener());
+//        listView.setOnItemClickListener(new ShowItemImageOnClickListener());
     }
     
     @Override
