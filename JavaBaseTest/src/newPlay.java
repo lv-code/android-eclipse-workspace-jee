@@ -1,22 +1,18 @@
 /**
- * <p>Title:  ½Ó¿ÚºÍ³éÏóº¯Êı</p>
- * <p>Description: ÑİÊ¾¼Ì³Ğ³éÏóº¯ÊıºÍÊµÏÖ½Ó¿Ú</p>
- * <p>Copyright: Copyright (c) 2003</p>
- * <p>Filename: newPlay.java</p>
- * @author ¶Å½­
- * @version 1.0
+ * Title:  æ¥å£å’ŒæŠ½è±¡å‡½æ•°
+ * Description: æ¼”ç¤ºç»§æ‰¿æŠ½è±¡å‡½æ•°å’Œå®ç°æ¥å£
  */
  
-//½Ó¿Ú 
+//æ¥å£ 
 interface player
 {
  int flag = 1;
- void play();//²¥·Å
- void pause();//ÔİÍ£
- void stop();//Í£Ö¹
+ void play();//æ’­æ”¾
+ void pause();//æš‚åœ
+ void stop();//åœæ­¢
 }//end :)
 
-//³éÏóÀà
+//æŠ½è±¡ç±»
 abstract class playing
 {
  public void display(Object oPara)
@@ -26,24 +22,24 @@ abstract class playing
  abstract void winRun();
 }//end :)
 
-//¼Ì³ĞÁËplaying³éÏóÀàºÍÊµÏÖÀàplayer½Ó¿Ú
+//ç»§æ‰¿äº†playingæŠ½è±¡ç±»å’Œå®ç°ç±»playeræ¥å£
 public class newPlay extends playing implements player
 {
   public void play()
   {
-    display("newPlay.play()");//ÕâÀïÖ»ÊÇÑİÊ¾£¬È¥µôÁË´úÂë¡£
+    display("newPlay.play()");//è¿™é‡Œåªæ˜¯æ¼”ç¤ºï¼Œå»æ‰äº†ä»£ç ã€‚
   }
   public void pause()
   {
-     display("newPlay.pause()");//ÕâÀïÖ»ÊÇÑİÊ¾£¬È¥µôÁË´úÂë¡£
+     display("newPlay.pause()");//è¿™é‡Œåªæ˜¯æ¼”ç¤ºï¼Œå»æ‰äº†ä»£ç ã€‚
   }
   public void stop()
   {
-    display("newPlay.stop()");//ÕâÀïÖ»ÊÇÑİÊ¾£¬È¥µôÁË´úÂë¡£
+    display("newPlay.stop()");//è¿™é‡Œåªæ˜¯æ¼”ç¤ºï¼Œå»æ‰äº†ä»£ç ã€‚
   }
   void winRun()
   {
-    display("newPlay.winRun()");//ÕâÀïÖ»ÊÇÑİÊ¾£¬È¥µôÁË´úÂë¡£
+    display("newPlay.winRun()");//è¿™é‡Œåªæ˜¯æ¼”ç¤ºï¼Œå»æ‰äº†ä»£ç ã€‚
   }
   public static void main(String[] args)
   {
