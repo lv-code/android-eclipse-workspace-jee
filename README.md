@@ -10,3 +10,8 @@ ToDoList
 **1. 巩固JAVA的基础**
 
 **2. 编写Blog增加对概念的理解**
+
+学习资料
+===
+
+* [Android常用知识点总汇](http://blog.csdn.net/wirelessqa/article/details/8218290)
