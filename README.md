@@ -15,3 +15,5 @@ ToDoList
 ===
 
 * [Android常用知识点总汇](http://blog.csdn.net/wirelessqa/article/details/8218290)
+* [Android应用性能测试](http://blog.csdn.net/wirelessqa/article/details/29187517)
+* [Java回调函数的理解](http://blog.csdn.net/wirelessqa/article/details/8150198)
