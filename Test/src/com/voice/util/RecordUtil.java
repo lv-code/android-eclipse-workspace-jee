@@ -8,8 +8,6 @@ import android.media.MediaRecorder;
 /**
  * 录音工具类
  * 
- * @author rendongwei
- * 
  */
 public class RecordUtil {
 	private static final int SAMPLE_RATE_IN_HZ = 8000;
@@ -37,7 +35,7 @@ public class RecordUtil {
 			throw new IOException("Path to file could not be created");
 		}
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);
+		recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_WB);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 		recorder.setAudioSamplingRate(SAMPLE_RATE_IN_HZ);
 		recorder.setOutputFile(mPath);
@@ -53,6 +51,7 @@ public class RecordUtil {
 	public void stop() throws IOException {
 		recorder.stop();
 		recorder.release();
+//		recorder = null;
 	}
 
 	/**
@@ -62,6 +61,7 @@ public class RecordUtil {
 	 */
 	public double getAmplitude() {
 		if (recorder != null) {
+//			最后调用这个方法采样的时候返回最大振幅的绝对值
 			return (recorder.getMaxAmplitude());
 		}
 		return 0;

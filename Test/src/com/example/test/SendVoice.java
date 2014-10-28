@@ -120,6 +120,7 @@ public class SendVoice extends Activity {
 							// 开始录音
 							mRecordUtil.start();
 						} catch (IOException e) {
+							// 区别于System.out.println(e);
 							e.printStackTrace();
 						}
 						new Thread(new Runnable() {
