@@ -120,6 +120,14 @@
             android:allowBackup="true"
             android:label="@string/title_activity_send_voice" >
         </activity>
+        <activity
+            android:name=".PanelBottom"
+            android:label="@string/title_activity_sliding_drawer" >
+        </activity>
+        <activity
+            android:name=".PullUpActivity"
+            android:label="@string/title_activity_pull_up" >
+        </activity>
     </application>
 
 </manifest>
