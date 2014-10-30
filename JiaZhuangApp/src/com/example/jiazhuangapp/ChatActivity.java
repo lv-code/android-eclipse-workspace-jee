@@ -11,12 +11,16 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 public class ChatActivity extends Activity implements OnClickListener {
 
 	private Button mBtnSend;
 	private Button mBtnBack;
+	private ImageView mImgAddition;
+	private RelativeLayout mLayout;
 	private EditText mEditTextContent;
 	private ListView mListView;
 	private ChatMsgViewAdapter mAdapter;
@@ -30,10 +34,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		initView();
-
+		initListener();
 		initData();
 	}
-
+	
 	public void initView() {
 		mListView = (ListView) findViewById(R.id.listview);
 		mBtnSend = (Button) findViewById(R.id.btn_send);
@@ -42,6 +46,23 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mBtnBack.setOnClickListener(this);
 
 		mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
+		mImgAddition = (ImageView) findViewById(R.id.btn_addition_menu);
+		mLayout = (RelativeLayout) findViewById(R.id.rl_bottom);
+	}
+	
+	private void initListener() {
+		mImgAddition.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout.getLayoutParams();
+				if(layoutParams.bottomMargin < 0) {
+					new ChatAsyncMove(mLayout).execute(1);// 负--往下
+				} else {
+					new ChatAsyncMove(mLayout).execute(-110);// 负--往下
+				}
+			}
+		});
 	}
 
 	/*

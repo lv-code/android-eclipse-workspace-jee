@@ -3,11 +3,19 @@ package com.example.test;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+/*
+ * 注意：
+对于自定义View，使用手势识别有两处陷阱可能会浪费你的不少时间。
+1：View必须设置longClickable为true，否则手势识别无法正确工作，只会返回Down, Show, Long三种手势
+2：必须在View的onTouchListener中调用手势识别，而不能像Activity一样重载onTouchEvent，否则同样手势识别无法正确工作
+ */
 public class PanelBottom extends LinearLayout implements GestureDetector.OnGestureListener {
 
 	GestureDetector mGesture = null;
@@ -44,6 +52,7 @@ public class PanelBottom extends LinearLayout implements GestureDetector.OnGestu
 				new AsynMove().execute(20);// 正--往上
 			}
 		}
+		Log.i("TAG", "onTouchEvent");
 		return mGesture.onTouchEvent(event);
 	}
 
@@ -71,6 +80,7 @@ public class PanelBottom extends LinearLayout implements GestureDetector.OnGestu
 		} else {
 			new AsynMove().execute(20);// 正--往上
 		}
+		Toast.makeText(getContext(), "onSingleTapUp", Toast.LENGTH_LONG).show();
 		return true;
 	}
 

@@ -9,11 +9,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="40dp"
         android:cacheColorHint="#0000"
         android:divider="@null"
         android:dividerHeight="5dp"
         android:scrollbarStyle="outsideOverlay"
-        android:layout_marginBottom="40dp"
         android:stackFromBottom="true" />
 
     <RelativeLayout
@@ -21,38 +21,73 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-60dp"
         android:background="@color/chat_footer_bg" >
 
-        <ImageView
-            android:id="@+id/btn_addition_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/chat_btn_addition_menu" />
-
-        <Button
-            android:id="@+id/btn_send"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@color/chat_send_btn"
-            android:text="发送" />
-
-        <EditText
-            android:id="@+id/et_sendmessage"
+        <LinearLayout
+            android:id="@+id/ll_1"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/btn_send"
-            android:layout_toRightOf="@id/btn_addition_menu"
-            android:background="@color/login_edit_normal"
-            android:singleLine="true"
-            android:textSize="18sp" />
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/btn_addition_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/chat_btn_addition_menu" />
+
+            <Button
+                android:id="@+id/btn_send"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@color/chat_send_btn"
+                android:text="发送" />
+
+            <EditText
+                android:id="@+id/et_sendmessage"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/btn_send"
+                android:layout_toRightOf="@id/btn_addition_menu"
+                android:background="@color/login_edit_normal"
+                android:singleLine="true"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_1" 
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/abc_ab_solid_light_holo" 
+                android:layout_margin="10dp"/>
+            
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/abc_ab_solid_light_holo"
+                android:layout_margin="10dp"/>
+            
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/abc_ab_solid_light_holo"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>
