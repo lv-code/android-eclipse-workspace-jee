@@ -57,10 +57,12 @@ public class ChatActivity extends Activity implements OnClickListener {
 			public void onClick(View v) {
 				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout.getLayoutParams();
 				if(layoutParams.bottomMargin < 0) {
-					new ChatAsyncMove(mLayout).execute(1);// 负--往下
+					layoutParams.bottomMargin = 0;
 				} else {
-					new ChatAsyncMove(mLayout).execute(-110);// 负--往下
+					layoutParams.bottomMargin = -110;
 				}
+				//TODO 做动画，让位置变化更流畅
+				mLayout.setLayoutParams(layoutParams);
 			}
 		});
 	}
