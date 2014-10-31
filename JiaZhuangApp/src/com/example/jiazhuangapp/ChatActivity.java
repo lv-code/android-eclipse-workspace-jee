@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -37,7 +38,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		initListener();
 		initData();
 	}
-	
+
 	public void initView() {
 		mListView = (ListView) findViewById(R.id.listview);
 		mBtnSend = (Button) findViewById(R.id.btn_send);
@@ -48,20 +49,22 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
 		mImgAddition = (ImageView) findViewById(R.id.btn_addition_menu);
 		mLayout = (RelativeLayout) findViewById(R.id.rl_bottom);
+
 	}
-	
+
 	private void initListener() {
+		
 		mImgAddition.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout.getLayoutParams();
-				if(layoutParams.bottomMargin < 0) {
+				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout
+						.getLayoutParams();
+				if (layoutParams.bottomMargin < 0) {
 					layoutParams.bottomMargin = 0;
 				} else {
-					layoutParams.bottomMargin = -110;
+					layoutParams.bottomMargin = -158;
 				}
-				//TODO 做动画，让位置变化更流畅
+				// TODO 做动画，让位置变化更流畅 .animate()
 				mLayout.setLayoutParams(layoutParams);
 			}
 		});
@@ -74,7 +77,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 	 * "感谢那些曾让我伤心难过的日子，我知道快乐已经离我不远了；", "蓬莱（pénglái）文章建安骨"
 	 */
 	private String[] msgArray = new String[] { "我的志愿是", "做一名校长",
-			"每天收集了学生的学费之后就去吃火锅", "今天吃麻辣火锅","明天吃酸菜鱼火锅","后天吃猪骨头火锅", "老师直夸我：",
+			"每天收集了学生的学费之后就去吃火锅", "今天吃麻辣火锅", "明天吃酸菜鱼火锅", "后天吃猪骨头火锅", "老师直夸我：",
 			"麦兜你终于找到生命的真谛了！", };
 
 	private String[] dataArray = new String[] { "2012-09-01 18:00",
