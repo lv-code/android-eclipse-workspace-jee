@@ -128,6 +128,10 @@
             android:name=".PullUpActivity"
             android:label="@string/title_activity_pull_up" >
         </activity>
+        <activity
+            android:name=".GridViewDemo"
+            android:label="@string/title_activity_grid_view_demo" >
+        </activity>
     </application>
 
 </manifest>
