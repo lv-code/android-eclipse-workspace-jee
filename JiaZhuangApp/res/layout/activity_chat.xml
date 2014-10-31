@@ -57,7 +57,7 @@
                 android:background="@color/login_edit_normal"
                 android:singleLine="true"
                 android:textSize="18sp" />
-
+<!-- 
             <GridView
                 android:id="@+id/gridView1"
                 android:layout_width="match_parent"
@@ -67,9 +67,8 @@
                 android:numColumns="3" >
 
             </GridView>
-            
+          -->   
         </RelativeLayout>
-<!-- 
         <LinearLayout
             android:id="@+id/chat_panel_addition"
             android:layout_width="fill_parent"
@@ -99,7 +98,6 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/chat_calling_card" />
         </LinearLayout>
-         -->
     </RelativeLayout>
 
 </RelativeLayout>

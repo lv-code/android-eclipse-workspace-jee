@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,15 +61,23 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mImgAddition.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+//				MyHelper.setSoftInputMode(ChatActivity.this);
+				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
+				imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(), 0); //强制隐藏键盘  
 				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout
 						.getLayoutParams();
+				int a = 0;
 				if (layoutParams.bottomMargin < 0) {
 					layoutParams.bottomMargin = 0;
+					a = 0;
 				} else {
 					layoutParams.bottomMargin = -158;
+					a = -158;
 				}
+				Log.i("tag1", "a = "+a);
 				// TODO 做动画，让位置变化更流畅 .animate()
-				mLayout.setLayoutParams(layoutParams);
+				ObjectAnimator.ofInt((View)mLayout, "bottomMargin", a).setDuration(100).start();;
+//				mLayout.setLayoutParams(layoutParams);
 			}
 		});
 	}
