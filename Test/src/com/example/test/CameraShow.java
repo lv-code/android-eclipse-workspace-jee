@@ -1,5 +1,7 @@
 package com.example.test;
 
+import static android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,14 +11,11 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,7 +28,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import static android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
 /*
  * 当将手机屏幕旋转时，系统会被强制重置启动onCreate方法
