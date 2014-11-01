@@ -76,7 +76,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 				}
 				Log.i("tag1", "a = "+a);
 				// TODO 做动画，让位置变化更流畅 .animate()
-				ObjectAnimator.
 				ObjectAnimator.ofInt((View)mLayout, "bottomMargin", a).setDuration(100).start();
 //				mLayout.setLayoutParams(layoutParams);
 			}
