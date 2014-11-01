@@ -49,6 +49,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private ListView mListView;
 	private ChatMsgViewAdapter mAdapter;
 	private List<ChatMsgEntity> mDataArrays = new ArrayList<ChatMsgEntity>();
+	
+	private final String MY_NAME = "麦兜";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -133,7 +135,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == Activity.RESULT_OK) {
 			switch (resultCode) {
@@ -163,6 +164,7 @@ public class ChatActivity extends Activity implements OnClickListener {
                         isBig = true;  
                     }  
                     // TODO 将照片显示到ListView中
+                    //发图片用新的xml来显示，左右各一个
   
   
                 } catch (Exception e) {  
@@ -211,7 +213,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 			ChatMsgEntity entity = new ChatMsgEntity();
 			entity.setDate(dataArray[i]);
 			if (i % 2 == 0) {
-				entity.setName("麦兜");
+				entity.setName(MY_NAME);
 				entity.setMsgType(true);
 			} else {
 				entity.setName("麦太");
@@ -232,7 +234,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_send:
-			sendText();
+			send();
 			break;
 		case R.id.head_TitleBackBtn:
 			finish();
@@ -240,13 +242,13 @@ public class ChatActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private void sendText() {
+	private void send() {
 		String contString = mEditTextContent.getText().toString();
 		if (contString.length() > 0) {
 			ChatMsgEntity entity = new ChatMsgEntity();
 			entity.setDate(getDate());
-			entity.setName("人马");
-			entity.setMsgType(false);
+			entity.setName(MY_NAME);
+			entity.setMsgType(true);
 			entity.setText(contString);
 
 			mDataArrays.add(entity);
