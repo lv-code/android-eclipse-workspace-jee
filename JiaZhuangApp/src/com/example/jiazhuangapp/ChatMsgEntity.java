@@ -5,9 +5,7 @@ public class ChatMsgEntity {
     private static final String TAG = ChatMsgEntity.class.getSimpleName();
 
     private String name;
-
     private String date;
-
     private String text;
 
     private boolean isComMeg = true;
