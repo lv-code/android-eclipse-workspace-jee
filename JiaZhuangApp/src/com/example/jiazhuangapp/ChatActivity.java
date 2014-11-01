@@ -1,5 +1,7 @@
 package com.example.jiazhuangapp;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -7,7 +9,11 @@ import java.util.List;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,12 +25,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class ChatActivity extends Activity implements OnClickListener {
 
+	private static final int SHOW_ALBUM = 11;
 	private Button mBtnSend;
 	private Button mBtnBack;
 	private ImageView mImgAddition;
+	private ImageView mImgAlbum;
 	private RelativeLayout mLayout;
 	private EditText mEditTextContent;
 	private ListView mListView;
@@ -53,7 +62,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
 		mImgAddition = (ImageView) findViewById(R.id.btn_addition_menu);
 		mLayout = (RelativeLayout) findViewById(R.id.rl_bottom);
-
+		mImgAlbum = (ImageView) findViewById(R.id.chat_phone_album);
 	}
 
 	private void initListener() {
@@ -80,8 +89,50 @@ public class ChatActivity extends Activity implements OnClickListener {
 //				mLayout.setLayoutParams(layoutParams);
 			}
 		});
+		
+		mImgAlbum.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+				intent.addCategory(Intent.CATEGORY_OPENABLE);
+				intent.setType("image/*");
+				intent.putExtra("crop", "true");
+				intent.putExtra("aspectX", 1);
+				intent.putExtra("aspectY", 1);
+				intent.putExtra("outputX", 80);
+				intent.putExtra("outputY", 80);
+				intent.putExtra("return-data", true);
+				startActivityForResult(intent, SHOW_ALBUM);
+				
+			}
+		});
+		chkSDStatus();
 	}
 
+	private void chkSDStatus() {
+		String sdStatus = Environment.getExternalStorageState();
+		if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+			Toast.makeText(this,
+					"SD card is not avaiable/writeable right now.",
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+	}
+	
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == SHOW_ALBUM && resultCode == Activity.RESULT_OK) {
+			System.out.println("data2-->" + data);
+			// showImage(data);
+		}
+	}
+
+	
+	
 	/*
 	 * "即使是一块牛肉，也应该有自己的态度，要慎其独，要善其身，要知道精彩的人生不能只有精肉，还要有适宜的肥油做调配，有雪白的肉筋做环绕，并且还要掌握跳进煎锅时的角度，姿势，以及火候，才能最终成为一块优秀道地的西冷牛排~"
 	 * , "不开心睡一觉，就让他过去吧，伤心还好，伤胃就不好了。", "要懂得珍惜守护身边的每个人，因为前世扭断脖子的回眸，我们才换来了今生的相遇；",
