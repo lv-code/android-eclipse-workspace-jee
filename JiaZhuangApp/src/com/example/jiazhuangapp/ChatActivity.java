@@ -8,19 +8,26 @@ import java.util.List;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +37,9 @@ import android.widget.Toast;
 public class ChatActivity extends Activity implements OnClickListener {
 
 	private static final int SHOW_ALBUM = 11;
+	
+	private boolean isBig = false; 
+	
 	private Button mBtnSend;
 	private Button mBtnBack;
 	private ImageView mImgAddition;
@@ -125,13 +135,60 @@ public class ChatActivity extends Activity implements OnClickListener {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == SHOW_ALBUM && resultCode == Activity.RESULT_OK) {
+		if (resultCode == Activity.RESULT_OK) {
+			switch (resultCode) {
+			case SHOW_ALBUM:
+				ContentResolver resolver = getContentResolver();  
+				  
+                // 照片的原始资源地址  
+                Uri imgUri = data.getData();  
+  
+                try {  
+                    // 使用ContentProvider通过Uri获取原始图片  
+                    Bitmap photo = MediaStore.Images.Media.getBitmap(resolver,  
+                            imgUri);  
+  
+                    // 获取屏幕分辨率  
+                    DisplayMetrics dm_2 = new DisplayMetrics();  
+                    getWindowManager().getDefaultDisplay().getMetrics(dm_2);  
+  
+                    // 图片分辨率与屏幕分辨率  
+                    float scale_2 = photo.getWidth() / (float) dm_2.widthPixels;  
+  
+                    Bitmap newBitMap_2 = null;  
+                    if (scale_2 > 1) {  
+                        newBitMap_2 = zoomBitmap(photo, photo.getWidth()  
+                                / scale_2, photo.getHeight() / scale_2);  
+                        photo.recycle();  
+                        isBig = true;  
+                    }  
+                    // TODO 将照片显示到ListView中
+  
+  
+                } catch (Exception e) {  
+                    // TODO: handle exception  
+                }  
+				break;
+
+			default:
+				break;
+			}
 			System.out.println("data2-->" + data);
 			// showImage(data);
 		}
 	}
 
-	
+	  // 对分辨率较大的图片进行缩放  
+    public Bitmap zoomBitmap(Bitmap bitmap, float width, float height) {  
+        int w = bitmap.getWidth();  
+        int h = bitmap.getHeight();  
+        Matrix matrix = new Matrix();  
+        float scaleWidth = ((float) width / w);  
+        float scaleHeight = ((float) height / h);  
+        matrix.postScale(scaleWidth, scaleHeight);// 利用矩阵进行缩放不会造成内存溢出  
+        Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);  
+        return newbmp;  
+    }  
 	
 	/*
 	 * "即使是一块牛肉，也应该有自己的态度，要慎其独，要善其身，要知道精彩的人生不能只有精肉，还要有适宜的肥油做调配，有雪白的肉筋做环绕，并且还要掌握跳进煎锅时的角度，姿势，以及火候，才能最终成为一块优秀道地的西冷牛排~"
@@ -175,7 +232,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_send:
-			send();
+			sendText();
 			break;
 		case R.id.head_TitleBackBtn:
 			finish();
@@ -183,7 +240,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private void send() {
+	private void sendText() {
 		String contString = mEditTextContent.getText().toString();
 		if (contString.length() > 0) {
 			ChatMsgEntity entity = new ChatMsgEntity();
