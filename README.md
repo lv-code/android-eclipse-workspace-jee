@@ -11,7 +11,7 @@ ToDoList
 
 **2. 编写Blog增加对概念的理解**
 
-**3. 学习SDK中的sample和api
+**3. 学习SDK中的sample和api**
 
 学习资料
 ===
