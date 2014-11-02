@@ -13,6 +13,8 @@ ToDoList
 
 **3. 学习SDK中的sample和api**
 
+**4. 学习Github上Github客户端的源代码**
+
 学习资料
 ===
 
