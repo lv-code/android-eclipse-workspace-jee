@@ -132,6 +132,10 @@
             android:name=".GridViewDemo"
             android:label="@string/title_activity_grid_view_demo" >
         </activity>
+        <activity
+            android:name=".IntentDemoActivity"
+            android:label="@string/title_activity_intent_demo" >
+        </activity>
     </application>
 
 </manifest>

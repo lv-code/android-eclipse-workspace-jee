@@ -40,5 +40,6 @@
     <string name="title_activity_sliding_drawer">SlidingDrawer</string>
     <string name="title_activity_pull_up">PullUpActivity</string>
     <string name="title_activity_grid_view_demo">GridViewDemo</string>
+    <string name="title_activity_intent_demo">IntentDemoActivity</string>
 
 </resources>
