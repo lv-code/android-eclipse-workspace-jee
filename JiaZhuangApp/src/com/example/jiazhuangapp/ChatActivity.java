@@ -1,5 +1,6 @@
 package com.example.jiazhuangapp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -31,9 +32,9 @@ import android.widget.Toast;
 public class ChatActivity extends Activity implements OnClickListener {
 
 	private static final int SHOW_ALBUM = 11;
-	
-	private boolean isBig = false; 
-	
+
+	private boolean isBig = false;
+
 	private Button mBtnSend;
 	private Button mBtnBack;
 	private ImageView mImgAddition;
@@ -43,7 +44,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private ListView mListView;
 	private ChatMsgViewAdapter mAdapter;
 	private List<ChatMsgEntity> mDataArrays = new ArrayList<ChatMsgEntity>();
-	
+
 	private final String MY_NAME = "麦兜";
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,13 +73,14 @@ public class ChatActivity extends Activity implements OnClickListener {
 	}
 
 	private void initListener() {
-		
+
 		mImgAddition.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				MyHelper.setSoftInputMode(ChatActivity.this);
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
-				imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(), 0); //强制隐藏键盘  
+				// MyHelper.setSoftInputMode(ChatActivity.this);
+				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(),
+						0); // 强制隐藏键盘
 				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout
 						.getLayoutParams();
 				int a = 0;
@@ -89,15 +91,16 @@ public class ChatActivity extends Activity implements OnClickListener {
 					layoutParams.bottomMargin = -158;
 					a = -158;
 				}
-				Log.i("tag1", "a = "+a);
+				Log.i("tag1", "a = " + a);
 				// TODO 做动画，让位置变化更流畅 .animate()
-				ObjectAnimator.ofInt((View)mLayout, "bottomMargin", a).setDuration(100).start();
-//				mLayout.setLayoutParams(layoutParams);
+				// ObjectAnimator.ofInt((View)mLayout, "bottomMargin",
+				// a).setDuration(100).start();
+				mLayout.setLayoutParams(layoutParams);
 			}
 		});
-		
+
 		mImgAlbum.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -110,7 +113,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 				intent.putExtra("outputY", 80);
 				intent.putExtra("return-data", true);
 				startActivityForResult(intent, SHOW_ALBUM);
-				
+
 			}
 		});
 		chkSDStatus();
@@ -125,48 +128,53 @@ public class ChatActivity extends Activity implements OnClickListener {
 			return;
 		}
 	}
-	
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == Activity.RESULT_OK) {
-			switch (resultCode) {
+			switch (requestCode) {
 			case SHOW_ALBUM:
-				ContentResolver resolver = getContentResolver();  
-				  
-                // 照片的原始资源地址  
-                Uri imgUri = data.getData();  
-  
-                try {  
-                    // 使用ContentProvider通过Uri获取原始图片  
-                    Bitmap photo = MediaStore.Images.Media.getBitmap(resolver,  
-                            imgUri);  
-  
-                    // 获取屏幕分辨率  
-                    DisplayMetrics dm_2 = new DisplayMetrics();  
-                    getWindowManager().getDefaultDisplay().getMetrics(dm_2);  
-  
-                    // 图片分辨率与屏幕分辨率  
-                    float scale_2 = photo.getWidth() / (float) dm_2.widthPixels;  
-  
-                    Bitmap newBitMap_2 = null;  
-                    if (scale_2 > 1) {  
-                        newBitMap_2 = zoomBitmap(photo, photo.getWidth()  
-                                / scale_2, photo.getHeight() / scale_2);  
-                        photo.recycle();  
-                        isBig = true;  
-                    }  
-                    // TODO 将照片显示到ListView中
-                    //发图片用新的xml来显示，左右各一个
-  
-  
-                } catch (Exception e) {  
-                    // TODO: handle exception  
-                }  
+				ContentResolver resolver = getContentResolver();
+
+				// 照片的原始资源地址
+				Uri imgUri = data.getData();
+				System.out.println("data111111-->" + data);
+				// 使用ContentProvider通过Uri获取原始图片
+				Bitmap photo = null;
+				try {
+					photo = MediaStore.Images.Media.getBitmap(resolver,
+							imgUri);
+
+				} catch (IOException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					System.out.println("data44444-->" + data);
+				}
+				// 获取屏幕分辨率
+				DisplayMetrics dm_2 = new DisplayMetrics();
+				getWindowManager().getDefaultDisplay().getMetrics(dm_2);
+
+				// 图片分辨率与屏幕分辨率
+				float scale_2 = photo.getWidth() / (float) dm_2.widthPixels;
+
+				Bitmap newBitMap_2 = null;
+				if (scale_2 > 1) {
+					newBitMap_2 = zoomBitmap(photo, photo.getWidth() / scale_2,
+							photo.getHeight() / scale_2);
+					photo.recycle();
+					isBig = true;
+				}
+				System.out.println("data22222-->" + data);
+				Log.i("tag1 Bitmap", newBitMap_2.toString());
+				Log.i("tag2 imgUri", imgUri.toString());
+				// TODO 将照片显示到ListView中
+				// 发图片用新的xml来显示，左右各一个
+
 				break;
 
 			default:
+				System.out.println("data33333-->" + data);
 				break;
 			}
 			System.out.println("data2-->" + data);
@@ -174,18 +182,18 @@ public class ChatActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	  // 对分辨率较大的图片进行缩放  
-    public Bitmap zoomBitmap(Bitmap bitmap, float width, float height) {  
-        int w = bitmap.getWidth();  
-        int h = bitmap.getHeight();  
-        Matrix matrix = new Matrix();  
-        float scaleWidth = ((float) width / w);  
-        float scaleHeight = ((float) height / h);  
-        matrix.postScale(scaleWidth, scaleHeight);// 利用矩阵进行缩放不会造成内存溢出  
-        Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);  
-        return newbmp;  
-    }  
-	
+	// 对分辨率较大的图片进行缩放
+	public Bitmap zoomBitmap(Bitmap bitmap, float width, float height) {
+		int w = bitmap.getWidth();
+		int h = bitmap.getHeight();
+		Matrix matrix = new Matrix();
+		float scaleWidth = ((float) width / w);
+		float scaleHeight = ((float) height / h);
+		matrix.postScale(scaleWidth, scaleHeight);// 利用矩阵进行缩放不会造成内存溢出
+		Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
+		return newbmp;
+	}
+
 	/*
 	 * "即使是一块牛肉，也应该有自己的态度，要慎其独，要善其身，要知道精彩的人生不能只有精肉，还要有适宜的肥油做调配，有雪白的肉筋做环绕，并且还要掌握跳进煎锅时的角度，姿势，以及火候，才能最终成为一块优秀道地的西冷牛排~"
 	 * , "不开心睡一觉，就让他过去吧，伤心还好，伤胃就不好了。", "要懂得珍惜守护身边的每个人，因为前世扭断脖子的回眸，我们才换来了今生的相遇；",
