@@ -15,7 +15,7 @@ ToDoList
 
 **4. 学习Github上Github客户端的源代码**
 
-学习资料
+学习资
 ===
 
 * [Android常用知识点总汇](http://blog.csdn.net/wirelessqa/article/details/8218290)
@@ -23,7 +23,7 @@ ToDoList
 * [Java回调函数的理解](http://blog.csdn.net/wirelessqa/article/details/8150198)
 * [Android 更新UI的两种方法——handler和runOnUiThread](http://www.2cto.com/kf/201302/190591.html)
 
-脚印
+脚印:colock10:
 ===
 
 *每个人的身体中都蕴藏着巨大的能量，只需要多关注一点点，就会有很大的改变*
