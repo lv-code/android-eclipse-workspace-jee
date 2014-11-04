@@ -136,6 +136,10 @@
             android:name=".IntentDemoActivity"
             android:label="@string/title_activity_intent_demo" >
         </activity>
+        <activity
+            android:name=".CameraAndAlbumTest"
+            android:label="@string/title_activity_camera_and_album_test" >
+        </activity>
     </application>
 
 </manifest>

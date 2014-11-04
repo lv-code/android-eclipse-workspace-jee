@@ -103,8 +103,13 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-				intent.addCategory(Intent.CATEGORY_OPENABLE);
+				// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+
+				Intent intent = new Intent(
+						Intent.ACTION_PICK,
+						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+				// intent.addCategory(Intent.CATEGORY_OPENABLE);
 				intent.setType("image/*");
 				intent.putExtra("crop", "true");
 				intent.putExtra("aspectX", 1);
@@ -135,22 +140,27 @@ public class ChatActivity extends Activity implements OnClickListener {
 		if (resultCode == Activity.RESULT_OK) {
 			switch (requestCode) {
 			case SHOW_ALBUM:
+				Uri imgUri = null;
 				ContentResolver resolver = getContentResolver();
-
-				// 照片的原始资源地址
-				Uri imgUri = data.getData();
-				System.out.println("data111111-->" + data);
-				// 使用ContentProvider通过Uri获取原始图片
-				Bitmap photo = null;
 				try {
-					photo = MediaStore.Images.Media.getBitmap(resolver,
-							imgUri);
+					// 照片的原始资源地址
+					imgUri = data.getData();
+				} catch (Exception e) {
+
+					System.out.println(e.getMessage());
+				}
+				Bitmap photo = null;
+				System.out.println("data111111-->" + data);
+				 try { 
+					// 使用ContentProvider通过Uri获取原始图片
+					 photo = MediaStore.Images.Media.getBitmap(resolver, imgUri);
 
 				} catch (IOException e) {
 					// TODO: handle exception
 					e.printStackTrace();
 					System.out.println("data44444-->" + data);
 				}
+
 				// 获取屏幕分辨率
 				DisplayMetrics dm_2 = new DisplayMetrics();
 				getWindowManager().getDefaultDisplay().getMetrics(dm_2);
