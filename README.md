@@ -23,9 +23,9 @@ ToDoList
 * [Java回调函数的理解](http://blog.csdn.net/wirelessqa/article/details/8150198)
 * [Android 更新UI的两种方法——handler和runOnUiThread](http://www.2cto.com/kf/201302/190591.html)
 
-脚印:colock10:
+脚印 
 ===
 
-*每个人的身体中都蕴藏着巨大的能量，只需要多关注一点点，就会有很大的改变*
+*:ring:每个人的身体中都蕴藏着巨大的能量，只需要多关注一点点，就会有很大的改变*
 
 
