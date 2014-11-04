@@ -21,4 +21,11 @@ ToDoList
 * [Android常用知识点总汇](http://blog.csdn.net/wirelessqa/article/details/8218290)
 * [Android应用性能测试](http://blog.csdn.net/wirelessqa/article/details/29187517)
 * [Java回调函数的理解](http://blog.csdn.net/wirelessqa/article/details/8150198)
-* [Android 更新UI的两种方法——handler和runOnUiThread](http://www.2cto.com/kf/201302/190591.ht)
+* [Android 更新UI的两种方法——handler和runOnUiThread](http://www.2cto.com/kf/201302/190591.ht
+
+脚印
+===
+
+* 每个人的身体中都蕴藏着巨大的能，只需要多关注一点点，就有很的改*
+
+
