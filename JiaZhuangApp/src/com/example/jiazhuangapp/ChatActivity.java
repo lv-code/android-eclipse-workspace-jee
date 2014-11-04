@@ -1,5 +1,6 @@
 package com.example.jiazhuangapp;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +12,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,6 +46,12 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private ListView mListView;
 	private ChatMsgViewAdapter mAdapter;
 	private List<ChatMsgEntity> mDataArrays = new ArrayList<ChatMsgEntity>();
+
+	// 从相册选择照片后，裁剪保存的路径
+	private static final String IMAGE_FILE_LOCATION = "file:///sdcard/temp.jpg"; // temp
+																					// file
+	private Uri imageUri = Uri.parse(IMAGE_FILE_LOCATION);// The Uri to store
+															// the big bitmap
 
 	private final String MY_NAME = "麦兜";
 
@@ -91,7 +99,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 					layoutParams.bottomMargin = -158;
 					a = -158;
 				}
-				Log.i("tag1", "a = " + a);
 				// TODO 做动画，让位置变化更流畅 .animate()
 				// ObjectAnimator.ofInt((View)mLayout, "bottomMargin",
 				// a).setDuration(100).start();
@@ -110,6 +117,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
 				// intent.addCategory(Intent.CATEGORY_OPENABLE);
+
 				intent.setType("image/*");
 				intent.putExtra("crop", "true");
 				intent.putExtra("aspectX", 1);
@@ -117,6 +125,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 				intent.putExtra("outputX", 80);
 				intent.putExtra("outputY", 80);
 				intent.putExtra("return-data", true);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+				intent.putExtra("outputFormat",
+						Bitmap.CompressFormat.JPEG.toString());
+				intent.putExtra("noFaceDetection", true); // no face detection
 				startActivityForResult(intent, SHOW_ALBUM);
 
 			}
@@ -140,44 +152,44 @@ public class ChatActivity extends Activity implements OnClickListener {
 		if (resultCode == Activity.RESULT_OK) {
 			switch (requestCode) {
 			case SHOW_ALBUM:
-				Uri imgUri = null;
-				ContentResolver resolver = getContentResolver();
-				try {
-					// 照片的原始资源地址
-					imgUri = data.getData();
-				} catch (Exception e) {
 
-					System.out.println(e.getMessage());
-				}
-				Bitmap photo = null;
-				System.out.println("data111111-->" + data);
-				 try { 
-					// 使用ContentProvider通过Uri获取原始图片
-					 photo = MediaStore.Images.Media.getBitmap(resolver, imgUri);
-
-				} catch (IOException e) {
-					// TODO: handle exception
-					e.printStackTrace();
-					System.out.println("data44444-->" + data);
+				/*
+				 * 用 intent.putExtra("crop", "true"); 会产生缩略图保存。
+				 * 不能用data.getData()获取数据
+				 */
+				ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+				if (imageUri != null) {
+					Bitmap bitmap = decodeUriAsBitmap(imageUri);// decode bitmap
+					imageView.setImageBitmap(bitmap);
 				}
 
-				// 获取屏幕分辨率
-				DisplayMetrics dm_2 = new DisplayMetrics();
-				getWindowManager().getDefaultDisplay().getMetrics(dm_2);
-
-				// 图片分辨率与屏幕分辨率
-				float scale_2 = photo.getWidth() / (float) dm_2.widthPixels;
-
-				Bitmap newBitMap_2 = null;
-				if (scale_2 > 1) {
-					newBitMap_2 = zoomBitmap(photo, photo.getWidth() / scale_2,
-							photo.getHeight() / scale_2);
-					photo.recycle();
-					isBig = true;
-				}
+				/*
+				 * 直接从相册获取图片 ContentResolver resolver = getContentResolver();
+				 * try { // 照片的原始资源地址 imgUri = data.getData(); } catch
+				 * (Exception e) {
+				 * 
+				 * System.out.println(e.getMessage()); } Bitmap photo = null;
+				 * System.out.println("data111111-->" + data);
+				 * System.out.println("imgUri -->" + imgUri); try { //
+				 * 使用ContentProvider通过Uri获取原始图片 photo =
+				 * MediaStore.Images.Media.getBitmap(resolver, imgUri);
+				 * 
+				 * } catch (IOException e) { // TODO: handle exception
+				 * e.printStackTrace(); System.out.println("data44444-->" +
+				 * data); }
+				 * 
+				 * // 获取屏幕分辨率 DisplayMetrics dm_2 = new DisplayMetrics();
+				 * getWindowManager().getDefaultDisplay().getMetrics(dm_2);
+				 * 
+				 * // 图片分辨率与屏幕分辨率 float scale_2 = photo.getWidth() / (float)
+				 * dm_2.widthPixels;
+				 * 
+				 * Bitmap newBitMap_2 = null; if (scale_2 > 1) { newBitMap_2 =
+				 * zoomBitmap(photo, photo.getWidth() / scale_2,
+				 * photo.getHeight() / scale_2); photo.recycle(); isBig = true;
+				 * }
+				 */
 				System.out.println("data22222-->" + data);
-				Log.i("tag1 Bitmap", newBitMap_2.toString());
-				Log.i("tag2 imgUri", imgUri.toString());
 				// TODO 将照片显示到ListView中
 				// 发图片用新的xml来显示，左右各一个
 
@@ -268,6 +280,18 @@ public class ChatActivity extends Activity implements OnClickListener {
 			mEditTextContent.setText("");
 			mListView.setSelection(mListView.getCount() - 1);
 		}
+	}
+
+	private Bitmap decodeUriAsBitmap(Uri uri) {
+		Bitmap bitmap = null;
+		try {
+			bitmap = BitmapFactory.decodeStream(getContentResolver()
+					.openInputStream(uri));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return bitmap;
 	}
 
 	private String getDate() {

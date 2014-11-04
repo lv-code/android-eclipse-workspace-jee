@@ -35,7 +35,7 @@ public class CameraAndAlbumTest extends Activity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
-                setContentView(R.layout.main);
+                setContentView(R.layout.activity_camera_and_album_test);
 
                 imageView = (ImageView) findViewById(R.id.imageView1);
                 button = (Button) findViewById(R.id.button1);
