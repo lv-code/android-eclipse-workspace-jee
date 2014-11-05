@@ -97,14 +97,14 @@
                 android:src="@drawable/chat_phone_album" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/chat_camera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:src="@drawable/chat_camera" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/chat_calling_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
