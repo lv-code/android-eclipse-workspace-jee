@@ -43,7 +43,6 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_userhead"
             android:background="@drawable/chat_text_content_left"
-            android:hint="左边的文字"
             android:minHeight="62dp"
             android:textColor="#fff" />
 

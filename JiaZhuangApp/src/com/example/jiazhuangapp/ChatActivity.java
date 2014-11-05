@@ -86,24 +86,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mImgAddition.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// MyHelper.setSoftInputMode(ChatActivity.this);
-				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(),
-						0); // 强制隐藏键盘
-				RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout
-						.getLayoutParams();
-				int a = 0;
-				if (layoutParams.bottomMargin < 0) {
-					layoutParams.bottomMargin = 0;
-					a = 0;
-				} else {
-					layoutParams.bottomMargin = -158;
-					a = -158;
-				}
-				// TODO 做动画，让位置变化更流畅 .animate()
-				// ObjectAnimator.ofInt((View)mLayout, "bottomMargin",
-				// a).setDuration(100).start();
-				mLayout.setLayoutParams(layoutParams);
+				togglePanelAddition();
 			}
 		});
 
@@ -121,10 +104,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 				intent.setType("image/*");
 				intent.putExtra("crop", "true");
-				intent.putExtra("aspectX", 1);
-				intent.putExtra("aspectY", 1);
-				intent.putExtra("outputX", 80);
-				intent.putExtra("outputY", 80);
+				intent.putExtra("aspectX", 2);
+				intent.putExtra("aspectY", 2);
+				intent.putExtra("outputX", 280);
+				intent.putExtra("outputY", 280);
 				intent.putExtra("return-data", true);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 				intent.putExtra("outputFormat",
@@ -137,6 +120,27 @@ public class ChatActivity extends Activity implements OnClickListener {
 		chkSDStatus();
 	}
 
+	private void togglePanelAddition() {
+		// MyHelper.setSoftInputMode(ChatActivity.this);
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(),
+				0); // 强制隐藏键盘
+		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout
+				.getLayoutParams();
+		int a = 0;
+		if (layoutParams.bottomMargin < 0) {
+			layoutParams.bottomMargin = 0;
+			a = 0;
+		} else {
+			layoutParams.bottomMargin = -158;
+			a = -158;
+		}
+		// TODO 做动画，让位置变化更流畅 .animate()
+		// ObjectAnimator.ofInt((View)mLayout, "bottomMargin",
+		// a).setDuration(100).start();
+		mLayout.setLayoutParams(layoutParams);
+	}
+	
 	private void chkSDStatus() {
 		String sdStatus = Environment.getExternalStorageState();
 		if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
@@ -158,12 +162,13 @@ public class ChatActivity extends Activity implements OnClickListener {
 				 * 用 intent.putExtra("crop", "true"); 会产生缩略图保存。
 				 * 不能用data.getData()获取数据
 				 */
-				ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+//				ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 				if (imageUri != null) {
 					imgBitmap = decodeUriAsBitmap(imageUri);// decode bitmap
-					imageView.setImageBitmap(imgBitmap);
+//					imageView.setImageBitmap(imgBitmap);
 				}
 				send();
+				togglePanelAddition();
 				/*
 				 * 直接从相册获取图片 ContentResolver resolver = getContentResolver();
 				 * try { // 照片的原始资源地址 imgUri = data.getData(); } catch
