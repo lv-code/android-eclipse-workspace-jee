@@ -24,6 +24,16 @@
         android:dividerHeight="5dp"
         android:scrollbarStyle="outsideOverlay"
         android:stackFromBottom="true" />
+    
+    <TextView
+        android:id="@+id/lv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="暂无消息" />
 
     <RelativeLayout
         android:id="@+id/rl_bottom"

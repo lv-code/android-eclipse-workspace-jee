@@ -51,7 +51,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private static final String IMAGE_FILE_LOCATION = "file:///sdcard/temp.jpg"; // temp
 																					// file
 	private Uri imageUri = Uri.parse(IMAGE_FILE_LOCATION);// The Uri to store
-															// the big bitmap
+	private Bitmap imgBitmap; //获取发送的图片转化为Bitmap
 
 	private final String MY_NAME = "麦兜";
 
@@ -69,6 +69,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 	public void initView() {
 		mListView = (ListView) findViewById(R.id.listview);
+		mListView.setEmptyView(findViewById(R.id.lv_empty));
 		mBtnSend = (Button) findViewById(R.id.btn_send);
 		mBtnSend.setOnClickListener(this);
 		mBtnBack = (Button) findViewById(R.id.head_TitleBackBtn);
@@ -159,10 +160,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 				 */
 				ImageView imageView = (ImageView) findViewById(R.id.imageView1);
 				if (imageUri != null) {
-					Bitmap bitmap = decodeUriAsBitmap(imageUri);// decode bitmap
-					imageView.setImageBitmap(bitmap);
+					imgBitmap = decodeUriAsBitmap(imageUri);// decode bitmap
+					imageView.setImageBitmap(imgBitmap);
 				}
-
+				send();
 				/*
 				 * 直接从相册获取图片 ContentResolver resolver = getContentResolver();
 				 * try { // 照片的原始资源地址 imgUri = data.getData(); } catch
@@ -230,7 +231,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 			"2012-09-01 18:10", "2012-09-01 18:11", "2012-09-01 18:20",
 			"2012-09-01 18:30", "2012-09-01 18:35", "2012-09-01 18:40",
 			"2012-09-01 18:50" };
-	private final static int COUNT = 8;
+	private final static int COUNT = 0;
 
 	public void initData() {
 		for (int i = 0; i < COUNT; i++) {
@@ -272,8 +273,23 @@ public class ChatActivity extends Activity implements OnClickListener {
 			ChatMsgEntity entity = new ChatMsgEntity();
 			entity.setDate(getDate());
 			entity.setName(MY_NAME);
-			entity.setMsgType(true);
+			entity.setMsgType(false);
 			entity.setText(contString);
+			entity.setImgBitmap(imgBitmap);
+
+			mDataArrays.add(entity);
+			mAdapter.notifyDataSetChanged();
+			mEditTextContent.setText("");
+			mListView.setSelection(mListView.getCount() - 1);
+		}
+		
+		if (imgBitmap != null) {
+			ChatMsgEntity entity = new ChatMsgEntity();
+			entity.setDate(getDate());
+			entity.setName(MY_NAME);
+			entity.setMsgType(false);
+			entity.setText("");
+			entity.setImgBitmap(imgBitmap);
 
 			mDataArrays.add(entity);
 			mAdapter.notifyDataSetChanged();

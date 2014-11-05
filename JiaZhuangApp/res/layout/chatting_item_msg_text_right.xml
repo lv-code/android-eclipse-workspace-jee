@@ -34,9 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/touxiang_youbian_1"
+            android:focusable="false"
             android:scaleType="fitCenter"
-            android:focusable="false" />
+            android:src="@drawable/touxiang_youbian_1" />
 
         <TextView
             android:id="@+id/tv_chatcontent"
@@ -50,9 +50,19 @@
             android:gravity="left|center"
             android:lineSpacingExtra="2dp"
             android:minHeight="62dp"
-            android:text="你好，北京！"
+            android:hint="你好，北京！"
             android:textColor="#fff"
             android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_chatimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_userhead"
+            android:background="@drawable/chat_text_content_left"
+            android:scaleType="fitCenter"
+            android:src="@drawable/chat_loadfalse" />
 
         <TextView
             android:id="@+id/tv_username"
