@@ -26,18 +26,20 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.Toast;
 
 public class ChatActivity extends Activity implements OnClickListener {
-
 
 	private boolean isBig = false;
 
@@ -46,7 +48,11 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private ImageView mImgAddition;
 	private ImageView mImgAlbum;
 	private ImageView mImgCamera;
+	private ImageView mImgMic;
+
 	private RelativeLayout mLayout;
+	private LinearLayout mPanelAddition;
+	private RelativeLayout chat_voicepanel;
 	private EditText mEditTextContent;
 	private ListView mListView;
 	private ChatMsgViewAdapter mAdapter;
@@ -57,13 +63,17 @@ public class ChatActivity extends Activity implements OnClickListener {
 																					// file
 	private static final int SHOW_ALBUM = 11;
 	private Uri imageUri = Uri.parse(IMAGE_FILE_LOCATION);// The Uri to store
-	private Bitmap imgBitmap; //获取发送的图片转化为Bitmap
+	private Bitmap imgBitmap; // 获取发送的图片转化为Bitmap
 
 	private Uri photoUri;
 	private final static int TAKE_PHOTO = 10;
 	private final static String PHOTO_URI = "photoUri";
-	
+
 	private final String MY_NAME = "麦兜";
+	
+	private int mVoicePanelVisible = 0;
+	private int mLayoutVisible = 0;
+	private int mBtnSendVisible = 0;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,6 +100,12 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mLayout = (RelativeLayout) findViewById(R.id.rl_bottom);
 		mImgAlbum = (ImageView) findViewById(R.id.chat_phone_album);
 		mImgCamera = (ImageView) findViewById(R.id.chat_camera);
+		
+		mPanelAddition = (LinearLayout) findViewById(R.id.chat_panel_addition);
+
+		mImgMic = (ImageView) findViewById(R.id.chat_microphone);
+		
+		chat_voicepanel = (RelativeLayout) findViewById(R.id.chat_voicepanel);
 	}
 
 	private void initListener() {
@@ -99,9 +115,12 @@ public class ChatActivity extends Activity implements OnClickListener {
 			public void onClick(View v) {
 				togglePanelAddition();
 				// TODO 重新加载Adapter，让ListView在RelativeLayout上面
-				ViewGroup.LayoutParams vgLayoutParams = (ViewGroup.LayoutParams) mListView.getLayoutParams();
-				RelativeLayout.LayoutParams rlLayoutParams =  new RelativeLayout.LayoutParams();
-				vgLayoutParams.layout_above = 
+				// LayoutParams vgLayoutParams = (LayoutParams) new
+				// RelativeLayout.LayoutParams();
+				// vgLayoutParams. = "";
+				// mListView.setLayoutParams(params);
+				mAdapter.notifyDataSetChanged();
+				mListView.setSelection(mListView.getCount() - 1);
 			}
 		});
 
@@ -132,9 +151,9 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 			}
 		});
-		
+
 		mImgCamera.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
@@ -144,14 +163,57 @@ public class ChatActivity extends Activity implements OnClickListener {
 				startActivityForResult(intent, TAKE_PHOTO);
 			}
 		});
+
+		mImgMic.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				togglePanleVoice();
+			}
+		});
+		
+		mEditTextContent.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if(mBtnSendVisible == 0) {
+					mBtnSend.setVisibility(View.VISIBLE);
+					mBtnSendVisible = 1;
+				} else {
+					mBtnSend.setVisibility(View.INVISIBLE);
+					mBtnSendVisible = 0;
+				}
+				
+			}
+		});
 		chkSDStatus();
 	}
 
+	private void togglePanleVoice() {
+		
+		if (mVoicePanelVisible == 0) {
+			chat_voicepanel.setVisibility(View.VISIBLE);
+			mVoicePanelVisible = 1;
+		} else {
+			chat_voicepanel.setVisibility(View.GONE);
+			mVoicePanelVisible = 0;
+//			togglePanelAddition();
+		}
+	}
+
 	private void togglePanelAddition() {
+		if (mLayoutVisible == 0) {
+			mPanelAddition.setVisibility(View.VISIBLE);
+			mLayoutVisible = 1;
+			chat_voicepanel.setVisibility(View.GONE);
+		} else {
+			mPanelAddition.setVisibility(View.GONE);
+			mLayoutVisible = 0;
+		}
+		/*
 		// MyHelper.setSoftInputMode(ChatActivity.this);
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(),
-				0); // 强制隐藏键盘
+		imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(), 0); // 强制隐藏键盘
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout
 				.getLayoutParams();
 		int a = 0;
@@ -166,8 +228,9 @@ public class ChatActivity extends Activity implements OnClickListener {
 		// ObjectAnimator.ofInt((View)mLayout, "bottomMargin",
 		// a).setDuration(100).start();
 		mLayout.setLayoutParams(layoutParams);
+		*/
 	}
-	
+
 	private void chkSDStatus() {
 		String sdStatus = Environment.getExternalStorageState();
 		if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
@@ -189,10 +252,11 @@ public class ChatActivity extends Activity implements OnClickListener {
 				 * 用 intent.putExtra("crop", "true"); 会产生缩略图保存。
 				 * 不能用data.getData()获取数据
 				 */
-//				ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+				// ImageView imageView = (ImageView)
+				// findViewById(R.id.imageView1);
 				if (imageUri != null) {
 					imgBitmap = decodeUriAsBitmap(imageUri);// decode bitmap
-//					imageView.setImageBitmap(imgBitmap);
+					// imageView.setImageBitmap(imgBitmap);
 				}
 				send();
 				togglePanelAddition();
@@ -202,7 +266,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 				try {
 					InputStream stream = getContentResolver().openInputStream(
 							photoUri);
-					if (photoUri != null){
+					if (photoUri != null) {
 						imgBitmap = BitmapFactory.decodeStream(stream);
 					}
 					send();
@@ -262,7 +326,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 		mAdapter = new ChatMsgViewAdapter(this, mDataArrays);
 		mListView.setAdapter(mAdapter);
-
 	}
 
 	@Override
@@ -293,7 +356,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 			mEditTextContent.setText("");
 			mListView.setSelection(mListView.getCount() - 1);
 		}
-		
+
 		if (imgBitmap != null) {
 			ChatMsgEntity entity = new ChatMsgEntity();
 			entity.setDate(getDate());
@@ -306,6 +369,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 			mAdapter.notifyDataSetChanged();
 			mEditTextContent.setText("");
 			mListView.setSelection(mListView.getCount() - 1);
+			System.out.println("ListView Count is : " + mListView.getCount());
+			imgBitmap = null;
 		}
 	}
 
@@ -340,5 +405,29 @@ public class ChatActivity extends Activity implements OnClickListener {
 	public void head_xiaohei(View v) { // 标题栏 返回按钮
 		// Intent intent = new Intent (ChatActivity.this,InfoXiaohei.class);
 		// startActivity(intent);
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
 	}
 }
