@@ -1,16 +1,25 @@
 package com.example.jiazhuangapp;
 
+import android.graphics.Bitmap;
+
 
 public class ChatMsgEntity {
     private static final String TAG = ChatMsgEntity.class.getSimpleName();
 
     private String name;
-
     private String date;
-
     private String text;
+    private Bitmap imgBitmap = null;
 
-    private boolean isComMeg = true;
+    public Bitmap getImgBitmap() {
+		return imgBitmap;
+	}
+
+	public void setImgBitmap(Bitmap imgbitmap) {
+		this.imgBitmap = imgbitmap;
+	}
+
+	private boolean isComMeg = true;
 
     public String getName() {
         return name;

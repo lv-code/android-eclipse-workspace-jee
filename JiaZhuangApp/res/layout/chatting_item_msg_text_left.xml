@@ -30,22 +30,32 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/touxiang_zuobian_1"
-            android:scaleType="fitCenter"
             android:clickable="true"
-            android:onClick="head_xiaohei" />
+            android:onClick="head_xiaohei"
+            android:scaleType="fitCenter"
+            android:src="@drawable/touxiang_zuobian_1" />
 
         <TextView
             android:id="@+id/tv_chatcontent"
             style="@style/chat_content_date_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="62dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_userhead"
-            android:textColor="#fff"
-            android:hint="左边的文字"
-            android:background="@drawable/chat_text_content_left" />
+            android:background="@drawable/chat_text_content_left"
+            android:minHeight="62dp"
+            android:textColor="#fff" />
+
+        <ImageView
+            android:id="@+id/iv_chatimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_userhead"
+            android:background="@drawable/chat_text_content_left"
+            android:onClick="head_xiaohei"
+            android:scaleType="fitCenter"
+            android:src="@drawable/chat_loadfalse" />
 
         <TextView
             android:id="@+id/tv_username"

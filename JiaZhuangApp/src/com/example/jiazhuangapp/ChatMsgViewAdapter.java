@@ -1,16 +1,14 @@
 package com.example.jiazhuangapp;
 
-import android.content.Context;
-import android.database.DataSetObserver;
+import java.util.List;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.List;
 
 public class ChatMsgViewAdapter extends BaseAdapter {
 	
@@ -76,15 +74,16 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	    {
 	    	  if (isComMsg)
 			  {
-				  convertView = mInflater.inflate(R.layout.chatting_item_msg_text_left, null);
+	    		  convertView = mInflater.inflate(R.layout.chatting_item_msg_text_right, null);
 			  }else{
-				  convertView = mInflater.inflate(R.layout.chatting_item_msg_text_right, null);
+				  convertView = mInflater.inflate(R.layout.chatting_item_msg_text_left, null);
 			  }
 
 	    	  viewHolder = new ViewHolder();
 			  viewHolder.tvSendTime = (TextView) convertView.findViewById(R.id.tv_sendtime);
 			  viewHolder.tvUserName = (TextView) convertView.findViewById(R.id.tv_username);
 			  viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tv_chatcontent);
+			  viewHolder.ivChatimg = (ImageView) convertView.findViewById(R.id.iv_chatimg);
 			  viewHolder.isComMsg = isComMsg;
 			  
 			  convertView.setTag(viewHolder);
@@ -97,15 +96,18 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	    viewHolder.tvSendTime.setText(entity.getDate());
 	    viewHolder.tvUserName.setText(entity.getName());
 	    viewHolder.tvContent.setText(entity.getText());
+	    if (null != entity.getImgBitmap());
+	    viewHolder.ivChatimg.setImageBitmap(entity.getImgBitmap());
 	    
 	    return convertView;
     }
-    
 
+	
     static class ViewHolder { 
         public TextView tvSendTime;
         public TextView tvUserName;
         public TextView tvContent;
+        public ImageView ivChatimg;
         public boolean isComMsg = true;
     }
 

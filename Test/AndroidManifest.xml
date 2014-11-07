@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -111,6 +114,31 @@
         <activity
             android:name=".Thumbnail"
             android:label="@string/title_activity_thumbnail" >
+        </activity>
+        <activity
+            android:name=".SendVoice"
+            android:allowBackup="true"
+            android:label="@string/title_activity_send_voice" >
+        </activity>
+        <activity
+            android:name=".PanelBottom"
+            android:label="@string/title_activity_sliding_drawer" >
+        </activity>
+        <activity
+            android:name=".PullUpActivity"
+            android:label="@string/title_activity_pull_up" >
+        </activity>
+        <activity
+            android:name=".GridViewDemo"
+            android:label="@string/title_activity_grid_view_demo" >
+        </activity>
+        <activity
+            android:name=".IntentDemoActivity"
+            android:label="@string/title_activity_intent_demo" >
+        </activity>
+        <activity
+            android:name=".CameraAndAlbumTest"
+            android:label="@string/title_activity_camera_and_album_test" >
         </activity>
     </application>
 

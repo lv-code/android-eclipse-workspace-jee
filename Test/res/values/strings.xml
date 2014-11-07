@@ -36,5 +36,11 @@
     <string name="title_activity_loadmore">Loadmore</string>
     <string name="title_activity_list_more_test">ListMoreTest</string>
     <string name="title_activity_thumbnail">Thumbnail</string>
+    <string name="title_activity_send_voice">SendVoice</string>
+    <string name="title_activity_sliding_drawer">SlidingDrawer</string>
+    <string name="title_activity_pull_up">PullUpActivity</string>
+    <string name="title_activity_grid_view_demo">GridViewDemo</string>
+    <string name="title_activity_intent_demo">IntentDemoActivity</string>
+    <string name="title_activity_camera_and_album_test">CameraAndAlbumTest</string>
 
 </resources>

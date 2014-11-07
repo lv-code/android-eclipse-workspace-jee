@@ -3,8 +3,6 @@ package com.example.jiazhuangapp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.readystatesoftware.viewbadger.BadgeView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
