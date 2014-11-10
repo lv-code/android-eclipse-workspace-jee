@@ -1,6 +1,14 @@
-JiaZhuangApp/bin
-JiaZhuangApp/gen
-Test/bin/
-Test/gen/
+#Android generated
+*/bin
+*/gen
+*/lint.xml
+
+#Eclipse
+*/.project
+*/.classpath
+*/.settings
+*/.checkstyle
+*/project.properties
+
 .metadata/
 RemoteSystemsTempFiles/

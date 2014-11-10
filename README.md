@@ -1,4 +1,4 @@
-android-eclipse-workspace-jee
+﻿android-eclipse-workspace-jee
 =============================
 
 学习android开发的代码实例，存放的是eclipse的workspace项目。项目中涉及的Java知识，做的一些demo。
@@ -28,4 +28,5 @@ ToDoList
 
 *:ring:每个人的身体中都蕴藏着巨大的能量，只需要多关注一点点，就会有很大的改变*
 
+**朋友的天猫旗舰店，帮着链接一下，里面的衣服很不错，有空进去看一下吧：[天生美](http://tianshengmei.tmall.com/)**
 
