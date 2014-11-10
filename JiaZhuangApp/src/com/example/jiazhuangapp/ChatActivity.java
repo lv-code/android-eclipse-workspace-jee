@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
+
+import com.example.Util.RecordUtil;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -18,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -27,9 +31,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.MotionEvent;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,7 +60,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 	private RelativeLayout mLayout;
 	private LinearLayout mPanelAddition;
-	private RelativeLayout chat_voicepanel;
+	private RelativeLayout chatVoicePanel;
 	private EditText mEditTextContent;
 	private ListView mListView;
 	private ChatMsgViewAdapter mAdapter;
@@ -70,11 +78,23 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private final static String PHOTO_URI = "photoUri";
 
 	private final String MY_NAME = "麦兜";
-	
+
 	private int mVoicePanelVisible = 0;
 	private int mLayoutVisible = 0;
 	private int mBtnSendVisible = 0;
 
+	private ImageView microhandler;
+	private MediaPlayer mMediaPlayer;
+	private RecordUtil mRecordUtil;
+	
+	private static final int RECORD_NO = 0; // 不在录音
+	private static final int RECORD_ING = 1; // 正在录音
+	private static final int RECORD_ED = 2; // 完成录音
+	private int mRecord_State = 0; // 录音的状态
+
+	private static final String PATH = "/sdcard/SendVoice/Record/";// 录音存储路径
+	private String mRecordPath;// 录音的存储名称
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		CustomTitleBar.getTitleBar(this, "和他（她）聊天");
@@ -100,15 +120,27 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mLayout = (RelativeLayout) findViewById(R.id.rl_bottom);
 		mImgAlbum = (ImageView) findViewById(R.id.chat_phone_album);
 		mImgCamera = (ImageView) findViewById(R.id.chat_camera);
-		
+
 		mPanelAddition = (LinearLayout) findViewById(R.id.chat_panel_addition);
 
 		mImgMic = (ImageView) findViewById(R.id.chat_microphone);
-		
-		chat_voicepanel = (RelativeLayout) findViewById(R.id.chat_voicepanel);
+
+		chatVoicePanel = (RelativeLayout) findViewById(R.id.chat_voicepanel);
+		microhandler = (ImageView) findViewById(R.id.chat_microhandler);
 	}
 
 	private void initListener() {
+
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				mListView.requestFocus();
+				mEditTextContent.clearFocus();
+			}
+
+		});
 
 		mImgAddition.setOnClickListener(new OnClickListener() {
 			@Override
@@ -171,42 +203,86 @@ public class ChatActivity extends Activity implements OnClickListener {
 				togglePanleVoice();
 			}
 		});
-		
+
 		mEditTextContent.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
+
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				if(mBtnSendVisible == 0 && hasFocus) {
+				if (mBtnSendVisible == 0 && hasFocus) {
 					mBtnSend.setVisibility(View.VISIBLE);
 					mBtnSendVisible = 1;
 				} else {
 					mBtnSend.setVisibility(View.INVISIBLE);
 					mBtnSendVisible = 0;
 				}
-				
+
 			}
 		});
 		mListView.setOnFocusChangeListener(new OnFocusChangeListener() {
-			
+
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				Toast.makeText(getApplicationContext(), "ListView focuse", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "ListView focuse",
+						Toast.LENGTH_SHORT).show();
 				mListView.requestFocus();
 				mEditTextContent.clearFocus();
+			}
+		});
+		microhandler.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					if (mRecord_State != RECORD_ING) {
+						// 修改录音状态
+						mRecord_State = RECORD_ING;
+						// 设置录音保存路径
+						mRecordPath = PATH + UUID.randomUUID().toString()
+								+ ".amr";
+						// 实例化录音工具类
+						mRecordUtil = new RecordUtil(mRecordPath);
+					}
+					try {
+						// 开始录音
+						mRecordUtil.start();
+					} catch (IOException e) {
+						// 区别于System.out.println(e);
+						e.printStackTrace();
+					}
+					
+					break;
+					
+					// 停止录音
+				case MotionEvent.ACTION_UP:
+					if (mRecord_State == RECORD_ING) {
+						// 修改录音状态
+						mRecord_State = RECORD_ED;
+						try {
+							// 停止录音
+							mRecordUtil.stop();
+							// 初始录音音量
+							mRecord_Volume = 0;
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					break;
+				return false;
 			}
 		});
 		chkSDStatus();
 	}
 
 	private void togglePanleVoice() {
-		
+
 		if (mVoicePanelVisible == 0) {
-			chat_voicepanel.setVisibility(View.VISIBLE);
+			chatVoicePanel.setVisibility(View.VISIBLE);
 			mVoicePanelVisible = 1;
 		} else {
-			chat_voicepanel.setVisibility(View.GONE);
+			chatVoicePanel.setVisibility(View.GONE);
 			mVoicePanelVisible = 0;
-//			togglePanelAddition();
+			// togglePanelAddition();
 		}
 	}
 
@@ -214,30 +290,24 @@ public class ChatActivity extends Activity implements OnClickListener {
 		if (mLayoutVisible == 0) {
 			mPanelAddition.setVisibility(View.VISIBLE);
 			mLayoutVisible = 1;
-			chat_voicepanel.setVisibility(View.GONE);
+			chatVoicePanel.setVisibility(View.GONE);
 		} else {
 			mPanelAddition.setVisibility(View.GONE);
 			mLayoutVisible = 0;
 		}
 		/*
-		// MyHelper.setSoftInputMode(ChatActivity.this);
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(), 0); // 强制隐藏键盘
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mLayout
-				.getLayoutParams();
-		int a = 0;
-		if (layoutParams.bottomMargin < 0) {
-			layoutParams.bottomMargin = 0;
-			a = 0;
-		} else {
-			layoutParams.bottomMargin = -158;
-			a = -158;
-		}
-		// TODO 做动画，让位置变化更流畅 .animate()
-		// ObjectAnimator.ofInt((View)mLayout, "bottomMargin",
-		// a).setDuration(100).start();
-		mLayout.setLayoutParams(layoutParams);
-		*/
+		 * // MyHelper.setSoftInputMode(ChatActivity.this); InputMethodManager
+		 * imm = (InputMethodManager)
+		 * getSystemService(Context.INPUT_METHOD_SERVICE);
+		 * imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(), 0); //
+		 * 强制隐藏键盘 RelativeLayout.LayoutParams layoutParams =
+		 * (RelativeLayout.LayoutParams) mLayout .getLayoutParams(); int a = 0;
+		 * if (layoutParams.bottomMargin < 0) { layoutParams.bottomMargin = 0; a
+		 * = 0; } else { layoutParams.bottomMargin = -158; a = -158; } // TODO
+		 * 做动画，让位置变化更流畅 .animate() // ObjectAnimator.ofInt((View)mLayout,
+		 * "bottomMargin", // a).setDuration(100).start();
+		 * mLayout.setLayoutParams(layoutParams);
+		 */
 	}
 
 	private void chkSDStatus() {

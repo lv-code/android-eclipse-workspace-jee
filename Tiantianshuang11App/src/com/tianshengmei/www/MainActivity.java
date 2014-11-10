@@ -46,7 +46,8 @@ public class MainActivity extends Activity {
 		}
 
 		ListView mListView = (ListView) findViewById(R.id.listview);
-
+//		mListView.setOverscrollHeader(getDrawable(R.drawable.img));
+		
 		SimpleAdapter adapter = new SimpleAdapter(this, mData,
 				R.layout.listview_item, new String[] { "title", "img" },
 				new int[] { R.id.title, R.id.imgview });
@@ -67,22 +68,22 @@ public class MainActivity extends Activity {
 		});
 	}
 
-//	@Override
-//	protected void onResume() {
-//		super.onResume();
-//		Intent intent = new Intent();
-//		intent.setAction("android.intent.action.VIEW");
-//		Uri content_url = Uri.parse("http://play.jb51.net");
-//		intent.setData(content_url);
-//		startActivity(intent);
-//		Log.e(TAG, "start onResume~~~");
-//	}
+	// @Override
+	// protected void onResume() {
+	// super.onResume();
+	// Intent intent = new Intent();
+	// intent.setAction("android.intent.action.VIEW");
+	// Uri content_url = Uri.parse("http://play.jb51.net");
+	// intent.setData(content_url);
+	// startActivity(intent);
+	// Log.e(TAG, "start onResume~~~");
+	// }
 
 	@Override
 	protected void onStop() {
 		super.onStop();
 		this.finish();
-//		Log.e(TAG, "start onStop~~~");
+		// Log.e(TAG, "start onStop~~~");
 	}
 
 	// @Override
