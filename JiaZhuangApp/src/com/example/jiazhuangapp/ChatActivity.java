@@ -176,7 +176,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 			
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				if(mBtnSendVisible == 0) {
+				if(mBtnSendVisible == 0 && hasFocus) {
 					mBtnSend.setVisibility(View.VISIBLE);
 					mBtnSendVisible = 1;
 				} else {
@@ -184,6 +184,15 @@ public class ChatActivity extends Activity implements OnClickListener {
 					mBtnSendVisible = 0;
 				}
 				
+			}
+		});
+		mListView.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				Toast.makeText(getApplicationContext(), "ListView focuse", Toast.LENGTH_SHORT).show();
+				mListView.requestFocus();
+				mEditTextContent.clearFocus();
 			}
 		});
 		chkSDStatus();
@@ -334,6 +343,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.btn_send:
 			send();
+			mBtnSend.setVisibility(View.INVISIBLE);
+			mBtnSendVisible = 0;
 			break;
 		case R.id.head_TitleBackBtn:
 			finish();

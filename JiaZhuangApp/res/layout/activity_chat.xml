@@ -12,6 +12,8 @@
         android:layout_alignParentTop="true"
         android:cacheColorHint="#0000"
         android:divider="@null"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:dividerHeight="5dp"
         android:scrollbarStyle="outsideOverlay"
         android:stackFromBottom="true" />
