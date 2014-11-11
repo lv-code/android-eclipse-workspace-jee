@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -86,15 +87,16 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private ImageView microhandler;
 	private MediaPlayer mMediaPlayer;
 	private RecordUtil mRecordUtil;
-	
+
 	private static final int RECORD_NO = 0; // 不在录音
 	private static final int RECORD_ING = 1; // 正在录音
 	private static final int RECORD_ED = 2; // 完成录音
 	private int mRecord_State = 0; // 录音的状态
+	private double mRecord_Volume;// 麦克风获取的音量值
 
 	private static final String PATH = "/sdcard/SendVoice/Record/";// 录音存储路径
 	private String mRecordPath;// 录音的存储名称
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		CustomTitleBar.getTitleBar(this, "和他（她）聊天");
@@ -250,10 +252,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 						// 区别于System.out.println(e);
 						e.printStackTrace();
 					}
-					
+
 					break;
-					
-					// 停止录音
+
+				// 停止录音
 				case MotionEvent.ACTION_UP:
 					if (mRecord_State == RECORD_ING) {
 						// 修改录音状态
@@ -266,8 +268,13 @@ public class ChatActivity extends Activity implements OnClickListener {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
+						// 显示提醒
+						Toast.makeText(ChatActivity.this, "录音成功",
+								Toast.LENGTH_SHORT).show();
+						sendVoice();
 					}
 					break;
+				}
 				return false;
 			}
 		});
@@ -453,6 +460,21 @@ public class ChatActivity extends Activity implements OnClickListener {
 			System.out.println("ListView Count is : " + mListView.getCount());
 			imgBitmap = null;
 		}
+	}
+	
+	private void sendVoice() {
+		ChatMsgEntity entity = new ChatMsgEntity();
+		entity.setDate(getDate());
+		entity.setName(MY_NAME);
+		entity.setMsgType(false);
+		entity.setText("");
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.globle_player_btn_play);
+		entity.setImgBitmap(bmp);
+
+		mDataArrays.add(entity);
+		mAdapter.notifyDataSetChanged();
+		mEditTextContent.setText("");
+		mListView.setSelection(mListView.getCount() - 1);
 	}
 
 	private Bitmap decodeUriAsBitmap(Uri uri) {
