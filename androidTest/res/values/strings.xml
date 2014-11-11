@@ -42,5 +42,6 @@
     <string name="title_activity_grid_view_demo">GridViewDemo</string>
     <string name="title_activity_intent_demo">IntentDemoActivity</string>
     <string name="title_activity_camera_and_album_test">CameraAndAlbumTest</string>
+    <string name="title_activity_timer_task_demo">TimerTaskDemo</string>
 
 </resources>

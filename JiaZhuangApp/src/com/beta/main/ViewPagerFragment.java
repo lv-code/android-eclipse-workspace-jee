@@ -1,15 +1,23 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
-import android.os.Bundle;
+import com.example.jiazhuangapp.R;
+import com.readystatesoftware.viewbadger.BadgeView;
+
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MyView extends Fragment {
+public class ViewPagerFragment extends Fragment {
 
-	public MyView() {
+	// private String text;
+	private int tabNum;
+
+	public ViewPagerFragment(String text, int tabNum) {
 		super();
+		// this.text = text;
+		this.tabNum = tabNum;
 	}
 
 	/**
@@ -18,9 +26,24 @@ public class MyView extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.flow_page0,
-				container, false);
-		
+		View v = null;
+		switch (this.tabNum) {
+		case 1:
+			v = inflater.inflate(R.layout.view_pager_fragment_introduction,
+					container, false);
+			break;
+
+		case 2:
+			v = inflater.inflate(R.layout.view_pager_fragment_designer,
+					container, false);
+			break;
+
+		default:
+			break;
+		}
+		// tv = (TextView)v.findViewById(R.id.viewPagerText);
+		// tv.setText(text);
+		return v;
 	}
 	
 	@Override

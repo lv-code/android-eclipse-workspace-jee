@@ -1,10 +1,11 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.jiazhuangapp.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import android.content.Context;

@@ -1,4 +1,6 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
+
+import com.example.jiazhuangapp.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

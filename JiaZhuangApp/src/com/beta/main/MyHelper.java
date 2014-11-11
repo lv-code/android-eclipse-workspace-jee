@@ -1,4 +1,4 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

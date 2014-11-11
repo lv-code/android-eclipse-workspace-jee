@@ -1,12 +1,14 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.Intent;
+import com.example.jiazhuangapp.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
-public class ViewPagerFragmentListView extends Fragment {
+public class ViewPagerFragmentListViewTest extends ListFragment {
 	
 	private ListView listView;
 	@Override
@@ -45,24 +47,21 @@ public class ViewPagerFragmentListView extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+
+		
 	}
 
-	private void init() {
-		List<String> items = new ArrayList<String>();
-		for (int i = 0; i < 2; i++) {
-			if(i == 0){
-			items.add("课程表");
-			}else{
-			items.add("考试");
-			}
-
-		}
-
-	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), 
-			android.R.layout.simple_list_item_1, items);
-	listView.setAdapter(adapter);
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		// TODO Auto-generated method stub
+		super.onListItemClick(l, v, position, id);
+		
+//		FragementDetails frag = (FragementDetails) getSupportFragmentManager()  
+//                .findFragmentById(R.id.);
+		
+//		Fragment frag = new ViewPagerFragmentListViewDetail();
 	}
-	  
+
 	private void initListView2() {
 			//得到ListView对象的引用
 //		listView = (ListView) findViewById(R.id.lv);
@@ -95,10 +94,7 @@ public class ViewPagerFragmentListView extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// 点击屏幕后显示第几行
-//				getActivity().setTitle("你点击了第"+position+"行");
-				Intent intent = new Intent();
-				intent.setClass(getActivity(), ListViewDetailActivity.class);
-				startActivity(intent);
+				getActivity().setTitle("你点击了第"+position+"行");
 			}
 		}
 	

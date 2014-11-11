@@ -1,6 +1,8 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 import java.util.ArrayList;
+
+import com.example.jiazhuangapp.R;
 
 import android.app.Activity;
 import android.content.Intent;

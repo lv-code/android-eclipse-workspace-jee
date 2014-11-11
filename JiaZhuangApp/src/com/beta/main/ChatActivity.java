@@ -1,4 +1,4 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 import static android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
@@ -10,7 +10,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
-import com.example.Util.RecordUtil;
+import com.beta.util.RecordUtil;
+import com.example.jiazhuangapp.R;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;

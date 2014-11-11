@@ -1,24 +1,23 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.jiazhuangapp.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 
-public class ViewPagerFragmentListViewTest extends ListFragment {
+public class ViewPagerFragmentForeman extends Fragment {
 	
 	private ListView listView;
 	@Override
@@ -26,16 +25,6 @@ public class ViewPagerFragmentListViewTest extends ListFragment {
 		Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.view_pager_fragment_designer, null);
 		listView = (ListView) view.findViewById(R.id.lv);
-//		Button btn = new Button(getActivity());
-//		//设置按钮的宽度和高度
-//		RelativeLayout.LayoutParams btParams = new RelativeLayout.LayoutParams (100,40);  
-//		
-//		btn.setLayoutParams(null);
-//		btn.setText("Text");
-//		btn.setBackgroundColor(0Xffff00);
-//		
-//		getActivity().addContentView(btn, btParams);
-//		
 //		init();
 		initListView2();
 		return view;
@@ -45,21 +34,24 @@ public class ViewPagerFragmentListViewTest extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-
-		
 	}
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		// TODO Auto-generated method stub
-		super.onListItemClick(l, v, position, id);
-		
-//		FragementDetails frag = (FragementDetails) getSupportFragmentManager()  
-//                .findFragmentById(R.id.);
-		
-//		Fragment frag = new ViewPagerFragmentListViewDetail();
-	}
+	private void init() {
+		List<String> items = new ArrayList<String>();
+		for (int i = 0; i < 2; i++) {
+			if(i == 0){
+			items.add("课程表");
+			}else{
+			items.add("考试");
+			}
 
+		}
+
+	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), 
+			android.R.layout.simple_list_item_1, items);
+	listView.setAdapter(adapter);
+	}
+	  
 	private void initListView2() {
 			//得到ListView对象的引用
 //		listView = (ListView) findViewById(R.id.lv);
@@ -70,7 +62,7 @@ public class ViewPagerFragmentListViewTest extends ListFragment {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("itemTitle", "第"+i+"行");
 				map.put("itemText", "第"+i+"行内容");
-				map.put("itemImage", R.drawable.touxiang);
+				map.put("itemImage", R.drawable.open_source_figure);
 				listItem.add(map);
 			}
 			SimpleAdapter mSimpleAdapter = new SimpleAdapter(getActivity(), 

@@ -1,4 +1,4 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,6 +1,7 @@
-package com.example.jiazhuangapp;
+package com.beta.main;
 
 
+import com.example.jiazhuangapp.R;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 import android.os.Bundle;
