@@ -140,6 +140,10 @@
             android:name="com.main.test.CameraAndAlbumTest"
             android:label="@string/title_activity_camera_and_album_test" >
         </activity>
+        <activity
+            android:name="com.main.test.TimerTaskDemo"
+            android:label="@string/title_activity_timer_task_demo" >
+        </activity>
     </application>
 
 </manifest>
