@@ -15,6 +15,8 @@ ToDoList
 
 **4. 学习Github上Github客户端的源代码**
 
+**5. 整理重装Ubuntu之后的工作**
+
 学习资
 ===
 
