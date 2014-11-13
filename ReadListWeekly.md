@@ -5,6 +5,11 @@
 张刚
 ===
 
+Git 教程，包括大师级别的，将特别细致
+http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/ch07.html
+
+
+
 用Gradle 构建你的android程序
 http://www.cnblogs.com/youxilua/archive/2013/05/20/3087935.html
 
