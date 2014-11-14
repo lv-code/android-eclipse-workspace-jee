@@ -4,7 +4,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 // 练习 线程操作
-// http://www.trinea.cn/android/java-android-thread-pool/
+//参考： http://www.trinea.cn/android/java-android-thread-pool/
 public class HandlerAndThreadPool {
 	public static void main(String[] args) {
 		test1();
