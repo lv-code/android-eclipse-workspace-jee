@@ -17,6 +17,8 @@ ToDoList
 
 **5. 整理重装Ubuntu之后的工作**
 
+**6. 在stackoverflow上提问**
+
 学习资
 ===
 
