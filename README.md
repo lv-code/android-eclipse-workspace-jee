@@ -19,6 +19,8 @@ ToDoList
 
 **6. 在stackoverflow上提问**
 
+**7. 构建专一的知识体系**
+
 学习资
 ===
 
