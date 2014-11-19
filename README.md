@@ -38,7 +38,7 @@ ToDoList
 
 工具推荐
 ===
-*:win:工欲善其事，必先利其器*
+*:hear:工欲善其事，必先利其器*
 
 **Cygwin 一个在windows平台上运行的类UNIX模拟环境**
 
