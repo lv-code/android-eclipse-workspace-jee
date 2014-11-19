@@ -36,3 +36,11 @@ ToDoList
 
 **朋友的天猫旗舰店，帮着链接一下，里面的衣服很不错，有空进去看一下吧：[天生美](http://tianshengmei.tmall.com/)**
 
+工具推荐
+===
+*:wing:工欲善其事，必先利其器*
+
+**Cygwin 一个在windows平台上运行的类UNIX模拟环境**
+
+**Vagrant 一款用来构建虚拟开发环境的工具，非常适合 php/python/ruby/java 这类语言开发 web 应用**
+
