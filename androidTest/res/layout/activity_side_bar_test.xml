@@ -23,7 +23,7 @@
             android:visibility="invisible" />
     </LinearLayout>
 
-    <com.main.test.SideBar
+    <com.test.main.SideBar
         android:id="@+id/sideBar"
         android:layout_width="30dp"
         android:layout_height="match_parent" />
