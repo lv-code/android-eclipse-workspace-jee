@@ -1,7 +1,5 @@
 package com.test.main;
 
-import com.example.test.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;

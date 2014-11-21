@@ -1,13 +1,10 @@
 package com.test.main;
 
-import com.example.test.R;
-import com.readystatesoftware.viewbadger.BadgeView;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+
+import com.readystatesoftware.viewbadger.BadgeView;
 
 public class ViewBadgerTest extends Activity {
 

@@ -1,7 +1,5 @@
 package com.test.main;
 
-import com.example.test.R;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.AttributeSet;

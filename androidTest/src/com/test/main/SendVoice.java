@@ -3,9 +3,6 @@ package com.test.main;
 import java.io.IOException;
 import java.util.UUID;
 
-import com.example.test.R;
-import com.voice.util.RecordUtil;
-
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -28,6 +25,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.voice.util.RecordUtil;
 
 
 /**

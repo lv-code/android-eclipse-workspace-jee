@@ -6,8 +6,6 @@ import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.example.test.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Xml;

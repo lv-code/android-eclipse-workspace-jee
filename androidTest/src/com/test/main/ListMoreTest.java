@@ -1,15 +1,13 @@
 package com.test.main;
-import com.example.test.R;
-
-import android.app.Activity;  
-import android.os.Bundle;  
-import android.view.Gravity;  
-import android.view.View;  
-import android.view.ViewGroup;  
-import android.widget.BaseAdapter;  
-import android.widget.Button;  
-import android.widget.ListView;  
-import android.widget.TextView;  
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
   
 public class ListMoreTest extends Activity {  
       

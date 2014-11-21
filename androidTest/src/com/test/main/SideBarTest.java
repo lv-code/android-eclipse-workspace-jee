@@ -1,12 +1,10 @@
 package com.test.main;
 
-import com.example.test.R;
-import com.test.main.SideBar;
-import com.test.main.SideBar.OnTouchingChangedListener;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.test.main.SideBar.OnTouchingChangedListener;
 
 public class SideBarTest extends Activity {
 	SideBar sideBar;

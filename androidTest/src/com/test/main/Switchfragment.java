@@ -3,8 +3,6 @@ package com.test.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.test.R;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;

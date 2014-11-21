@@ -3,12 +3,8 @@ package com.test.main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.example.test.R;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;

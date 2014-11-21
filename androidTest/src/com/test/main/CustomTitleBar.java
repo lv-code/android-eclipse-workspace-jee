@@ -1,14 +1,12 @@
 package com.test.main;
 
-import android.app.Activity;  
-import android.view.KeyEvent;  
-import android.view.View;  
-import android.view.View.OnClickListener;  
-import android.view.Window;  
-import android.widget.Button;  
-import android.widget.TextView;  
-  
-import com.example.test.R;
+import android.app.Activity;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class CustomTitleBar {
     private static Activity mActivity;  

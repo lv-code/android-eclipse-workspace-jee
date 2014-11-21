@@ -1,19 +1,16 @@
 package com.test.main;
 
-import java.util.ArrayList;  
-  
+import java.util.ArrayList;
 
-import com.example.test.R;
-
-import android.app.ListActivity;  
-import android.os.Bundle;  
-import android.os.Handler;  
-import android.util.Log;  
-import android.view.View;  
-import android.widget.AbsListView;  
-import android.widget.AbsListView.OnScrollListener;  
-import android.widget.Button;  
-import android.widget.ListView;  
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.Button;
+import android.widget.ListView;
   
 public class Loadmore extends ListActivity implements OnScrollListener {  
     private ListView listView;  

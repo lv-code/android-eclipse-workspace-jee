@@ -1,8 +1,5 @@
 package com.test.main;
 
-import com.example.test.R;
-import com.readystatesoftware.viewbadger.BadgeView;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;

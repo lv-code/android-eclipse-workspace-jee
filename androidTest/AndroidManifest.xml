@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.test"
+    package="com.test.main"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -25,7 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.test.main.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,115 +34,123 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.test.main.DisplayMessageActivity"
+            android:name=".DisplayMessageActivity"
             android:label="@string/title_activity_display_message" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.test.MainActivity" />
         </activity>
         <activity
-            android:name="com.test.main.MyActionBarActivity"
+            android:name=".MyActionBarActivity"
             android:label="我的Activity"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
         <activity
-            android:name="com.test.main.ListView_Adapter"
+            android:name=".ListView_Adapter"
             android:label="@string/title_activity_list_view__adapter" >
         </activity>
         <activity
-            android:name="com.test.main.CustomTitleBarActivity"
+            android:name=".CustomTitleBarActivity"
             android:label="@string/title_activity_custom_title_bar" >
         </activity>
         <activity
-            android:name="com.test.main.HandlerActivity"
+            android:name=".HandlerActivity"
             android:label="@string/title_activity_handler" >
         </activity>
         <activity
-            android:name="com.test.main.HttpClientActivity"
+            android:name=".HttpClientActivity"
             android:label="@string/title_activity_http_client" >
         </activity>
         <activity
-            android:name="com.test.main.ParseXML"
+            android:name=".ParseXML"
             android:label="@string/title_activity_parse_xml" >
         </activity>
         <activity
-            android:name="com.test.main.SideBarTest"
+            android:name=".SideBarTest"
             android:label="@string/title_activity_side_bar_test" >
         </activity>
         <activity
-            android:name="com.test.main.Switchfragment"
+            android:name=".Switchfragment"
             android:label="碎片管理" >
         </activity>
         <activity
-            android:name="com.test.main.SlidingMenuDemo"
+            android:name=".SlidingMenuDemo"
             android:label="@string/title_activity_sliding_menu" >
         </activity>
         <activity
-            android:name="com.test.main.ViewBadgerTest"
+            android:name=".ViewBadgerTest"
             android:label="@string/title_activity_view_badger_test" >
         </activity>
         <activity
-            android:name="com.test.main.ListFragmentDemo"
+            android:name=".ListFragmentDemo"
             android:label="@string/title_activity_list_fragment_demo" >
         </activity>
         <activity
-            android:name="com.test.main.TransitionActivity"
+            android:name=".TransitionActivity"
             android:label="@string/title_activity_transition" >
         </activity>
         <activity
-            android:name="com.test.main.TransitionNextActivity"
+            android:name=".TransitionNextActivity"
             android:label="@string/title_activity_transition_next" >
         </activity>
         <activity
-            android:name="com.test.main.CameraShow"
+            android:name=".CameraShow"
             android:configChanges="orientation"
             android:label="@string/title_activity_camera_show"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.test.main.LoadMyDevicePhoto"
+            android:name=".LoadMyDevicePhoto"
             android:label="@string/title_activity_load_my_device_photo" >
         </activity>
         <activity
-            android:name="com.test.main.Loadmore"
+            android:name=".Loadmore"
             android:label="@string/title_activity_loadmore" >
         </activity>
         <activity
-            android:name="com.test.main.ListMoreTest"
+            android:name=".ListMoreTest"
             android:label="@string/title_activity_list_more_test" >
         </activity>
         <activity
-            android:name="com.test.main.Thumbnail"
+            android:name=".Thumbnail"
             android:label="@string/title_activity_thumbnail" >
         </activity>
         <activity
-            android:name="com.test.main.SendVoice"
+            android:name=".SendVoice"
             android:allowBackup="true"
             android:label="@string/title_activity_send_voice" >
         </activity>
         <activity
-            android:name="com.test.main.PanelBottom"
+            android:name=".PanelBottom"
             android:label="@string/title_activity_sliding_drawer" >
         </activity>
         <activity
-            android:name="com.test.main.PullUpActivity"
+            android:name=".PullUpActivity"
             android:label="@string/title_activity_pull_up" >
         </activity>
         <activity
-            android:name="com.test.main.GridViewDemo"
+            android:name=".GridViewDemo"
             android:label="@string/title_activity_grid_view_demo" >
         </activity>
         <activity
-            android:name="com.test.main.IntentDemoActivity"
+            android:name=".IntentDemoActivity"
             android:label="@string/title_activity_intent_demo" >
         </activity>
         <activity
-            android:name="com.test.main.CameraAndAlbumTest"
+            android:name=".CameraAndAlbumTest"
             android:label="@string/title_activity_camera_and_album_test" >
         </activity>
         <activity
-            android:name="com.test.main.TimerTaskDemo"
+            android:name=".TimerTaskDemo"
             android:label="@string/title_activity_timer_task_demo" >
+        </activity>
+        <activity
+            android:name=".LifeCycleActivity"
+            android:label="@string/title_activity_life_cycle" >
+        </activity>
+        <activity
+            android:name=".LifeCycleTest"
+            android:label="@string/title_activity_life_cycle_test" >
         </activity>
     </application>
 

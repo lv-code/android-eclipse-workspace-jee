@@ -9,8 +9,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.example.test.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;

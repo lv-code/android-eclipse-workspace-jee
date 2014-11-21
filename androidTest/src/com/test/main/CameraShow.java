@@ -10,8 +10,6 @@ import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Locale;
 
-import com.example.test.R;
-
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;

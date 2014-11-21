@@ -1,14 +1,12 @@
 package com.test.main;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
-import com.example.test.R;
 
 /**  
  * 这个是自定义的TextView.  

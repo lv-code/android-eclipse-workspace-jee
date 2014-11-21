@@ -1,14 +1,12 @@
 package com.test.main;
 
 
-import com.example.test.R;
-
-import android.os.Bundle;  
+import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
-import android.view.View;  
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;  
+import android.widget.ListView;
   
 public class TitlesListFragment extends ListFragment {  
 	  

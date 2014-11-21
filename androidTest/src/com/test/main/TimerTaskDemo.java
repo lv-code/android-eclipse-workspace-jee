@@ -9,8 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.test.R;
-
 public class TimerTaskDemo extends Activity implements OnClickListener {
 
 	private final int TIMELENGTH = 10;
