@@ -243,8 +243,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 						// 设置录音保存路径
 						mRecordPath = PATH + UUID.randomUUID().toString()
 								+ ".amr";
+						Log.d("debug", "mRecordPaht:  "+mRecordPath);
 						// 实例化录音工具类
 						mRecordUtil = new RecordUtil(mRecordPath);
+						
 					}
 					try {
 						// 开始录音
@@ -253,7 +255,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 						// 区别于System.out.println(e);
 						e.printStackTrace();
 					}
-
+					Log.d("debug", "2222222:  ");
 					break;
 
 				// 停止录音

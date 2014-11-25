@@ -25,5 +25,6 @@
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_userinfo">UserinfoActivity</string>
     <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_media_record_test">MediaRecordTest</string>
 
 </resources>
