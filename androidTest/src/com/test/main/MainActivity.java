@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,19 +49,21 @@ public class MainActivity extends Activity {
 		init();
 		// initListView1();
 		initListView2();
+		
 	}
 
 	private void init() {
-		strs = new String[] { "android生命周期测试", "计时器", "相机、相册","9宫格布局", "Handler详细机制", "HttpClient联系", "解析XML",
+		strs = new String[] { "MediaRecorder录音测试", "android生命周期测试", "计时器", "相机、相册","9宫格布局", "Handler详细机制", "HttpClient联系", "解析XML",
 				"侧边栏字母导航", "Fragment ViewPager碎片管理", "滑动菜单demo", "又上角的圆圈demo",
 				"ListFragment实例", "Activity切换效果", "调用Camera和相册", "获取本机中所有图片",
 				"ListView加载更多", "ListView分页","用GridView展示手机照片","发送语音","上拉菜单" };
-		desc = new String[] { "LifeCycle", "TimerTaskDemo", "网上的实例","GridView","第一个小例子完成，但是不理解意思呢？？？", "编写HttpClientTools",
+		desc = new String[] { "MediaRecorder录音测试", "LifeCycle", "TimerTaskDemo", "网上的实例","GridView","第一个小例子完成，但是不理解意思呢？？？", "编写HttpClientTools",
 				"从网上找个小例子练习", "从网上找的字母检索例子", "需要不断练习", "SlidingMenu从github",
 				"badge from github", "网上例子", "新建res/anim",
 				"需要配置AndroidManifext",
 				"本示例演示如何在Android中使用加载器(Loader)来实现获取本机中的所有图片，并进行查看图片的效果。",
 				"小demo", "用BaseAdapter","其中还有dialog的使用","send voice","pull up menu" };
+		arraylist.add(MediaRecordTest.class);
 		arraylist.add(LifeCycleTest.class);
 		arraylist.add(TimerTaskDemo.class);
 		arraylist.add(CameraAndAlbumTest.class);
