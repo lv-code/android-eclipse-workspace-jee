@@ -95,7 +95,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 	private int mRecord_State = 0; // 录音的状态
 	private double mRecord_Volume;// 麦克风获取的音量值
 
-	private static final String PATH = "/sdcard/SendVoice/Record/";// 录音存储路径
+	// 录音存储路径
+	private static final String PATH = Environment.getExternalStorageDirectory().getAbsolutePath()+"/jiaZhuangApp/";
 	private String mRecordPath;// 录音的存储名称
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -231,6 +232,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 				mEditTextContent.clearFocus();
 			}
 		});
+
 		microhandler.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -241,28 +243,26 @@ public class ChatActivity extends Activity implements OnClickListener {
 						// 修改录音状态
 						mRecord_State = RECORD_ING;
 						// 设置录音保存路径
-						mRecordPath = PATH + UUID.randomUUID().toString()
-								+ ".amr";
-						Log.d("debug", "mRecordPaht:  "+mRecordPath);
+						mRecordPath = PATH + UUID.randomUUID().toString() + ".3gp";
+						Log.d("debug", "mRecordPaht:  " + mRecordPath);
 						// 实例化录音工具类
-						mRecordUtil = new RecordUtil(mRecordPath);
-						
+						 mRecordUtil = new RecordUtil(mRecordPath);
+						Log.i("info", "start");
+						try {
+							// 开始录音
+							mRecordUtil.start();
+						} catch (IOException e) {
+							// 区别于System.out.println(e);
+							e.printStackTrace();
+						}
+						return true;
 					}
-					try {
-						// 开始录音
-						mRecordUtil.start();
-					} catch (IOException e) {
-						// 区别于System.out.println(e);
-						e.printStackTrace();
-					}
-					Log.d("debug", "2222222:  ");
-					break;
-
-				// 停止录音
+					// 停止录音
 				case MotionEvent.ACTION_UP:
 					if (mRecord_State == RECORD_ING) {
 						// 修改录音状态
 						mRecord_State = RECORD_ED;
+						Log.i("info", "end");
 						try {
 							// 停止录音
 							mRecordUtil.stop();
@@ -276,9 +276,11 @@ public class ChatActivity extends Activity implements OnClickListener {
 								Toast.LENGTH_SHORT).show();
 						sendVoice();
 					}
-					break;
+					v.performClick();
+
 				}
-				return false;
+//				Log.d("debug", "5555555:-----------------------------  " + event.getAction());
+				return true;
 			}
 		});
 		chkSDStatus();
@@ -464,14 +466,15 @@ public class ChatActivity extends Activity implements OnClickListener {
 			imgBitmap = null;
 		}
 	}
-	
+
 	private void sendVoice() {
 		ChatMsgEntity entity = new ChatMsgEntity();
 		entity.setDate(getDate());
 		entity.setName(MY_NAME);
 		entity.setMsgType(false);
 		entity.setText("");
-		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.globle_player_btn_play);
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(),
+				R.drawable.globle_player_btn_play);
 		entity.setImgBitmap(bmp);
 
 		mDataArrays.add(entity);
@@ -521,8 +524,13 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
+
+		try {
+			mRecordUtil.stop();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

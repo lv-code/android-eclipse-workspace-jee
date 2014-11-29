@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import android.media.MediaRecorder;
+import android.util.Log;
 
 /**
  * 录音工具类
@@ -31,13 +32,14 @@ public class RecordUtil {
 					+ ".");
 		}
 		File directory = new File(mPath).getParentFile();
+		Log.d("debug", "mPath  :  " + mPath);
 		if (!directory.exists() && !directory.mkdirs()) {
 			throw new IOException("Path to file could not be created");
 		}
 		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_WB);
+		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		recorder.setAudioSamplingRate(SAMPLE_RATE_IN_HZ);
+//		recorder.setAudioSamplingRate(SAMPLE_RATE_IN_HZ);
 		recorder.setOutputFile(mPath);
 		recorder.prepare();
 		recorder.start();
