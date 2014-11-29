@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 				"需要配置AndroidManifext",
 				"本示例演示如何在Android中使用加载器(Loader)来实现获取本机中的所有图片，并进行查看图片的效果。",
 				"小demo", "用BaseAdapter","其中还有dialog的使用","send voice","pull up menu" };
-		arraylist.add(MediaRecordTest.class);
+		arraylist.add(AudioRecordTest.class);
 		arraylist.add(LifeCycleTest.class);
 		arraylist.add(TimerTaskDemo.class);
 		arraylist.add(CameraAndAlbumTest.class);

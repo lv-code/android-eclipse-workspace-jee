@@ -46,7 +46,7 @@
             android:theme="@style/CustomActionBarTheme" >
         </activity>
         <activity
-            android:name=".MediaRecordTest"
+            android:name=".AudioRecordTest"
             android:label="MediaRecordTest测试">
         </activity>
         <activity
