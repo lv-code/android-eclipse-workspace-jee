@@ -2,9 +2,9 @@
 <resources>
 
     <!-- 标题栏 -->
-    <color name="title_bar_bg">#aaaaaa</color>
+    <color name="title_bar_bg">#905c44</color>
     <color name="title_text">#ffffff</color>
-    <!-- 流程 #7d8289-->
+    <!-- 流程 #7d8289 -->
     <color name="gray_white">#eee</color>
     <color name="gray_white2">#dadada</color>
     <color name="txt">#000</color>
@@ -22,8 +22,9 @@
     <!-- 个人中心 -->
     <color name="userinfo_bg">#c8c8c8</color>
     <!-- 聊天 -->
-<color name="chat_bg">#c8c8c8</color>
-<color name="chat_footer_bg">#585858</color>
-<color name="chat_send_btn">#ccc</color>
-<color name="login_edit_normal">#fff</color>
+    <color name="chat_bg">#c8c8c8</color>
+    <color name="chat_footer_bg">#585858</color>
+    <color name="chat_send_btn">#ccc</color>
+    <color name="login_edit_normal">#fff</color>
+
 </resources>
