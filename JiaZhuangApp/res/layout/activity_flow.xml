@@ -42,233 +42,98 @@
     <LinearLayout
         android:id="@+id/topline"
         android:layout_width="fill_parent"
-        android:layout_height="36dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/my_title_bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="#00aaaaaa"
+        android:background="@color/gray_white"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
-<!-- 进度条  android:progressDrawable="@drawable/test_po_seekbar" -->
-        <SeekBar
-            android:id="@+id/seekBar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:max="100"
-            android:maxHeight="8.0dp"
-            android:minHeight="4.0dp"
-            android:paddingLeft="16.0dp"
-            android:paddingRight="16.0dp"
-            android:progress="60"
-            android:thumb="@drawable/anniu_1" />
-    </LinearLayout>
-
-    <RadioGroup
-        android:id="@+id/radioGroup1"
+    
+<!-- 装修进度面板 -->
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textColor="@color/txt"
+        android:text="你的裝修进度"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+   
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/flowProgress"
+        android:layout_width="fill_parent"
+        android:layout_height="88dp"
         android:layout_below="@+id/topline"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-14dp"
-        android:orientation="horizontal"
-        android:paddingLeft="10.0dp"
-        android:paddingRight="10.0dp" >
-
-        <RadioButton
-            android:id="@+id/radio0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:checked="true"
-            android:layout_marginLeft="-4.0dp" />
-
-        <RadioButton
-            android:id="@+id/radio1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-
-        <RadioButton
-            android:id="@+id/radio2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-
-        <RadioButton
-            android:id="@+id/radio3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-
-        <RadioButton
-            android:id="@+id/radio4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-
-        <RadioButton
-            android:id="@+id/radio5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-
-        <RadioButton
-            android:id="@+id/radio6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-
-        <RadioButton
-            android:id="@+id/radio7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-
-        <RadioButton
-            android:id="@+id/radio8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/radio"
-            android:button="@null"
-            android:layout_marginLeft="12.9dp"/>
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/flow_name"
+        android:background="@color/gray_white"
+        android:orientation="horizontal" >
+    
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/pagerline"
-        android:layout_alignLeft="@+id/pagerline"
-        android:layout_marginBottom="-80dp"
-        android:layout_marginLeft="6dp"
-        android:background="@drawable/biaoqian"
-        android:gravity="center"
-        android:text="前期"
-        android:textColor="#fff"
-        android:textSize="16sp" />
+        android:layout_marginLeft="28dp"
+        android:textSize="14sp"
+        android:textColor="@color/txt"
+        android:text="总完成度 "/>
+                <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/txt"
+        android:text="30"/>
+                        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/txt"
+        android:text=" %"/>
+               
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:textSize="14sp"
+        android:textColor="@color/txt"
+        android:text="当前阶段 "/>
+                <TextView
+        android:id="@+id/nowFlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/txt"
+        android:text="8"/>
+                        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/txt"
+        android:text=" 天"/>
+                        
+      </LinearLayout>
+
 
     <LinearLayout
-        android:id="@+id/pagerline"
+        android:id="@+id/flowServer"
         android:layout_width="fill_parent"
         android:layout_height="300dp"
-        android:layout_below="@+id/topline"
+        android:layout_below="@+id/flowProgress"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/baikuang"
+        android:background="@color/gray_white2"
         android:gravity="center_vertical"
         android:orientation="vertical" >
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/flow_viewpager"
-            android:layout_width="wrap_content"
-            android:layout_height="260dp"
-            android:layout_gravity="center"
-            android:paddingEnd="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingStart="20dp"
-            android:paddingTop="20dp" >
 
-            <android.support.v4.view.PagerTitleStrip
-                android:id="@+id/flow_pagertitle"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom"
-                android:background="#0000"
-                android:textColor="#ffff" />
-        </android.support.v4.view.ViewPager>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="20dp"
-            android:gravity="right"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/page0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="matrix"
-                android:src="@drawable/page_now" />
-
-            <ImageView
-                android:id="@+id/page1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:scaleType="matrix"
-                android:src="@drawable/page" />
-
-            <ImageView
-                android:id="@+id/page2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:scaleType="matrix"
-                android:src="@drawable/page" />
-        </LinearLayout>
-    </LinearLayout>
-<!-- 
-    <LinearLayout
-        android:id="@+id/pageLine"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pagerline"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="0dp" >
-
-        <ImageButton
-            android:id="@+id/prev"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/butten_01"
-            android:gravity="center"
-            android:padding="0dp" />
-
-        <ImageButton
-            android:id="@+id/preview"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@drawable/butten_02"
-            android:padding="0dp" />
-
-        <ImageButton
-            android:id="@+id/next"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@drawable/butten_03"
-            android:padding="0dp" />
-    </LinearLayout>
--->
     <include
         android:id="@+id/bottom"
-        layout="@layout/bottom_bar" />
+        layout="@layout/flow_page1" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

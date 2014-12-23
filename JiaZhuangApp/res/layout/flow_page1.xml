@@ -7,54 +7,54 @@
     android:paddingRight="20dp"
     android:paddingStart="20dp"
     android:paddingTop="20dp" >
-
+    
+  <ImageView
+        android:id="@+id/ImageView0"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/flow_shop" />
+  
     <ImageView
-        android:id="@+id/ImageView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ImageView1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/tubiao3" />
+        android:src="@drawable/flow_file" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageView01"
-        android:layout_below="@+id/ImageView01"
-        android:layout_marginTop="22dp"
-        android:src="@drawable/tubiao3" />
-
-    <ImageView
-        android:id="@+id/ImageView02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/imageView1"
-        android:src="@drawable/tubiao3" />
-
-    <ImageView
-        android:id="@+id/ImageView03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+       <ImageView
+        android:id="@+id/ImageView2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_above="@+id/imageView1"
         android:layout_alignParentRight="true"
-        android:src="@drawable/tubiao3" />
+        android:src="@drawable/flow_mail" />
+    
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/ImageView4"
+        android:layout_below="@+id/ImageView0"
+        android:layout_marginTop="22dp"
+        android:src="@drawable/flow_calenda" />
 
     <ImageView
-        android:id="@+id/ImageView05"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ImageView4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/tubiao3" />
+        android:layout_below="@+id/ImageView1"
+        android:src="@drawable/flow_image" />
+
 
     <ImageView
-        android:id="@+id/ImageView04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ImageView5"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/imageView1"
-        android:src="@drawable/tubiao3" />
+        android:src="@drawable/flow_pick" />
 
 </RelativeLayout>
