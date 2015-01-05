@@ -1,7 +1,8 @@
-package com.beta.main;
+package com.beta.adapter;
 
 import java.util.List;
 
+import com.beta.main.ChatMsgEntity;
 import com.example.jiazhuangapp.R;
 
 import android.content.Context;

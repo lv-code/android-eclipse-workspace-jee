@@ -14,38 +14,36 @@
 
         <ImageView
             android:id="@+id/title_right_btn"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_sidebar"
-            android:gravity="center" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:src="@drawable/icon_sidebar" />
 
         <TextView
             android:id="@+id/head_center_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:drawableRight="@drawable/icon_pulldown"
             android:drawablePadding="6dp"
-            android:textSize="18sp"
+            android:drawableRight="@drawable/icon_pulldown"
             android:text="前期"
-            android:textColor="@color/title_text" />
+            android:textColor="@color/title_text"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/head_TitleBackBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="0dp"
             android:background="@drawable/back_60x60"
             android:gravity="center"
-            android:visibility="gone"
-            android:onClick="goBack" />
-
-
+            android:onClick="goBack"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout
@@ -153,4 +151,13 @@
         </GridView>
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/flow_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_below="@+id/my_title_bar"
+        android:visibility="invisible"
+        android:background="#fff">
+    </ListView>
+    
 </RelativeLayout>

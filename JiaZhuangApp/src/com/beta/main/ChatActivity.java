@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import com.beta.adapter.ChatMsgViewAdapter;
 import com.beta.util.RecordUtil;
 import com.example.jiazhuangapp.R;
 

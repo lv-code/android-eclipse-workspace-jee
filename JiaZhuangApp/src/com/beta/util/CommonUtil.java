@@ -13,7 +13,7 @@ public class CommonUtil {
 	 * @param context
 	 * @param defType，如："drawable"
 	 * @param resName
-	 * @return
+	 * @return id
 	 */
 	public static int getResourceIdByStr(Context context, String resName, String defType) {
 		return context.getResources().getIdentifier(resName, defType,

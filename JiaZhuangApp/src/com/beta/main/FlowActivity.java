@@ -6,7 +6,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.beta.adapter.FlowListViewAdapter;
 import com.beta.util.CommonUtil;
 import com.example.jiazhuangapp.R;
 
@@ -27,6 +28,11 @@ public class FlowActivity extends FragmentActivity {
 
 	// 进度名称
 	private TextView flow_name;
+	// 选择列表
+	ListView listview;
+	Boolean listview_show = false;
+	//当前选择的阶段
+			int checkedItem = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,65 +41,129 @@ public class FlowActivity extends FragmentActivity {
 		// 给返回按钮绑定监听器
 		setContentView(R.layout.activity_flow);
 		goBack();
-//		initListView();
+		initViewById();
+		initTitleBar();
+		initListView();
 		initGridView();
 	}
-/*
-	// 抽屉导航--侧边栏的列表数据
+
+	private void initViewById() {
+		flow_name = (TextView) this.findViewById(R.id.head_center_text);
+		listview = (ListView) this.findViewById(R.id.flow_listview);
+	}
+
+	// 初始化标题栏
+	private void initTitleBar() {
+
+		flow_name.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				toggleListView();
+			}
+		});
+	}
+
+	//控制ListView的可见
+	private void toggleListView() {
+		final Drawable img_pullup = getResources().getDrawable(
+				R.drawable.icon_pullup);
+		img_pullup.setBounds(0, 0, img_pullup.getMinimumWidth(),
+				img_pullup.getMinimumHeight());
+		final Drawable img_pulldown = getResources().getDrawable(
+				R.drawable.icon_pulldown);
+		img_pulldown.setBounds(0, 0, img_pulldown.getMinimumWidth(),
+				img_pulldown.getMinimumHeight());
+		if (!listview_show) {
+			listview_show = true;
+			listview.setVisibility(View.VISIBLE);
+			flow_name.setCompoundDrawables(null, null, img_pullup, null);
+
+		} else {
+			listview_show = false;
+			listview.setVisibility(View.GONE);
+			flow_name.setCompoundDrawables(null, null, img_pulldown, null);
+		}
+
+	}
+
+	// 点击标题栏，选择装修阶段
 	public void initListView() {
-		final String[] mListImage = { "flow_1_qianqi", "flow_2_kaigongzhunbei",
-				"flow_3_kaigong", "flow_4_shuidian", "flow_5_niwa",
-				"flow_6_mugong", "flow_7_youqi", "flow_8_anzhuang" };
+		final String[] mListImage = { "flow_listview_icon_qianqi",
+				"flow_listview_icon_kaigongzhunbei",
+				"flow_listview_icon_kaigong", "flow_listview_icon_shuidian",
+				"flow_listview_icon_niwa", "flow_listview_icon_mugong",
+				"flow_listview_icon_youqi", "flow_listview_icon_anzhaung" };
 		final String[] mListTitle = { "前期", "开工准备", "开工", "水电", "泥瓦", "木工",
 				"油漆", "安装" };
-		ListView listview;
+
 		ArrayList<Map<String, Object>> mData = new ArrayList<Map<String, Object>>();
-		listview = (ListView) findViewById(R.id.right_drawer);
-		Resources res = context.getResources();
+
 		int length = mListTitle.length;
 		for (int i = 0; i < length; i++) {
 			Map<String, Object> item = new HashMap<String, Object>();
-			item.put("image", res.getIdentifier(mListImage[i], "drawable",
-					getPackageName()));
+			item.put("img", CommonUtil.getResourceIdByStr(context,
+					mListImage[i], "drawable"));
 			item.put("title", mListTitle[i]);
+			if ( i== checkedItem ) {
+				item.put("item_now", R.drawable.flow_listview_xuanzhong);
+			} else {
+				item.put("item_now", R.drawable.flow_listview_weixuanzhong);
+			}
 			mData.add(item);
 		}
 
-		SimpleAdapter adapter = new SimpleAdapter(this, mData,
-				R.layout.flow_listview_item, new String[] { "image", "title" },
-				new int[] { R.id.itemImage, R.id.itemTitle });
+		final SimpleAdapter adapter = new FlowListViewAdapter(this, mData,
+				R.layout.flow_listview_item, new String[] { "img", "title", "item_now" },
+				new int[] { R.id.item_img, R.id.item_title, R.id.item_img_now });
+		
 		listview.setAdapter(adapter);
+
 		listview.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
 				flow_name.setText(mListTitle[position]);
-
+				changeItemImg(adapter, position);
+				toggleListView();
 				// Toast.makeText(context, "您选择了标题：" + mListTitle[position],
 				// Toast.LENGTH_LONG).show();
 			}
 		});
+		
 	}
-	*/
 
+	//改变ListView item的选中状态
+	private void changeItemImg(SimpleAdapter sa, int selectedItem) {
+
+		HashMap<String, Object> map1 = (HashMap<String, Object>) sa.getItem(checkedItem);
+		HashMap<String, Object> map2 = (HashMap<String, Object>) sa.getItem(selectedItem);
+		map1.put("item_now", R.drawable.flow_listview_weixuanzhong);
+		map2.put("item_now", R.drawable.flow_listview_xuanzhong);
+		
+		sa.notifyDataSetChanged();
+		checkedItem = selectedItem;
+	}
+	
 	public void initGridView() {
-		String [] icon = {"calenda","file","image","mail","note","pick","plan","player","shop"};
-		String [] txt = {"时间排期","合同","图片","邮件","备忘","便签","计划","影音","促销"};
+		String[] icon = { "calenda", "file", "image", "mail", "note", "pick",
+				"plan", "player", "shop" };
+		String[] txt = { "时间排期", "合同", "图片", "邮件", "备忘", "便签", "计划", "影音", "促销" };
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 
 		// 生成动态数组，并且转入数据
 		ArrayList<HashMap<String, Object>> lstImageItem = new ArrayList<HashMap<String, Object>>();
 		for (int i = 0; i < icon.length; i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("ItemImage", CommonUtil.getResourceIdByStr(context, "flow_"+icon[i], "drawable"));// 添加图像资源的ID
+			map.put("ItemImage", CommonUtil.getResourceIdByStr(context, "flow_"
+					+ icon[i], "drawable"));// 添加图像资源的ID
 			map.put("ItemText", txt[i]);// 按序号做ItemText
 			lstImageItem.add(map);
 		}
-		
+
 		// 生成适配器的ImageItem <====> 动态数组的元素，两者一一对应
-		SimpleAdapter saImageItems = new SimpleAdapter(this, // 没什么解释
-				lstImageItem,// 数据来源
-				R.layout.flow_gridview_item,// night_item的XML实现
+		SimpleAdapter saImageItems = new SimpleAdapter(this, lstImageItem,// 数据来源
+				R.layout.flow_gridview_item,
 
 				// 动态数组与ImageItem对应的子项
 				new String[] { "ItemImage", "ItemText" },
@@ -103,11 +173,10 @@ public class FlowActivity extends FragmentActivity {
 		// 添加并且显示
 		gridview.setAdapter(saImageItems);
 		// 添加消息处理
-//		gridview.setOnItemClickListener(new ItemClickListener());
+		// gridview.setOnItemClickListener(new ItemClickListener());
 	}
 
 	// 右侧滑动菜单
-
 
 	public void goBack() {
 		Button titleBackBtn = (Button) this
