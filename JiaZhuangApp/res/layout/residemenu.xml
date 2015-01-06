@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/residemenu_bg"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/iv_shadow"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/residemenu_bg"
+        android:scaleType="fitXY" />
+
+    <ScrollView
+        android:id="@+id/sv_left_menu"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/layout_left_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/sv_right_menu"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/layout_right_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+   <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="52dp"
+        android:background="@drawable/app_logo"
+        android:scaleType="centerCrop" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="52dp"
+            android:layout_marginBottom="18dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/private_declare_txt_color"
+            android:text="隐私声明" />
+    </RelativeLayout>
+
+</FrameLayout>
