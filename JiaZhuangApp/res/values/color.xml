@@ -4,6 +4,9 @@
     <!-- 标题栏 -->
     <color name="title_bar_bg">#905c44</color>
     <color name="title_text">#ffffff</color>
+    <!-- 左边菜单 -->
+    <color name="residemenu_bg">#282828</color>
+    <color name="private_declare_txt_color">#8f8e8e</color>
     <!-- 流程 #7d8289 -->
     <color name="gray_white">#eee</color>
     <color name="gray_white2">#dadada</color>

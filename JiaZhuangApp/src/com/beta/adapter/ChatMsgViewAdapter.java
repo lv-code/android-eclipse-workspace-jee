@@ -2,9 +2,6 @@ package com.beta.adapter;
 
 import java.util.List;
 
-import com.beta.main.ChatMsgEntity;
-import com.example.jiazhuangapp.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.beta.main.ChatMsgEntity;
+import com.beta.main.R;
 
 public class ChatMsgViewAdapter extends BaseAdapter {
 	
@@ -35,18 +35,22 @@ public class ChatMsgViewAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
     }
 
-    public int getCount() {
+    @Override
+	public int getCount() {
         return coll.size();
     }
 
-    public Object getItem(int position) {
+    @Override
+	public Object getItem(int position) {
         return coll.get(position);
     }
 
-    public long getItemId(int position) {
+    @Override
+	public long getItemId(int position) {
         return position;
     }
     
+	@Override
 	public int getItemViewType(int position) {
 		// TODO Auto-generated method stub
 	 	ChatMsgEntity entity = coll.get(position);
@@ -61,13 +65,15 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	}
 
 
+	@Override
 	public int getViewTypeCount() {
 		// TODO Auto-generated method stub
 		return 2;
 	}
 	
 	
-    public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+	public View getView(int position, View convertView, ViewGroup parent) {
     	
     	ChatMsgEntity entity = coll.get(position);
     	boolean isComMsg = entity.getMsgType();

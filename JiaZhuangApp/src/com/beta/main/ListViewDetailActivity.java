@@ -1,7 +1,5 @@
 package com.beta.main;
 
-import com.example.jiazhuangapp.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +26,7 @@ public class ListViewDetailActivity extends Activity {
 		Button titleBackBtn = (Button) this
 				.findViewById(R.id.head_TitleBackBtn);
 		titleBackBtn.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				ListViewDetailActivity.this.finish();
 			}

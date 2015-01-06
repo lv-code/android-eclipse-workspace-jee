@@ -3,8 +3,6 @@ package com.beta.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.jiazhuangapp.R;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -52,6 +50,7 @@ public class LjljActivity extends FragmentActivity {
 		Button titleBackBtn = (Button) this
 				.findViewById(R.id.head_TitleBackBtn);
 		titleBackBtn.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				LjljActivity.this.finish();
 			}
@@ -149,6 +148,7 @@ public class LjljActivity extends FragmentActivity {
 			index = i;
 		}
 
+		@Override
 		public void onClick(View v) {
 			if (3 != index) {
 				mViewPager.setCurrentItem(index);
@@ -219,14 +219,17 @@ public class LjljActivity extends FragmentActivity {
 		// int one = offset * 2 + bmpW;// 页卡1 -> 页卡2 偏移量
 		// int two = one * 2;// 页卡1 -> 页卡3 偏移量
 		// * 两种方法，这个是一种，下面还有一种，显然这个比较麻烦
+		@Override
 		public void onPageScrollStateChanged(int arg0) {
 
 		}
 
+		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 
 		}
 
+		@Override
 		public void onPageSelected(int arg0) {
 
 			setDefaultBackgroundColor(arg0);

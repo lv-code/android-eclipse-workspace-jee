@@ -1,13 +1,8 @@
 package com.beta.main;
 
-import com.example.jiazhuangapp.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,6 +26,7 @@ public class LoginActivity extends Activity {
 		Button titleBackBtn = (Button) this
 				.findViewById(R.id.head_TitleBackBtn);
 		titleBackBtn.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				LoginActivity.this.finish();
 			}

@@ -9,30 +9,42 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.beta.adapter.FlowListViewAdapter;
+import com.beta.residemenu.ResideMenu;
+import com.beta.residemenu.ResideMenuItem;
 import com.beta.util.CommonUtil;
-import com.example.jiazhuangapp.R;
+import com.example.jiazhuangapp.Html5Activity;
 
-public class FlowActivity extends FragmentActivity {
+public class FlowActivity extends FragmentActivity implements OnClickListener {
+
 	Context context = FlowActivity.this;
 
+	final static String TAG = "INFO : ";
+
+	ImageView title_right_btn;
 	// 进度名称
-	private TextView flow_name;
+	TextView flow_name;
 	// 选择列表
 	ListView listview;
 	Boolean listview_show = false;
-	//当前选择的阶段
-			int checkedItem = 0;
+	// 当前选择的阶段
+	int checkedItem = 0;
+	ResideMenu resideMenu;
+	// 左侧菜单的打开状态
+	Boolean residemenuOpen = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +57,83 @@ public class FlowActivity extends FragmentActivity {
 		initTitleBar();
 		initListView();
 		initGridView();
+		initResideMenu();
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		// 展开左侧菜单
+		case R.id.title_right_btn:
+			Log.e(TAG, "左侧菜单被点击！！！！");
+			resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+			/*
+			if (!residemenuOpen) {
+				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
+				residemenuOpen = true;
+			} else {
+				resideMenu.closeMenu();
+				residemenuOpen = false;
+			}*/
+			break;
+
+		// 展开ListView选择列表
+		case R.id.head_center_text:
+			toggleListView();
+			break;
+		default:
+			Log.i(TAG, "这里是default！！！！");
+			break;
+		}
+
+	}
+
+	OnClickListener resideMenuOnClickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show();
+
+		}
+	};
+
+	// attach to current activity;
+	private void initResideMenu() {
+		resideMenu = new ResideMenu(this);
+//		resideMenu.setBackground(R.drawable.app_logo);
+		//不显示阴影
+		resideMenu.setShadowVisible(false);
+		resideMenu.attachToActivity(this);
+
+		// create menu items;
+		String titles[] = { "阶段服务", "项目沟通", "修改密码"};
+		//用 0 来代表：不是当前的选择条目
+		int icon[] = { R.drawable.residemenu_item_now, 0, 0  };
+
+		for (int i = 0; i < titles.length; i++) {
+			ResideMenuItem item = new ResideMenuItem(this, icon[i], titles[i]);
+			item.setOnClickListener(resideMenuOnClickListener);
+			resideMenu.addMenuItem(item, ResideMenu.DIRECTION_LEFT); 
+		}
 	}
 
 	private void initViewById() {
+		title_right_btn = (ImageView) findViewById(R.id.title_right_btn);
 		flow_name = (TextView) this.findViewById(R.id.head_center_text);
 		listview = (ListView) this.findViewById(R.id.flow_listview);
+
 	}
 
 	// 初始化标题栏
 	private void initTitleBar() {
 
-		flow_name.setOnClickListener(new OnClickListener() {
+		title_right_btn.setOnClickListener(this);
+		flow_name.setOnClickListener(this);
 
-			@Override
-			public void onClick(View v) {
-				toggleListView();
-			}
-		});
 	}
 
-	//控制ListView的可见
+	// 控制ListView的可见
 	private void toggleListView() {
 		final Drawable img_pullup = getResources().getDrawable(
 				R.drawable.icon_pullup);
@@ -105,7 +174,7 @@ public class FlowActivity extends FragmentActivity {
 			item.put("img", CommonUtil.getResourceIdByStr(context,
 					mListImage[i], "drawable"));
 			item.put("title", mListTitle[i]);
-			if ( i== checkedItem ) {
+			if (i == checkedItem) {
 				item.put("item_now", R.drawable.flow_listview_xuanzhong);
 			} else {
 				item.put("item_now", R.drawable.flow_listview_weixuanzhong);
@@ -114,9 +183,10 @@ public class FlowActivity extends FragmentActivity {
 		}
 
 		final SimpleAdapter adapter = new FlowListViewAdapter(this, mData,
-				R.layout.flow_listview_item, new String[] { "img", "title", "item_now" },
-				new int[] { R.id.item_img, R.id.item_title, R.id.item_img_now });
-		
+				R.layout.flow_listview_item, new String[] { "img", "title",
+						"item_now" }, new int[] { R.id.item_img,
+						R.id.item_title, R.id.item_img_now });
+
 		listview.setAdapter(adapter);
 
 		listview.setOnItemClickListener(new OnItemClickListener() {
@@ -130,21 +200,23 @@ public class FlowActivity extends FragmentActivity {
 				// Toast.LENGTH_LONG).show();
 			}
 		});
-		
+
 	}
 
-	//改变ListView item的选中状态
+	// 改变ListView item的选中状态
 	private void changeItemImg(SimpleAdapter sa, int selectedItem) {
 
-		HashMap<String, Object> map1 = (HashMap<String, Object>) sa.getItem(checkedItem);
-		HashMap<String, Object> map2 = (HashMap<String, Object>) sa.getItem(selectedItem);
+		HashMap<String, Object> map1 = (HashMap<String, Object>) sa
+				.getItem(checkedItem);
+		HashMap<String, Object> map2 = (HashMap<String, Object>) sa
+				.getItem(selectedItem);
 		map1.put("item_now", R.drawable.flow_listview_weixuanzhong);
 		map2.put("item_now", R.drawable.flow_listview_xuanzhong);
-		
+
 		sa.notifyDataSetChanged();
 		checkedItem = selectedItem;
 	}
-	
+
 	public void initGridView() {
 		String[] icon = { "calenda", "file", "image", "mail", "note", "pick",
 				"plan", "player", "shop" };
@@ -173,7 +245,16 @@ public class FlowActivity extends FragmentActivity {
 		// 添加并且显示
 		gridview.setAdapter(saImageItems);
 		// 添加消息处理
-		// gridview.setOnItemClickListener(new ItemClickListener());
+		gridview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(context, Html5Activity.class);
+				startActivity(intent);
+
+			}
+		});
 	}
 
 	// 右侧滑动菜单
@@ -182,6 +263,7 @@ public class FlowActivity extends FragmentActivity {
 		Button titleBackBtn = (Button) this
 				.findViewById(R.id.head_TitleBackBtn);
 		titleBackBtn.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				FlowActivity.this.finish();
 			}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jiazhuangapp"
+    package="com.beta.main"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -31,7 +31,7 @@
         <activity
             android:name="com.beta.main.FlowActivity"
             android:label="@string/title_activity_next" >
-                        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -58,7 +58,6 @@
         <activity
             android:name="com.beta.main.StartActivity"
             android:label="@string/title_activity_start" >
-
         </activity>
         <activity
             android:name="com.beta.main.UserinfoActivity"
@@ -72,6 +71,10 @@
         <activity
             android:name=".MediaRecordTest"
             android:label="@string/title_activity_media_record_test" >
+        </activity>
+        <activity
+            android:name=".Html5Activity"
+            android:label="@string/title_activity_html5" >
         </activity>
     </application>
 

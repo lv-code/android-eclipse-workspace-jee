@@ -1,15 +1,13 @@
 package com.beta.main;
 
 
-import com.example.jiazhuangapp.R;
-import com.readystatesoftware.viewbadger.BadgeView;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
+import com.readystatesoftware.viewbadger.BadgeView;
 
 public class ViewPagerFragmentListViewDetail extends Fragment {
 	

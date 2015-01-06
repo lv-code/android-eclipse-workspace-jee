@@ -1,8 +1,5 @@
 package com.beta.main;
 
-import com.example.jiazhuangapp.R;
-import com.readystatesoftware.viewbadger.BadgeView;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.readystatesoftware.viewbadger.BadgeView;
 
 public class FragmentTest extends Fragment {  
     private static final String TAG = "TestFragment";  
