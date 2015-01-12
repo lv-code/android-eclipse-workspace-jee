@@ -26,7 +26,6 @@ import com.beta.adapter.FlowListViewAdapter;
 import com.beta.residemenu.ResideMenu;
 import com.beta.residemenu.ResideMenuItem;
 import com.beta.util.CommonUtil;
-import com.example.jiazhuangapp.Html5Activity;
 
 public class FlowActivity extends FragmentActivity implements OnClickListener {
 
@@ -37,14 +36,24 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 	ImageView title_right_btn;
 	// 进度名称
 	TextView flow_name;
+	//网格组件
+	GridView gridview;
+	// 生成动态数组，并且转入数据
+	ArrayList<HashMap<String, Object>> lstImageItem;
+	
 	// 选择列表
 	ListView listview;
 	Boolean listview_show = false;
 	// 当前选择的阶段
 	int checkedItem = 0;
+	
 	ResideMenu resideMenu;
+	//当前所在菜单
+	int resideMenuNow = 0;
 	// 左侧菜单的打开状态
 	Boolean residemenuOpen = false;
+	//GridView的适配器
+	SimpleAdapter saImageItems;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +77,6 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		case R.id.title_right_btn:
 			Log.e(TAG, "左侧菜单被点击！！！！");
 			resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
-			/*
-			if (!residemenuOpen) {
-				resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
-				residemenuOpen = true;
-			} else {
-				resideMenu.closeMenu();
-				residemenuOpen = false;
-			}*/
 			break;
 
 		// 展开ListView选择列表
@@ -89,11 +90,21 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 
 	}
 
+	// 左边菜单
 	OnClickListener resideMenuOnClickListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
-			Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show();
+			switch (v.getId()) {
+			case 2:
+				Intent intent = new Intent(context, PasswdResetActivity.class);
+				startActivity(intent);
+				break;
+
+			default:
+				Log.i(TAG, "v.getId() : "+v.getId());
+				break;
+			}
 
 		}
 	};
@@ -109,11 +120,13 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		// create menu items;
 		String titles[] = { "阶段服务", "项目沟通", "修改密码"};
 		//用 0 来代表：不是当前的选择条目
-		int icon[] = { R.drawable.residemenu_item_now, 0, 0  };
+		int icon[] = { 0, 0, 0  };
+		icon[resideMenuNow] = R.drawable.residemenu_item_now;
 
 		for (int i = 0; i < titles.length; i++) {
 			ResideMenuItem item = new ResideMenuItem(this, icon[i], titles[i]);
 			item.setOnClickListener(resideMenuOnClickListener);
+			item.setId(i);
 			resideMenu.addMenuItem(item, ResideMenu.DIRECTION_LEFT); 
 		}
 	}
@@ -196,6 +209,7 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 				flow_name.setText(mListTitle[position]);
 				changeItemImg(adapter, position);
 				toggleListView();
+				changeGridView();
 				// Toast.makeText(context, "您选择了标题：" + mListTitle[position],
 				// Toast.LENGTH_LONG).show();
 			}
@@ -217,14 +231,26 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		checkedItem = selectedItem;
 	}
 
+	//改变GridView的数据
+	private void changeGridView() {
+		SimpleAdapter sa = (SimpleAdapter) gridview.getAdapter();
+		HashMap<String, Object> map1 = new HashMap<String, Object>();
+		map1.put("ItemImage", context.getResources().getIdentifier("flow_file", "drawable",
+				context.getPackageName()));
+		map1.put("ItemText", "test");
+		lstImageItem.add(map1);
+		sa.notifyDataSetChanged();
+	}
+	
 	public void initGridView() {
 		String[] icon = { "calenda", "file", "image", "mail", "note", "pick",
 				"plan", "player", "shop" };
 		String[] txt = { "时间排期", "合同", "图片", "邮件", "备忘", "便签", "计划", "影音", "促销" };
-		GridView gridview = (GridView) findViewById(R.id.gridview);
+		gridview = (GridView) this.findViewById(R.id.gridview);
 
 		// 生成动态数组，并且转入数据
-		ArrayList<HashMap<String, Object>> lstImageItem = new ArrayList<HashMap<String, Object>>();
+		lstImageItem = new ArrayList<HashMap<String, Object>>();
+		
 		for (int i = 0; i < icon.length; i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("ItemImage", CommonUtil.getResourceIdByStr(context, "flow_"
@@ -234,7 +260,7 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		}
 
 		// 生成适配器的ImageItem <====> 动态数组的元素，两者一一对应
-		SimpleAdapter saImageItems = new SimpleAdapter(this, lstImageItem,// 数据来源
+		saImageItems = new SimpleAdapter(this, lstImageItem,
 				R.layout.flow_gridview_item,
 
 				// 动态数组与ImageItem对应的子项

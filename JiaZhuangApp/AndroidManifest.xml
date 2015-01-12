@@ -25,11 +25,11 @@
         android:label="@string/app_name"
         android:theme="@style/MyCustomTheme" >
         <activity
-            android:name="com.beta.main.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.beta.main.FlowActivity"
+            android:name=".FlowActivity"
             android:label="@string/title_activity_next" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,33 +38,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.beta.main.LjljActivity"
+            android:name=".LjljActivity"
             android:label="@string/title_activity_ljlj"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.beta.main.ListViewDetailActivity"
+            android:name=".ListViewDetailActivity"
             android:label="设计师详细页"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.beta.main.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="com.beta.main.WhatsnewActivity"
+            android:name=".WhatsnewActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.beta.main.StartActivity"
+            android:name=".StartActivity"
             android:label="@string/title_activity_start" >
         </activity>
         <activity
-            android:name="com.beta.main.UserinfoActivity"
+            android:name=".UserinfoActivity"
             android:label="@string/title_activity_userinfo" >
         </activity>
         <activity
-            android:name="com.beta.main.ChatActivity"
+            android:name=".ChatActivity"
             android:label="@string/title_activity_chat"
             android:screenOrientation="portrait" >
         </activity>
@@ -75,6 +75,10 @@
         <activity
             android:name=".Html5Activity"
             android:label="@string/title_activity_html5" >
+        </activity>
+        <activity
+            android:name=".PasswdResetActivity"
+            android:label="@string/title_activity_passwd_reset" >
         </activity>
     </application>
 

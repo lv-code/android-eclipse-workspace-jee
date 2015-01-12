@@ -22,6 +22,8 @@
     <color name="bottom_item_text_selector">#585858</color>
     <color name="login_bg">#ccc</color>
     <color name="login_white">#fff</color>
+    <!-- 密码重置 -->
+    <color name="passwdreset_next_btn">#905c44</color>
     <!-- 个人中心 -->
     <color name="userinfo_bg">#c8c8c8</color>
     <!-- 聊天 -->
