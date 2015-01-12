@@ -1,4 +1,4 @@
-package com.test.main;
+package com.test.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.text.util.Linkify;
@@ -94,5 +95,11 @@ public class MyHelper {
 		userEditor.putString("NAME", strName);
 		userEditor.putString("PASSWORD", strPassword);
 		userEditor.commit();
+	}
+	
+	public void refreshActivity() {
+		mActivity.finish();
+        Intent intent = new Intent(mActivity.getApplicationContext(), mActivity.getClass());
+        mActivity.startActivity(intent);
 	}
 }

@@ -12,6 +12,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.test.util.HttpClientTools;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;

@@ -16,7 +16,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <com.test.main.DashedLine
+        <com.test.widget.DashedLineView
             android:id="@+id/dashedline"
             android:layout_width="fill_parent"
             android:layout_height="36dp"/>
@@ -32,19 +32,19 @@
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 
-        <com.test.main.RingView
+        <com.test.widget.RingView
             android:id="@+id/ring0"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="20dp" />
 
-        <com.test.main.RingView
+        <com.test.widget.RingView
             android:id="@+id/ring1"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginRight="20dp" />
 
-        <com.test.main.RingView
+        <com.test.widget.RingView
             android:id="@+id/ring2"
             android:layout_width="20dp"
             android:layout_height="20dp" />

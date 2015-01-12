@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.test.main;
+package com.test.util;
 
 import java.io.InputStream;
 import java.util.ArrayList;

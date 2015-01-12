@@ -1,4 +1,8 @@
-package com.test.main;
+package com.test.widget;
+
+import com.test.main.R;
+import com.test.main.R.id;
+import com.test.main.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

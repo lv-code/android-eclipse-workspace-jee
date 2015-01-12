@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.test.main.SideBar.OnTouchingChangedListener;
+import com.test.widget.SideBar;
+import com.test.widget.SideBar.OnTouchingChangedListener;
 
 public class SideBarTest extends Activity {
 	SideBar sideBar;

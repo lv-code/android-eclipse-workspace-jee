@@ -1,6 +1,9 @@
 package com.test.main;
 
 
+import com.test.util.Shakespeare;
+import com.test.widget.DetailsFragment;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;

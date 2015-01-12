@@ -3,8 +3,10 @@ package com.test.main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.test.adapter.ListView_Adapter;
+import com.test.util.MyHelper;
+
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,7 +21,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 /*
- * Handler: 联系了Activity之间使用Bundle和Intent传值；
+ * Handler: 联系了Activity之间使用Bundle和Intent传值
+ * ListView: 列表的基本用法，用SimpleAdapter做数据适配器
  */
 public class MainActivity extends Activity {
 	private static final String EXTRA_MESSAGE = null;
@@ -47,22 +50,26 @@ public class MainActivity extends Activity {
 		// 启动activity时，不自动弹出软键盘
 		MyHelper.setSoftInputMode(this);
 		init();
-		// initListView1();
 		initListView2();
-		
 	}
 
 	private void init() {
-		strs = new String[] { "MediaRecorder录音测试", "android生命周期测试", "计时器", "相机、相册","9宫格布局", "Handler详细机制", "HttpClient联系", "解析XML",
-				"侧边栏字母导航", "Fragment ViewPager碎片管理", "滑动菜单demo", "又上角的圆圈demo",
-				"ListFragment实例", "Activity切换效果", "调用Camera和相册", "获取本机中所有图片",
+		strs = new String[] { "ListView的基本操作demo", "ListView和RadioButton结合", "动态设置UI", "PopupWin弹出菜单示例", "Notification通知测试", "MediaRecorder录音测试", "android生命周期测试", "计时器", "相机、相册","9宫格布局", "Handler详细机制", "HttpClient联系", "解析XML",
+				"侧边栏字母导航", /*"Fragment ViewPager碎片管理",*/ "滑动菜单demo", "又上角的圆圈demo",
+				"ListFragment实例", "Activity切换效果", "调用Camera和相册", /*"获取本机中所有图片",*/
 				"ListView加载更多", "ListView分页","用GridView展示手机照片","发送语音","上拉菜单" };
-		desc = new String[] { "MediaRecorder录音测试", "LifeCycle", "TimerTaskDemo", "网上的实例","GridView","第一个小例子完成，但是不理解意思呢？？？", "编写HttpClientTools",
+		desc = new String[] { "添加item、", "ListView和RadioButton结合", "动态设置UI，刷新Activity界面", "PopupWin弹出菜单示例", "实现类似日程提醒功能", "MediaRecorder录音测试", "LifeCycle", "TimerTaskDemo", /*"网上的实例",*/ "GridView","第一个小例子完成，但是不理解意思呢？？？", "编写HttpClientTools",
 				"从网上找个小例子练习", "从网上找的字母检索例子", "需要不断练习", "SlidingMenu从github",
 				"badge from github", "网上例子", "新建res/anim",
 				"需要配置AndroidManifext",
-				"本示例演示如何在Android中使用加载器(Loader)来实现获取本机中的所有图片，并进行查看图片的效果。",
+				/*"本示例演示如何在Android中使用加载器(Loader)来实现获取本机中的所有图片，并进行查看图片的效果。",*/
 				"小demo", "用BaseAdapter","其中还有dialog的使用","send voice","pull up menu" };
+		
+		arraylist.add(ListViewBaseDemo.class);
+		arraylist.add(ListViewAndRadioButton.class);
+		arraylist.add(DynamicCreateUIDemo.class);
+		arraylist.add(PopupWinDemo.class);
+		arraylist.add(NotificationDemo.class);
 		arraylist.add(AudioRecordTest.class);
 		arraylist.add(LifeCycleTest.class);
 		arraylist.add(TimerTaskDemo.class);
@@ -72,13 +79,13 @@ public class MainActivity extends Activity {
 		arraylist.add(HttpClientActivity.class);
 		arraylist.add(ParseXML.class);
 		arraylist.add(SideBarTest.class);
-		arraylist.add(Switchfragment.class);
+//		arraylist.add(Switchfragment.class);
 		arraylist.add(SlidingMenuDemo.class);
 		arraylist.add(ViewBadgerTest.class);
 		arraylist.add(ListFragmentDemo.class);
 		arraylist.add(TransitionActivity.class);
 		arraylist.add(CameraShow.class);
-		arraylist.add(LoadMyDevicePhoto.class);
+//		arraylist.add(LoadMyDevicePhoto.class);
 		arraylist.add(Loadmore.class);
 		arraylist.add(ListMoreTest.class);
 		arraylist.add(Thumbnail.class);

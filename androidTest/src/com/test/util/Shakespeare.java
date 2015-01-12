@@ -1,4 +1,4 @@
-package com.test.main;
+package com.test.util;
 
 public final class Shakespeare {
     /**

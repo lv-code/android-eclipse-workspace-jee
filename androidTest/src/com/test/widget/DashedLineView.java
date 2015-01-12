@@ -1,4 +1,4 @@
-package com.test.main;
+package com.test.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,15 +10,15 @@ import android.graphics.PathEffect;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class DashedLine extends View {
+public class DashedLineView extends View {
 	private final Context context;
 	
-	public DashedLine(Context context) {
+	public DashedLineView(Context context) {
 		this(context, null); 
 		// TODO Auto-generated constructor stub
 	}
 
-	public DashedLine(Context context, AttributeSet attrs) {
+	public DashedLineView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
 	}

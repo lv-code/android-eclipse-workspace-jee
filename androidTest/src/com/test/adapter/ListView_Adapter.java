@@ -1,8 +1,13 @@
-package com.test.main;
+package com.test.adapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.test.main.R;
+import com.test.main.R.id;
+import com.test.main.R.layout;
+import com.test.main.R.menu;
 
 import android.app.Activity;
 import android.os.Bundle;

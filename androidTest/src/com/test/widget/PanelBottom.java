@@ -1,4 +1,7 @@
-package com.test.main;
+package com.test.widget;
+
+import com.test.main.R;
+import com.test.main.R.drawable;
 
 import android.content.Context;
 import android.os.AsyncTask;

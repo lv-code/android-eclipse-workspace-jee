@@ -9,7 +9,7 @@
  * @date: 2014年9月4日 下午12:04:09 
  * @version: V1.0   
  */
-package com.test.main;
+package com.test.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;

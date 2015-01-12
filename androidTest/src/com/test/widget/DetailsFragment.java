@@ -1,4 +1,4 @@
-package com.test.main;
+package com.test.widget;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;

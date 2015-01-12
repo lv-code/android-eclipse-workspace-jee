@@ -1,6 +1,10 @@
-package com.test.main;
+package com.test.adapter;
 
 import java.util.List;
+
+import com.test.main.R;
+import com.test.main.R.id;
+import com.test.main.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -47,10 +47,14 @@
         </activity>
         <activity
             android:name=".AudioRecordTest"
-            android:label="MediaRecordTest测试">
+            android:label="MediaRecordTest测试"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".ListView_Adapter"
+            android:name="com.test.adapter.ListView_Adapter"
             android:label="@string/title_activity_list_view__adapter" >
         </activity>
         <activity
@@ -125,7 +129,7 @@
             android:label="@string/title_activity_send_voice" >
         </activity>
         <activity
-            android:name=".PanelBottom"
+            android:name="com.test.widget.PanelBottom"
             android:label="@string/title_activity_sliding_drawer" >
         </activity>
         <activity
@@ -155,6 +159,31 @@
         <activity
             android:name=".LifeCycleTest"
             android:label="@string/title_activity_life_cycle_test" >
+        </activity>
+        <activity
+            android:name=".NotificationDemo"
+            android:label="@string/title_activity_notification_demo" >
+        </activity>
+        <activity
+            android:name=".PopupWinDemo"
+            android:label="@string/title_activity_popup_win_demo" >
+        </activity>
+        <activity
+            android:name=".ListViewAndRadioButton"
+            android:label="单选列表" >
+        </activity>
+        <activity
+            android:name=".DynamicCreateUIDemo"
+            android:label="@string/title_activity_dynamic_create_uidemo" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ListViewBaseDemo"
+            android:label="@string/title_activity_list_view_base_demo" >
         </activity>
     </application>
 

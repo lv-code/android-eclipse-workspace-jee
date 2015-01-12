@@ -3,6 +3,10 @@ package com.test.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.test.widget.Fragment1;
+import com.test.widget.Fragment2;
+import com.test.widget.FragmentTest;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -74,13 +78,13 @@ public class Switchfragment extends FragmentActivity implements OnClickListener 
         fragmentList=new ArrayList<Fragment>();  
         oneFragment=new Fragment1();  
         twoFragment=new Fragment2();  
-        threeFragment=FragmentTest.newInstance("这是一个测试fragment from threeFragment"); 
-        testFragment=FragmentTest.newInstance("这是一个测试fragment");
+//        threeFragment=FragmentTest.newInstance("这是一个测试fragment from threeFragment"); 
+//        testFragment=FragmentTest.newInstance("这是一个测试fragment");
           
         fragmentList.add(oneFragment);  
         fragmentList.add(twoFragment);  
-        fragmentList.add(threeFragment);  
-        fragmentList.add(testFragment);
+//        fragmentList.add(threeFragment);  
+//        fragmentList.add(testFragment);
           
         screenWidth=getResources().getDisplayMetrics().widthPixels;  
           
