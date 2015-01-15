@@ -185,6 +185,10 @@
             android:name=".ListViewBaseDemo"
             android:label="@string/title_activity_list_view_base_demo" >
         </activity>
+        <activity
+            android:name=".RestRetrofitActivity"
+            android:label="@string/title_activity_rest_retrofit" >
+        </activity>
     </application>
 
 </manifest>

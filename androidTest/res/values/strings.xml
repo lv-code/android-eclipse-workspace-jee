@@ -49,5 +49,6 @@
     <string name="title_activity_popup_win_demo">PopupWinDemo</string>
     <string name="title_activity_dynamic_create_uidemo">DynamicCreateUIDemo</string>
     <string name="title_activity_list_view_base_demo">ListViewBaseDemo</string>
+    <string name="title_activity_rest_retrofit">RestRetrofitActivity</string>
 
 </resources>
