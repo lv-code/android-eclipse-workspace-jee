@@ -1,10 +1,14 @@
-package com.beta.main;
+package backup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.content.Intent;
+import com.beta.main.R;
+import com.beta.main.R.drawable;
+import com.beta.main.R.id;
+import com.beta.main.R.layout;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,7 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class ViewPagerFragmentListView extends Fragment {
+public class ViewPagerFragmentForeman extends Fragment {
 	
 	private ListView listView;
 	@Override
@@ -24,16 +28,6 @@ public class ViewPagerFragmentListView extends Fragment {
 		Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.view_pager_fragment_designer, null);
 		listView = (ListView) view.findViewById(R.id.lv);
-//		Button btn = new Button(getActivity());
-//		//设置按钮的宽度和高度
-//		RelativeLayout.LayoutParams btParams = new RelativeLayout.LayoutParams (100,40);  
-//		
-//		btn.setLayoutParams(null);
-//		btn.setText("Text");
-//		btn.setBackgroundColor(0Xffff00);
-//		
-//		getActivity().addContentView(btn, btParams);
-//		
 //		init();
 		initListView2();
 		return view;
@@ -71,7 +65,7 @@ public class ViewPagerFragmentListView extends Fragment {
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("itemTitle", "第"+i+"行");
 				map.put("itemText", "第"+i+"行内容");
-				map.put("itemImage", R.drawable.touxiang);
+				map.put("itemImage", R.drawable.open_source_figure);
 				listItem.add(map);
 			}
 			SimpleAdapter mSimpleAdapter = new SimpleAdapter(getActivity(), 
@@ -93,10 +87,7 @@ public class ViewPagerFragmentListView extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// 点击屏幕后显示第几行
-//				getActivity().setTitle("你点击了第"+position+"行");
-				Intent intent = new Intent();
-				intent.setClass(getActivity(), ListViewDetailActivity.class);
-				startActivity(intent);
+				getActivity().setTitle("你点击了第"+position+"行");
 			}
 		}
 	

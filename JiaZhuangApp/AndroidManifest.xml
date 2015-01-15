@@ -31,19 +31,14 @@
         <activity
             android:name=".FlowActivity"
             android:label="@string/title_activity_next" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".LjljActivity"
+            android:name="backup.LjljActivity"
             android:label="@string/title_activity_ljlj"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ListViewDetailActivity"
+            android:name="backup.ListViewDetailActivity"
             android:label="设计师详细页"
             android:screenOrientation="portrait" >
         </activity>
@@ -58,6 +53,11 @@
         <activity
             android:name=".StartActivity"
             android:label="@string/title_activity_start" >
+                       <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".UserinfoActivity"
@@ -80,9 +80,13 @@
             android:name=".PasswdResetActivity"
             android:label="@string/title_activity_passwd_reset" >
         </activity>
-                <activity
+        <activity
             android:name=".PasswdChangeActivity"
             android:label="@string/title_activity_passwd_change" >
+        </activity>
+        <activity
+            android:name=".UserCollectActivity"
+            android:label="@string/title_activity_user_collect" >
         </activity>
     </application>
 

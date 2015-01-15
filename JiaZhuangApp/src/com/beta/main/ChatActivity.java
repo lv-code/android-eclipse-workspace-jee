@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -421,8 +422,9 @@ public class ChatActivity extends Activity implements OnClickListener {
 			mBtnSend.setVisibility(View.INVISIBLE);
 			mBtnSendVisible = 0;
 			break;
+			//在 CustomTitleBar中监听了OnClick
 		case R.id.head_TitleBackBtn:
-			finish();
+			this.finish();
 			break;
 		}
 	}
@@ -520,7 +522,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		super.onPause();
 
 		try {
-			mRecordUtil.stop();
+			if(null!=mRecordUtil) mRecordUtil.stop();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

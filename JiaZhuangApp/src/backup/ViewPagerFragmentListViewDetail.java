@@ -1,4 +1,4 @@
-package com.beta.main;
+package backup;
 
 
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.beta.main.R;
+import com.beta.main.R.id;
+import com.beta.main.R.layout;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 public class ViewPagerFragmentListViewDetail extends Fragment {

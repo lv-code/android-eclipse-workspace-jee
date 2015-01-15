@@ -1,4 +1,9 @@
-package com.beta.main;
+package backup;
+
+import com.beta.main.CustomTitleBar;
+import com.beta.main.R;
+import com.beta.main.R.id;
+import com.beta.main.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

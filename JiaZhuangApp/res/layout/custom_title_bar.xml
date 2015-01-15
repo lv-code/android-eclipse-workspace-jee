@@ -8,11 +8,12 @@
 
     <Button
         android:id="@+id/head_TitleBackBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/back_60x60"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/icon_goback"
         android:gravity="center" />
 
     <TextView

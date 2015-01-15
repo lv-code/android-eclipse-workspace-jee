@@ -1,7 +1,12 @@
-package com.beta.main;
+package backup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.beta.main.R;
+import com.beta.main.R.drawable;
+import com.beta.main.R.id;
+import com.beta.main.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;

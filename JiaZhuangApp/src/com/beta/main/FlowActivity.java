@@ -94,16 +94,21 @@ public class FlowActivity extends Activity implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
+			Intent intent = new Intent();
 			switch (v.getId()) {
+			case 1:
+				intent.setClass(context, ChatActivity.class);
+				break;
+
 			case 2:
-				Intent intent = new Intent(context, PasswdChangeActivity.class);
-				startActivity(intent);
+				intent.setClass(context, PasswdChangeActivity.class);
 				break;
 
 			default:
 				Log.i(TAG, "v.getId() : " + v.getId());
 				break;
 			}
+			startActivity(intent);
 
 		}
 	};

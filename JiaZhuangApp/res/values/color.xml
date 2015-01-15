@@ -32,5 +32,8 @@
     <color name="chat_footer_bg">#585858</color>
     <color name="chat_send_btn">#ccc</color>
     <color name="login_edit_normal">#fff</color>
+    <!-- 用户收藏 -->
+    <color name="user_collect_list_bg">#f1f1f1</color>
+    <color name="user_collect_txt">#282828</color>
 
 </resources>

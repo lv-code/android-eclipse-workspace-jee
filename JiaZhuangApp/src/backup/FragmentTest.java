@@ -1,4 +1,4 @@
-package com.beta.main;
+package backup;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.beta.main.R;
+import com.beta.main.R.id;
+import com.beta.main.R.layout;
 import com.readystatesoftware.viewbadger.BadgeView;
 
 public class FragmentTest extends Fragment {  

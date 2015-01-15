@@ -1,4 +1,7 @@
-package com.beta.main;
+package backup;
+
+import com.beta.main.R;
+import com.beta.main.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

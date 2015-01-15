@@ -1,7 +1,13 @@
-package com.beta.main;
+package backup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.beta.main.CustomTitleBar;
+import com.beta.main.LoginActivity;
+import com.beta.main.R;
+import com.beta.main.R.id;
+import com.beta.main.R.layout;
 
 import android.content.Context;
 import android.content.Intent;

@@ -2,6 +2,7 @@ package com.beta.main;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,9 +43,9 @@ public class LoginActivity extends Activity {
 		if ("123456".equals(mUser.getText().toString())
 				&& "abc".equals(mPassword.getText().toString())) // 判断 帐号和密码
 		{
-			// Intent intent = new Intent();
-			// intent.setClass(LoginActivity.this, LoadingActivity.class);
-			// startActivity(intent);
+			 Intent intent = new Intent();
+			 intent.setClass(LoginActivity.this, FlowActivity.class);
+			 startActivity(intent);
 			Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT)
 					.show();
 		} else if ("".equals(mUser.getText().toString())
