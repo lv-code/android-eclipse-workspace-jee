@@ -80,6 +80,10 @@
             android:name=".PasswdResetActivity"
             android:label="@string/title_activity_passwd_reset" >
         </activity>
+                <activity
+            android:name=".PasswdChangeActivity"
+            android:label="@string/title_activity_passwd_change" >
+        </activity>
     </application>
 
 </manifest>

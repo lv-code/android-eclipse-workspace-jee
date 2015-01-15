@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,39 +20,38 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.beta.adapter.FlowListViewAdapter;
 import com.beta.residemenu.ResideMenu;
 import com.beta.residemenu.ResideMenuItem;
 import com.beta.util.CommonUtil;
 
-public class FlowActivity extends FragmentActivity implements OnClickListener {
+public class FlowActivity extends Activity implements OnClickListener {
 
 	Context context = FlowActivity.this;
 
 	final static String TAG = "INFO : ";
 
-	ImageView title_right_btn;
+	ImageView btnTitleRight;
 	// 进度名称
-	TextView flow_name;
-	//网格组件
+	TextView tvFlowName;
+	// 网格组件
 	GridView gridview;
 	// 生成动态数组，并且转入数据
 	ArrayList<HashMap<String, Object>> lstImageItem;
-	
+
 	// 选择列表
 	ListView listview;
-	Boolean listview_show = false;
+	Boolean lvShow = false;
 	// 当前选择的阶段
 	int checkedItem = 0;
-	
+
 	ResideMenu resideMenu;
-	//当前所在菜单
+	// 当前所在菜单
 	int resideMenuNow = 0;
 	// 左侧菜单的打开状态
 	Boolean residemenuOpen = false;
-	//GridView的适配器
+	// GridView的适配器
 	SimpleAdapter saImageItems;
 
 	@Override
@@ -97,12 +96,12 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case 2:
-				Intent intent = new Intent(context, PasswdResetActivity.class);
+				Intent intent = new Intent(context, PasswdChangeActivity.class);
 				startActivity(intent);
 				break;
 
 			default:
-				Log.i(TAG, "v.getId() : "+v.getId());
+				Log.i(TAG, "v.getId() : " + v.getId());
 				break;
 			}
 
@@ -112,28 +111,28 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 	// attach to current activity;
 	private void initResideMenu() {
 		resideMenu = new ResideMenu(this);
-//		resideMenu.setBackground(R.drawable.app_logo);
-		//不显示阴影
+		// resideMenu.setBackground(R.drawable.app_logo);
+		// 不显示阴影
 		resideMenu.setShadowVisible(false);
 		resideMenu.attachToActivity(this);
 
-		// create menu items;
-		String titles[] = { "阶段服务", "项目沟通", "修改密码"};
-		//用 0 来代表：不是当前的选择条目
-		int icon[] = { 0, 0, 0  };
+		// 左侧菜单条目
+		String titles[] = { "阶段服务", "项目沟通", "修改密码" };
+		// 用 0 来代表：不是当前的选择条目
+		int icon[] = { 0, 0, 0 };
 		icon[resideMenuNow] = R.drawable.residemenu_item_now;
 
 		for (int i = 0; i < titles.length; i++) {
 			ResideMenuItem item = new ResideMenuItem(this, icon[i], titles[i]);
 			item.setOnClickListener(resideMenuOnClickListener);
 			item.setId(i);
-			resideMenu.addMenuItem(item, ResideMenu.DIRECTION_LEFT); 
+			resideMenu.addMenuItem(item, ResideMenu.DIRECTION_LEFT);
 		}
 	}
 
 	private void initViewById() {
-		title_right_btn = (ImageView) findViewById(R.id.title_right_btn);
-		flow_name = (TextView) this.findViewById(R.id.head_center_text);
+		btnTitleRight = (ImageView) findViewById(R.id.title_right_btn);
+		tvFlowName = (TextView) this.findViewById(R.id.head_center_text);
 		listview = (ListView) this.findViewById(R.id.flow_listview);
 
 	}
@@ -141,8 +140,8 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 	// 初始化标题栏
 	private void initTitleBar() {
 
-		title_right_btn.setOnClickListener(this);
-		flow_name.setOnClickListener(this);
+		btnTitleRight.setOnClickListener(this);
+		tvFlowName.setOnClickListener(this);
 
 	}
 
@@ -156,26 +155,23 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 				R.drawable.icon_pulldown);
 		img_pulldown.setBounds(0, 0, img_pulldown.getMinimumWidth(),
 				img_pulldown.getMinimumHeight());
-		if (!listview_show) {
-			listview_show = true;
+		if (!lvShow) {
+			lvShow = true;
 			listview.setVisibility(View.VISIBLE);
-			flow_name.setCompoundDrawables(null, null, img_pullup, null);
+			tvFlowName.setCompoundDrawables(null, null, img_pullup, null);
 
 		} else {
-			listview_show = false;
+			lvShow = false;
 			listview.setVisibility(View.GONE);
-			flow_name.setCompoundDrawables(null, null, img_pulldown, null);
+			tvFlowName.setCompoundDrawables(null, null, img_pulldown, null);
 		}
 
 	}
 
 	// 点击标题栏，选择装修阶段
 	public void initListView() {
-		final String[] mListImage = { "flow_listview_icon_qianqi",
-				"flow_listview_icon_kaigongzhunbei",
-				"flow_listview_icon_kaigong", "flow_listview_icon_shuidian",
-				"flow_listview_icon_niwa", "flow_listview_icon_mugong",
-				"flow_listview_icon_youqi", "flow_listview_icon_anzhaung" };
+		final String[] mListImage = { "qianqi", "kaigongzhunbei", "kaigong",
+				"shuidian", "niwa", "mugong", "youqi", "anzhaung" };
 		final String[] mListTitle = { "前期", "开工准备", "开工", "水电", "泥瓦", "木工",
 				"油漆", "安装" };
 
@@ -185,7 +181,7 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		for (int i = 0; i < length; i++) {
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put("img", CommonUtil.getResourceIdByStr(context,
-					mListImage[i], "drawable"));
+					"flow_listview_icon_" + mListImage[i], "drawable"));
 			item.put("title", mListTitle[i]);
 			if (i == checkedItem) {
 				item.put("item_now", R.drawable.flow_listview_xuanzhong);
@@ -206,12 +202,10 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				flow_name.setText(mListTitle[position]);
+				tvFlowName.setText(mListTitle[position]);
 				changeItemImg(adapter, position);
 				toggleListView();
 				changeGridView();
-				// Toast.makeText(context, "您选择了标题：" + mListTitle[position],
-				// Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -231,17 +225,19 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		checkedItem = selectedItem;
 	}
 
-	//改变GridView的数据
+	// 改变GridView的数据
 	private void changeGridView() {
 		SimpleAdapter sa = (SimpleAdapter) gridview.getAdapter();
 		HashMap<String, Object> map1 = new HashMap<String, Object>();
-		map1.put("ItemImage", context.getResources().getIdentifier("flow_file", "drawable",
-				context.getPackageName()));
+		map1.put(
+				"ItemImage",
+				context.getResources().getIdentifier("flow_file", "drawable",
+						context.getPackageName()));
 		map1.put("ItemText", "test");
 		lstImageItem.add(map1);
 		sa.notifyDataSetChanged();
 	}
-	
+
 	public void initGridView() {
 		String[] icon = { "calenda", "file", "image", "mail", "note", "pick",
 				"plan", "player", "shop" };
@@ -250,7 +246,7 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 
 		// 生成动态数组，并且转入数据
 		lstImageItem = new ArrayList<HashMap<String, Object>>();
-		
+
 		for (int i = 0; i < icon.length; i++) {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("ItemImage", CommonUtil.getResourceIdByStr(context, "flow_"
@@ -262,10 +258,8 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		// 生成适配器的ImageItem <====> 动态数组的元素，两者一一对应
 		saImageItems = new SimpleAdapter(this, lstImageItem,
 				R.layout.flow_gridview_item,
-
 				// 动态数组与ImageItem对应的子项
 				new String[] { "ItemImage", "ItemText" },
-
 				// ImageItem的XML文件里面的一个ImageView,两个TextView ID
 				new int[] { R.id.ItemImage, R.id.ItemText });
 		// 添加并且显示
@@ -283,8 +277,7 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 		});
 	}
 
-	// 右侧滑动菜单
-
+	// 返回
 	public void goBack() {
 		Button titleBackBtn = (Button) this
 				.findViewById(R.id.head_TitleBackBtn);
@@ -294,16 +287,6 @@ public class FlowActivity extends FragmentActivity implements OnClickListener {
 				FlowActivity.this.finish();
 			}
 		});
-	}
-
-	public void goHome(View v) {
-		FlowActivity.this.finish();
-	}
-
-	// 判断是否登陆
-	public void goLogin(View v) {
-		Intent intent = new Intent(context, LoginActivity.class);
-		startActivity(intent);
 	}
 
 }

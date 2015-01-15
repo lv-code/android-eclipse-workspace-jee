@@ -7,6 +7,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/android-viewbadger.jar"/>
 	<classpathentry kind="lib" path="libs/nineoldandroids-library-2.4.0.jar"/>
+	<classpathentry kind="lib" path="libs/retrofit-1.9.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/library-slidingmenu"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

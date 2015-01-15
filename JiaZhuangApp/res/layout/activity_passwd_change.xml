@@ -32,24 +32,58 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:drawablePadding="6dp"
-            android:text="密码重置"
+            android:text="密码修改"
             android:textColor="@color/title_text"
             android:textSize="18sp" />
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/newPwd1"
+        android:id="@+id/oldPwd"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_below="@+id/my_title_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
-        android:layout_marginTop="85.5dp"
+        android:layout_marginTop="40dp"
+        android:background="@null"
+        android:drawableLeft="@drawable/password_old_lock"
+        android:drawablePadding="10dp"
+        android:hint="请输入旧密码"
+        android:inputType="textPassword"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/oldPwd"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/edit_text_bg" />
+
+    <EditText
+        android:id="@+id/newPwd1"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@+id/oldPwd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="18dp"
         android:background="@null"
         android:drawableLeft="@drawable/password_new_lock"
+        android:drawablePadding="10dp"
         android:hint="请输入新密码"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -72,8 +106,13 @@
         android:layout_marginTop="18dp"
         android:background="@null"
         android:drawableLeft="@drawable/password_new_lock"
+        android:drawablePadding="10dp"
         android:hint="请再次输入新密码"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -93,7 +132,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
-        android:layout_marginTop="87.5dp"
+        android:layout_marginTop="43.5dp"
         android:background="@color/passwdreset_next_btn"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
