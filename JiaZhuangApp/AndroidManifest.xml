@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jiazhuangapp"
+    package="com.beta.main"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -25,52 +25,68 @@
         android:label="@string/app_name"
         android:theme="@style/MyCustomTheme" >
         <activity
-            android:name="com.beta.main.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.beta.main.FlowActivity"
+            android:name=".FlowActivity"
             android:label="@string/title_activity_next" >
         </activity>
         <activity
-            android:name="com.beta.main.LjljActivity"
+            android:name="backup.LjljActivity"
             android:label="@string/title_activity_ljlj"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.beta.main.ListViewDetailActivity"
+            android:name="backup.ListViewDetailActivity"
             android:label="设计师详细页"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.beta.main.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
         <activity
-            android:name="com.beta.main.WhatsnewActivity"
+            android:name=".WhatsnewActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.beta.main.StartActivity"
+            android:name=".StartActivity"
             android:label="@string/title_activity_start" >
-            <intent-filter>
+                       <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.beta.main.UserinfoActivity"
+            android:name=".UserinfoActivity"
             android:label="@string/title_activity_userinfo" >
         </activity>
         <activity
-            android:name="com.beta.main.ChatActivity"
+            android:name=".ChatActivity"
             android:label="@string/title_activity_chat"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MediaRecordTest"
             android:label="@string/title_activity_media_record_test" >
+        </activity>
+        <activity
+            android:name=".Html5Activity"
+            android:label="@string/title_activity_html5" >
+        </activity>
+        <activity
+            android:name=".PasswdResetActivity"
+            android:label="@string/title_activity_passwd_reset" >
+        </activity>
+        <activity
+            android:name=".PasswdChangeActivity"
+            android:label="@string/title_activity_passwd_change" >
+        </activity>
+        <activity
+            android:name=".UserCollectActivity"
+            android:label="@string/title_activity_user_collect" >
         </activity>
     </application>
 

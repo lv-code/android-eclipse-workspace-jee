@@ -2,16 +2,19 @@
 <resources>
 
     <!-- 标题栏 -->
-    <color name="title_bar_bg">#aaaaaa</color>
+    <color name="title_bar_bg">#905c44</color>
     <color name="title_text">#ffffff</color>
-    <!-- 流程 #7d8289-->
+    <!-- 左边菜单 -->
+    <color name="residemenu_bg">#282828</color>
+    <color name="private_declare_txt_color">#8f8e8e</color>
+    <!-- 流程 #7d8289 -->
     <color name="gray_white">#eee</color>
     <color name="gray_white2">#dadada</color>
     <color name="txt">#000</color>
     <color name="flow_listview_bg">#6f7783</color>
-    <color name="flow_listview_item_bg">#6f7783</color>
-    <color name="flow_listview_item_text">#fff</color>
-    <color name="flow_listview_selector">#848fa0</color>
+    <color name="flow_listview_item_bg">#fff</color>
+    <color name="flow_listview_item_text">#383c47</color>
+    <color name="flow_listview_selector">#fff</color>
     <color name="style_blue">#1122ff</color>
     <color name="bottom_item_line_color">#111111</color>
     <color name="title_color_white">#ffffff</color>
@@ -19,11 +22,18 @@
     <color name="bottom_item_text_selector">#585858</color>
     <color name="login_bg">#ccc</color>
     <color name="login_white">#fff</color>
+    <!-- 密码重置 -->
+    <color name="passwdreset_next_btn">#905c44</color>
+    <color name="edit_text_bg">#4f4e4e</color>
     <!-- 个人中心 -->
     <color name="userinfo_bg">#c8c8c8</color>
     <!-- 聊天 -->
-<color name="chat_bg">#c8c8c8</color>
-<color name="chat_footer_bg">#585858</color>
-<color name="chat_send_btn">#ccc</color>
-<color name="login_edit_normal">#fff</color>
+    <color name="chat_bg">#c8c8c8</color>
+    <color name="chat_footer_bg">#585858</color>
+    <color name="chat_send_btn">#ccc</color>
+    <color name="login_edit_normal">#fff</color>
+    <!-- 用户收藏 -->
+    <color name="user_collect_list_bg">#f1f1f1</color>
+    <color name="user_collect_txt">#282828</color>
+
 </resources>

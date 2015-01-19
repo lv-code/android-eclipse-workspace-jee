@@ -1,7 +1,5 @@
 package com.beta.main;
 
-import com.example.jiazhuangapp.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +30,7 @@ context = UserinfoActivity.this;
 		Button titleBackBtn = (Button) this
 				.findViewById(R.id.head_TitleBackBtn);
 		titleBackBtn.setOnClickListener(new OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				UserinfoActivity.this.finish();
 			}

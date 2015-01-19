@@ -1,5 +1,7 @@
 package com.test.main;
 
+import com.test.widget.PanelBottom;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.RelativeLayout;

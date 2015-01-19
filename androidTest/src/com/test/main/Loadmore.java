@@ -2,6 +2,8 @@ package com.test.main;
 
 import java.util.ArrayList;
 
+import com.test.adapter.LoadmoreListViewAdapter;
+
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.os.Handler;

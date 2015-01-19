@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#cccccc">
+    android:background="#fff" >
 
     <TextView
         android:id="@+id/itemTitle"
@@ -10,7 +10,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="8dp"
+        android:hint="defaultText"
+        android:text="Hello"
+        android:textColor="#339900"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/itemText"
@@ -18,14 +23,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/itemTitle"
-        />
+        android:layout_marginBottom="4dp"
+        android:textSize="10sp"
+        android:textColor="#696969"
+        android:text="description" />
 
     <ImageView
         android:id="@+id/itemImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        />
+        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

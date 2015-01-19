@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="6dp"
+    android:paddingStart="6dp"
+    android:paddingRight="6dp"
+    android:paddingEnd="6dp"
     tools:context="${relativePackage}.${activityClass}" >
     
     <com.test.widget.FlexibleListView

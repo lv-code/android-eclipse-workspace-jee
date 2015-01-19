@@ -1,7 +1,5 @@
 package com.beta.main;
 
-import com.example.jiazhuangapp.R;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

@@ -26,5 +26,9 @@
     <string name="title_activity_userinfo">UserinfoActivity</string>
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_media_record_test">MediaRecordTest</string>
+    <string name="title_activity_html5">Html5Activity</string>
+    <string name="title_activity_passwd_reset">PasswdResetActivity</string>
+    <string name="title_activity_passwd_change">title_activity_passwd_change</string>
+    <string name="title_activity_user_collect">UserCollectActivity</string>
 
 </resources>

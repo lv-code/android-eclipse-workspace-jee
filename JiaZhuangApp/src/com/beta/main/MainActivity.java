@@ -1,7 +1,6 @@
 package com.beta.main;
 
-import com.example.jiazhuangapp.R;
-
+import backup.LjljActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +24,7 @@ public class MainActivity extends Activity {
 		// 自定义Activity标题栏
 		CustomTitleBar.getTitleBar(this, "我的自定义标题栏");
 		Log.d("a break point 1", "消息1111");
-		CustomTitleBar.hideBackBtn();
+//		CustomTitleBar.hideBackBtn();
 		// ---------------------------------------------------
 		Log.d("a break point 2", "消息2222");
 		setContentView(R.layout.activity_main);
@@ -69,11 +68,13 @@ public class MainActivity extends Activity {
 
 	}
 
+	@Override
 	protected void onStart() {
 		super.onStart();
 		init();
 	}
 
+	@Override
 	protected void onResume() {
 		super.onResume();
 	}
