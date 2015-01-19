@@ -40,7 +40,7 @@
     <EditText
         android:id="@+id/oldPwd"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="@dimen/input_height"
         android:layout_below="@+id/my_title_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="45dp"
@@ -69,7 +69,7 @@
     <EditText
         android:id="@+id/newPwd1"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="@dimen/input_height"
         android:layout_below="@+id/oldPwd"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="45dp"
@@ -98,7 +98,7 @@
     <EditText
         android:id="@+id/newPwd2"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="@dimen/input_height"
         android:layout_below="@+id/newPwd1"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="45dp"
@@ -127,7 +127,7 @@
     <Button
         android:id="@+id/next"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
+        android:layout_height="@dimen/input_height"
         android:layout_below="@+id/newPwd2"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="45dp"

@@ -45,6 +45,11 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".WhatsnewActivity"
@@ -53,11 +58,6 @@
         <activity
             android:name=".StartActivity"
             android:label="@string/title_activity_start" >
-                       <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".UserinfoActivity"
@@ -87,6 +87,10 @@
         <activity
             android:name=".UserCollectActivity"
             android:label="@string/title_activity_user_collect" >
+        </activity>
+        <activity
+            android:name=".ForgetPwdActivity"
+            android:label="@string/title_activity_forget_pwd" >
         </activity>
     </application>
 

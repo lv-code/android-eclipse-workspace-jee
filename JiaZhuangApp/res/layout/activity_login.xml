@@ -2,71 +2,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/lon_in_beijing"
+    android:background="@drawable/login_bg"
     tools:context="${relativePackage}.${activityClass}" >
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="190dp"
-        android:layout_height="190dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:contentDescription="广告图"
+        android:layout_marginTop="40dp"
+        android:contentDescription="logo"
         android:scaleType="fitXY"
-        android:src="@drawable/abc_menu_dropdown_panel_holo_dark" />
+        android:src="@drawable/login_logo" />
 
     <EditText
         android:id="@+id/phone"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:ems="10"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:drawablePadding="10dp"
         android:hint="请输入手机号"
         android:inputType="phone"
-        android:drawableLeft="@drawable/icon_user"
+        android:background="@drawable/btn_shape"
+        android:textColor="@color/login_txt_color"
+        android:drawableLeft="@drawable/login_username"
         android:singleLine="true" >
 
         <requestFocus />
     </EditText>
 
-  
-
     <EditText
         android:id="@+id/passwd"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
         android:layout_below="@+id/phone"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:ems="10"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
+        android:paddingRight="40dp"
+        android:paddingEnd="40dp"
+        android:drawablePadding="10dp"
         android:hint="请输入密码"
         android:inputType="textPassword"
-        android:drawableLeft="@drawable/icon_password"
-        android:drawableRight="@drawable/icon_eye1"
+        android:background="@drawable/btn_shape"
+        android:textColor="@color/login_txt_color"
+        android:drawableLeft="@drawable/login_pwd"
         android:singleLine="true" />
+    
+    <CheckBox
+        android:id="@+id/cbShowPwd"
+        style="@style/MyCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/passwd"
+        android:layout_alignBottom="@+id/passwd"
+        android:layout_alignRight="@+id/passwd" 
+        android:layout_marginRight="6dp"/>
+    <TextView
+        android:id="@+id/forgetPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/passwd"
+        android:layout_below="@+id/passwd"
+        android:layout_marginTop="4dp"
+        android:textColor="#fff"
+        android:textSize="14sp"
+        android:text="忘记密码" />
 
 
-    <ImageButton
+    <ImageView
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwd"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="登陆按钮"
         android:gravity="center"
         android:onClick="login_submit"
-        android:padding="0dp"
-        android:paddingEnd="0dp"
-        android:paddingStart="0dp"
-        android:src="@drawable/lon_in"
-        android:text="@string/login"
-        android:textSize="16sp"
-        android:textStyle="bold" />
+        android:src="@drawable/login_btn"/>
 
-    <include layout="@layout/bottom_bar" />
 
 </RelativeLayout>

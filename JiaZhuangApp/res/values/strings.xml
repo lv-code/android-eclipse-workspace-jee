@@ -30,5 +30,6 @@
     <string name="title_activity_passwd_reset">PasswdResetActivity</string>
     <string name="title_activity_passwd_change">title_activity_passwd_change</string>
     <string name="title_activity_user_collect">UserCollectActivity</string>
+    <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
 
 </resources>
