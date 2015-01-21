@@ -9,42 +9,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_margin="10dp"
-        android:src="@drawable/collect_zhanwei03_touxiang" />
+        android:layout_margin="10dp"/>
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ivAvatar" >
-
-        
     <TextView
         android:id="@+id/tvWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivAvatar"
         android:layout_margin="10dp"
         android:textColor="@color/user_collect_txt" />
-        
-        <ImageView
-            android:id="@+id/tvImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"/>
-
-        <ImageView
-            android:id="@+id/tvVoiceImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/tvVoiceTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="47"
-            android:textColor="#fff"
-            android:textSize="12sp" />
-
-    </FrameLayout>
 
     <TextView
         android:id="@+id/tvDate"
@@ -53,7 +26,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
-        android:text="2014.11.08"
         android:textColor="@color/user_collect_txt" />
 
 </RelativeLayout>

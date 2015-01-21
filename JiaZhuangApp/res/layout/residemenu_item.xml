@@ -25,7 +25,7 @@
             android:paddingEnd="2dp"
             android:layout_marginLeft="16dp"
 			android:drawablePadding="28dp"
-            android:drawableRight="@drawable/residemenu_item_right"
+            android:drawableRight="@drawable/icon_residemenu_item_right"
             android:text="aaa"
             android:id="@+id/tv_title"/>
     

@@ -30,7 +30,7 @@
         android:inputType="phone"
         android:background="@drawable/btn_shape"
         android:textColor="@color/login_txt_color"
-        android:drawableLeft="@drawable/login_username"
+        android:drawableLeft="@drawable/icon_login_username"
         android:singleLine="true" >
 
         <requestFocus />
@@ -54,7 +54,7 @@
         android:inputType="textPassword"
         android:background="@drawable/btn_shape"
         android:textColor="@color/login_txt_color"
-        android:drawableLeft="@drawable/login_pwd"
+        android:drawableLeft="@drawable/icon_login_pwd"
         android:singleLine="true" />
     
     <CheckBox

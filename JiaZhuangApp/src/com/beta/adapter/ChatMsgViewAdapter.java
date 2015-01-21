@@ -71,7 +71,6 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 		return 2;
 	}
 	
-	
     @Override
 	public View getView(int position, View convertView, ViewGroup parent) {
     	
@@ -99,8 +98,6 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	    }else{
 	        viewHolder = (ViewHolder) convertView.getTag();
 	    }
-	
-	    
 	    
 	    viewHolder.tvSendTime.setText(entity.getDate());
 	    viewHolder.tvUserName.setText(entity.getName());

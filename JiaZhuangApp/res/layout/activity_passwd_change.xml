@@ -5,49 +5,16 @@
     android:background="#fff"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <RelativeLayout
-        android:id="@+id/my_title_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="36dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/title_bar_bg"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:id="@+id/title_right_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="0dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:onClick="goBack"
-            android:src="@drawable/icon_goback" />
-
-        <TextView
-            android:id="@+id/head_center_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawablePadding="6dp"
-            android:text="密码修改"
-            android:textColor="@color/title_text"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
     <EditText
         android:id="@+id/oldPwd"
         android:layout_width="match_parent"
         android:layout_height="@dimen/input_height"
-        android:layout_below="@+id/my_title_bar"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
         android:layout_marginTop="40dp"
         android:background="@null"
-        android:drawableLeft="@drawable/password_old_lock"
+        android:drawableLeft="@drawable/icon_password_old_lock"
         android:drawablePadding="10dp"
         android:hint="请输入旧密码"
         android:inputType="textPassword"
@@ -76,7 +43,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="18dp"
         android:background="@null"
-        android:drawableLeft="@drawable/password_new_lock"
+        android:drawableLeft="@drawable/icon_password_new_lock"
         android:drawablePadding="10dp"
         android:hint="请输入新密码"
         android:inputType="textPassword"
@@ -105,7 +72,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="18dp"
         android:background="@null"
-        android:drawableLeft="@drawable/password_new_lock"
+        android:drawableLeft="@drawable/icon_password_new_lock"
         android:drawablePadding="10dp"
         android:hint="请再次输入新密码"
         android:inputType="textPassword"
@@ -133,10 +100,10 @@
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
         android:layout_marginTop="43.5dp"
-        android:background="@color/passwdreset_next_btn"
+        android:background="@color/btn_bg"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:text="下一步"
-        android:textColor="#fff" />
+        android:textColor="@color/txt_white" />
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/userinfo_bg"
@@ -34,12 +35,18 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
 
-        <ImageView
-            android:id="@+id/ImageView02"
+        <TextView
+            android:id="@+id/userCollect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:src="@drawable/wo_xuanxiangkuang" />
+            android:background="@drawable/wo_xuanxiangkuang"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="收藏"
+            android:textColor="@color/txt"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/ImageView01"
@@ -89,9 +96,5 @@
             android:layout_weight="1.0"
             android:src="@drawable/wo_xuanxiangkuang" />
     </LinearLayout>
-
-    <include
-        android:id="@+id/bottom"
-        layout="@layout/bottom_bar" />
 
 </RelativeLayout>

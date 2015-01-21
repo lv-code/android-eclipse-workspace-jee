@@ -47,7 +47,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="85.5dp"
         android:background="@null"
-        android:drawableLeft="@drawable/password_new_lock"
+        android:drawableLeft="@drawable/icon_password_new_lock"
         android:hint="请输入新密码"
         android:inputType="textPassword" />
 
@@ -71,7 +71,7 @@
         android:layout_marginRight="45dp"
         android:layout_marginTop="18dp"
         android:background="@null"
-        android:drawableLeft="@drawable/password_new_lock"
+        android:drawableLeft="@drawable/icon_password_new_lock"
         android:hint="请再次输入新密码"
         android:inputType="textPassword" />
 
@@ -94,7 +94,7 @@
         android:layout_marginLeft="45dp"
         android:layout_marginRight="45dp"
         android:layout_marginTop="87.5dp"
-        android:background="@color/passwdreset_next_btn"
+        android:background="@color/btn_bg"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:text="下一步"

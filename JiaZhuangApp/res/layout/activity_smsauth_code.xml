@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/input_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:background="@null"
+        android:hint="请输入手机号码" >
+
+        <requestFocus />
+    </EditText>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/phone"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/edit_text_bg" />
+
+    <Button
+        android:id="@+id/btnAuthCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="20dp"
+        android:background="@color/btn_bg"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/txt_white"
+        android:text="获取验证码" />
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnAuthCode"
+        android:layout_alignBottom="@+id/btnAuthCode"
+        android:layout_alignRight="@+id/phone"
+        android:text="倒计时" />
+    
+   <TextView
+       android:id="@+id/textView2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBaseline="@+id/textView1"
+       android:layout_alignBottom="@+id/textView1"
+       android:layout_toRightOf="@+id/textView1"
+       android:layout_marginLeft="8dp"
+       android:layout_marginRight="8dp"
+       android:textColor="#dd1111"
+       android:textSize="18sp"
+       android:text="60" />
+
+    <EditText
+        android:id="@+id/etAuthCode"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/input_height"
+        android:layout_below="@+id/btnAuthCode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@null"
+        android:hint="请输入验证码" />
+
+       <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/etAuthCode"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/edit_text_bg" />
+    
+   <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_below="@+id/etAuthCode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="43.5dp"
+        android:background="@color/btn_bg"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="下一步"
+        android:textColor="@color/txt_white" />
+
+   <TextView
+       android:id="@+id/textView3"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBaseline="@+id/textView2"
+       android:layout_alignBottom="@+id/textView2"
+       android:layout_toRightOf="@+id/textView2"
+       android:text="秒" />
+
+</RelativeLayout>

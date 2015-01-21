@@ -10,11 +10,14 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.beta.adapter.UserCollectListViewAdapter;
+import com.beta.adapter.UserCollectMsgEntity;
+
 /**
  * @author zg
  * 列表现在采用FrameLayout中显示不用组件，之后可以用不同的Layout来填充，如：activity_user_collect_img，activity_user_collect_voice
  */
-public class UserCollectActivity extends Activity {
+public class UserCollectActivity extends MyBaseActivity {
 
 	Context context = UserCollectActivity.this;
 	ListView lv;
@@ -27,6 +30,7 @@ public class UserCollectActivity extends Activity {
 		setContentView(R.layout.activity_user_collect);
 		initViewById();
 		initListView();
+		goBack();
 	}
 	
 	@Override
@@ -43,29 +47,20 @@ public class UserCollectActivity extends Activity {
 
 	
 	private void initListView() {
-		//测试数据
-		final String[] word = {"不客气。那就说好后天下午2点，我带主材的人过去...", "", "", "测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试"};
-		final int[] img = {0, R.drawable.collect_zhanwei01, 0, 0};
-		final String[] voiceTxt = {"", "", "47’’", ""};
-		final int[] voiceImg = {0, 0, R.drawable.collect_player_start, 0};
-		
-		ArrayList<Map<String, Object>> mData = new ArrayList<Map<String, Object>>();
-		for (int i = 0; i < word.length; i++) {
-			Map<String, Object> item = new HashMap<String, Object>();
-			item.put("avatar", R.drawable.collect_zhanwei03_touxiang);
-			item.put("word", word[i]);
-			item.put("img", img[i]);
-			item.put("voiceTxt", voiceTxt[i]);
-			item.put("voiceImg", voiceImg[i]);
-			item.put("date", "2014.11.08");
-			mData.add(item);
-		}
-		
-		SimpleAdapter sa = new SimpleAdapter(context, mData,
-				R.layout.activity_user_collect_list_item_word, new String[] {
- "avatar", "word", "img", "voiceTxt", "voiceImg",
-						"date" }, new int[] { R.id.ivAvatar, R.id.tvWord,
-						R.id.tvImg, R.id.tvVoiceTxt, R.id.tvVoiceImg, R.id.tvDate});
+		UserCollectListViewAdapter sa = new UserCollectListViewAdapter(this, getData());
 		lv.setAdapter(sa);
+	}
+	
+	//测试数据
+	private ArrayList<UserCollectMsgEntity> getData() {
+		ArrayList<UserCollectMsgEntity> mData = new ArrayList<UserCollectMsgEntity>();
+		UserCollectMsgEntity m1 = new UserCollectMsgEntity("user01", "2015.1.20", 1, "不客气。那就说好后天下午2点，我带主材的人过去...");
+		UserCollectMsgEntity m2 = new UserCollectMsgEntity("user01", "2015.1.20", 2, "http://localhost/img/1.png");
+		UserCollectMsgEntity m3 = new UserCollectMsgEntity("user01", "2015.1.20", 3, "47s");
+		mData.add(m1);
+		mData.add(m2);
+		mData.add(m3);
+
+		return mData;
 	}
 }

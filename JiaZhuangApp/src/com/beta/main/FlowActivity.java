@@ -26,7 +26,7 @@ import com.beta.residemenu.ResideMenu;
 import com.beta.residemenu.ResideMenuItem;
 import com.beta.util.CommonUtil;
 
-public class FlowActivity extends Activity implements OnClickListener {
+public class FlowActivity extends MyBaseActivity implements OnClickListener {
 
 	Context context = FlowActivity.this;
 
@@ -71,10 +71,10 @@ public class FlowActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		Log.e(TAG, "view被点击！！！！");
 		switch (v.getId()) {
 		// 展开左侧菜单
 		case R.id.title_right_btn:
-			Log.e(TAG, "左侧菜单被点击！！！！");
 			resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
 			break;
 
@@ -82,9 +82,11 @@ public class FlowActivity extends Activity implements OnClickListener {
 		case R.id.head_center_text:
 			toggleListView();
 			break;
-		default:
-			Log.i(TAG, "这里是default！！！！");
-			break;
+
+			// 跳转隐私声明
+			case R.id.privacy:
+				startActivity(new Intent(context, PrivacyActivity.class));
+				break;
 		}
 
 	}
@@ -102,10 +104,6 @@ public class FlowActivity extends Activity implements OnClickListener {
 
 			case 2:
 				intent.setClass(context, PasswdChangeActivity.class);
-				break;
-
-			default:
-				Log.i(TAG, "v.getId() : " + v.getId());
 				break;
 			}
 			startActivity(intent);
@@ -125,7 +123,7 @@ public class FlowActivity extends Activity implements OnClickListener {
 		String titles[] = { "阶段服务", "项目沟通", "修改密码" };
 		// 用 0 来代表：不是当前的选择条目
 		int icon[] = { 0, 0, 0 };
-		icon[resideMenuNow] = R.drawable.residemenu_item_now;
+		icon[resideMenuNow] = R.drawable.icon_residemenu_item_now;
 
 		for (int i = 0; i < titles.length; i++) {
 			ResideMenuItem item = new ResideMenuItem(this, icon[i], titles[i]);
@@ -133,6 +131,9 @@ public class FlowActivity extends Activity implements OnClickListener {
 			item.setId(i);
 			resideMenu.addMenuItem(item, ResideMenu.DIRECTION_LEFT);
 		}
+		
+		//隐私声明
+		findViewById(R.id.privacy).setOnClickListener(this);
 	}
 
 	private void initViewById() {
@@ -278,18 +279,6 @@ public class FlowActivity extends Activity implements OnClickListener {
 				Intent intent = new Intent(context, Html5Activity.class);
 				startActivity(intent);
 
-			}
-		});
-	}
-
-	// 返回
-	public void goBack() {
-		Button titleBackBtn = (Button) this
-				.findViewById(R.id.head_TitleBackBtn);
-		titleBackBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FlowActivity.this.finish();
 			}
 		});
 	}

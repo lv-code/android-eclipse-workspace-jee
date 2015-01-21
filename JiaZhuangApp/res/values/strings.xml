@@ -31,5 +31,20 @@
     <string name="title_activity_passwd_change">title_activity_passwd_change</string>
     <string name="title_activity_user_collect">UserCollectActivity</string>
     <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
+    <string name="title_activity_privacy">PrivacyActivity</string>
+    <string name="privacy_txt">&#160;&#160;&#160;&#160;蓝景家装工具,以此声明对本站用户隐私保护的许诺。蓝景家装工具的隐私声明正在不断改进中，随着本站服务范围的扩大，会随时更新隐私声明。我们欢迎您随时查看隐私声明。
+
+    \n\n&#160;&#160;&#160;&#160;隐私政策\n\n
+
+    &#160;&#160;&#160;&#160;蓝景家装工具非常重视对用户隐私权的保护，用户的邮件及手机号等个人资料为用户重要隐私，我们承诺不会将个人资料用作它途；承诺不会在未获得用户许可的情况下擅自将用户的个人资料信息出租或出售给任何第三方，但以下情况除外：
+    \n&#160;&#160;&#160;&#160;用户同意让第三方共享资料；
+    \n&#160;&#160;&#160;&#160;用户同意公开其个人资料，享受为其提供的产品和服务；
+    \n&#160;&#160;&#160;&#160;根据法律的有关规定，或者行政或司法机构的要求，向第三方或者行政、司法机构披露；
+    \n&#160;&#160;&#160;&#160;本站发现用户违反了本站服务条款或本站其它使用规定。
+
+    \n\n&#160;&#160;&#160;&#160;使用说明\n\n
+
+    &#160;&#160;&#160;&#160;蓝景家装工具用户可以通过设定的密码来保护账户和资料安全。用户应当对其密码的保密负全部责任。请不要和他人分享此信息。</string>
+    <string name="title_activity_smsauth_code">SMSAuthCodeActivity</string>
 
 </resources>
