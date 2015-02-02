@@ -1,6 +1,5 @@
 package com.beta.main;
 
-import backup.LjljActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -94,8 +93,8 @@ public class MainActivity extends Activity {
 		imgV1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, LjljActivity.class);
-				startActivity(intent);
+//				Intent intent = new Intent(context, LjljActivity.class);
+//				startActivity(intent);
 				// finish();//停止当前的Activity,如果不写,则按返回键会跳转回原来的Activity
 			}
 		});

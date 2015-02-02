@@ -3,7 +3,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="title_bar_height">48dp</dimen>
     <!-- 输入框的高度 -->
     <dimen name="input_height">45dp</dimen>
+    <!-- 第一个控件的layout_marginTop -->
+    <dimen name="first_widget_layout_marginTop">20dp</dimen>
 
 </resources>

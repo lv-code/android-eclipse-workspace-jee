@@ -5,6 +5,10 @@
     <color name="bg_white">#fff</color>
     <color name="btn_bg">#905c44</color>
     <color name="txt_white">#fff</color>
+    <color name="common_text">#383c47</color>
+    <color name="common_list_bg">#f1f1f1</color>
+    <color name="common_list_divider">#dadbdb</color>
+    <color name="common_list_item_bg">#fff</color>
     
     <!-- 标题栏 -->
     <color name="title_bar_bg">#905c44</color>
@@ -19,8 +23,6 @@
     <color name="gray_white2">#dadada</color>
     <color name="txt">#000</color>
     <color name="flow_listview_bg">#6f7783</color>
-    <color name="flow_listview_item_bg">#fff</color>
-    <color name="flow_listview_item_text">#383c47</color>
     <color name="flow_listview_selector">#fff</color>
     <color name="style_blue">#1122ff</color>
     <color name="bottom_item_line_color">#111111</color>

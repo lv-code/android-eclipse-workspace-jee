@@ -1,18 +1,24 @@
 package com.beta.main;
 
+import com.beta.mybase.MyBaseActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 
-public class PasswdChangeActivity extends MyBaseActivity {
+public class PasswdChangeActivity extends MyBaseActivity implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MyHelper.setNoTitle(PasswdChangeActivity.this);
+		CustomTitleBar.getTitleBar(PasswdChangeActivity.this, "修改密码");
 		setContentView(R.layout.activity_passwd_change);
-	}
-	
-	public void goBack(View v) {
-		PasswdChangeActivity.this.finish();
+		goBack();
+		findViewById(R.id.btnNext).setOnClickListener(this);
+	}	
+	@Override
+	public void onClick(View v) {
+		startActivity(new Intent(PasswdChangeActivity.this, PasswdChangeSuccessActivity.class));
 	}
 }

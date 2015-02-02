@@ -12,6 +12,7 @@ import android.widget.SimpleAdapter;
 
 import com.beta.adapter.UserCollectListViewAdapter;
 import com.beta.adapter.UserCollectMsgEntity;
+import com.beta.mybase.MyBaseActivity;
 
 /**
  * @author zg
@@ -35,7 +36,6 @@ public class UserCollectActivity extends MyBaseActivity {
 	
 	@Override
 	protected void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 	}
 

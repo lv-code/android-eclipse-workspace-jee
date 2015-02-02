@@ -1,5 +1,7 @@
 package com.beta.main;
 
+import com.beta.mybase.MyBaseActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +20,6 @@ public class SMSAuthCodeActivity extends MyBaseActivity implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
-		startActivity(new Intent(SMSAuthCodeActivity.this, PasswdChangeSuccessActivity.class));
-		
+		startActivity(new Intent(SMSAuthCodeActivity.this, PasswdResetActivity.class));
 	}
 }

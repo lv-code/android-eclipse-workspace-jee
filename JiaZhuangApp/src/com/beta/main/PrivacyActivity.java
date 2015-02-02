@@ -1,5 +1,7 @@
 package com.beta.main;
 
+import com.beta.mybase.MyBaseActivity;
+
 import android.os.Bundle;
 
 public class PrivacyActivity extends MyBaseActivity {

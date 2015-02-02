@@ -1,4 +1,4 @@
-package com.beta.main;
+package com.beta.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

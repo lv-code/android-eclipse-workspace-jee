@@ -48,7 +48,7 @@ public class UserCollectListViewAdapter extends BaseAdapter {
 				viewHolderWord.tvWord = (TextView) convertView.findViewById(R.id.tvWord);
 				viewHolderWord.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
 				
-				viewHolderWord.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.drawable.collect_zhanwei03_touxiang));
+				viewHolderWord.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.drawable.tmp_touxiang01));
 				viewHolderWord.tvWord.setText(userCollectMsgEntity.getContent().toString());
 				viewHolderWord.tvDate.setText(userCollectMsgEntity.getDate().toString());
 				convertView.setTag(viewHolderWord);
@@ -60,7 +60,7 @@ public class UserCollectListViewAdapter extends BaseAdapter {
 				viewHolderImg.ivImg = (ImageView) convertView.findViewById(R.id.ivImg);
 				viewHolderImg.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
 				
-				viewHolderImg.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.drawable.collect_zhanwei03_touxiang));
+				viewHolderImg.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.drawable.tmp_touxiang01));
 				viewHolderImg.ivImg.setImageDrawable(context.getResources().getDrawable(R.drawable.collect_zhanwei01));
 				viewHolderImg.tvDate.setText(userCollectMsgEntity.getDate().toString());
 				convertView.setTag(viewHolderImg);
@@ -72,7 +72,7 @@ public class UserCollectListViewAdapter extends BaseAdapter {
 				viewHolderVoice.tvVoice = (TextView) convertView.findViewById(R.id.tvVoice);
 				viewHolderVoice.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
 				
-				viewHolderVoice.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.drawable.collect_zhanwei03_touxiang));
+				viewHolderVoice.ivAvatar.setImageDrawable(context.getResources().getDrawable(R.drawable.tmp_touxiang01));
 				viewHolderVoice.tvVoice.setText(userCollectMsgEntity.getContent().toString());
 				viewHolderVoice.tvDate.setText(userCollectMsgEntity.getDate().toString());
 				convertView.setTag(viewHolderVoice);

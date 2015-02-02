@@ -88,5 +88,5 @@
         android:contentDescription="中间"></ImageView>   
    </RelativeLayout> 
 
-   <include layout="@layout/bottom_bar" /> 
+   <include layout="@layout/include_bottom_bar" /> 
 </RelativeLayout>

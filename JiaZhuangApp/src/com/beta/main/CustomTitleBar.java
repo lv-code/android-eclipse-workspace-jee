@@ -20,10 +20,10 @@ public class CustomTitleBar {
         mActivity = activity;  
       activity.requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 //        activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        activity.setContentView(R.layout.custom_title_bar);  
+        activity.setContentView(R.layout.include_title_bar);  
         activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,  
-                R.layout.custom_title_bar);  
-        TextView textView = (TextView) activity.findViewById(R.id.head_center_text);  
+                R.layout.include_title_bar);  
+        TextView textView = (TextView) activity.findViewById(R.id.tvTitleBarCenter);  
         textView.setText(title);  
 
 //        // 返回按钮 注：这里不是UI的主线程，所以 监听不到 onClick

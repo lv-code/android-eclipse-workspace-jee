@@ -116,7 +116,7 @@ public class WhatsnewActivity extends Activity {
 	
 	public void startbutton(View v) {  
       	Intent intent = new Intent();
-		intent.setClass(WhatsnewActivity.this,MainActivity.class);
+		intent.setClass(WhatsnewActivity.this,LoginActivity.class);
 		startActivity(intent);
 		this.finish();
       } 

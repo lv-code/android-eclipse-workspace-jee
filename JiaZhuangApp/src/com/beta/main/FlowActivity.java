@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,9 +20,11 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.beta.adapter.FlowListViewAdapter;
+import com.beta.mybase.MyBaseActivity;
 import com.beta.residemenu.ResideMenu;
 import com.beta.residemenu.ResideMenuItem;
 import com.beta.util.CommonUtil;
+import com.beta.util.MyHelper;
 
 public class FlowActivity extends MyBaseActivity implements OnClickListener {
 
@@ -32,7 +32,7 @@ public class FlowActivity extends MyBaseActivity implements OnClickListener {
 
 	final static String TAG = "INFO : ";
 
-	ImageView btnTitleRight;
+	ImageView ivFlowTitleBarLeftMenu;
 	// 进度名称
 	TextView tvFlowName;
 	// 网格组件
@@ -60,8 +60,8 @@ public class FlowActivity extends MyBaseActivity implements OnClickListener {
 		MyHelper.setNoTitle(FlowActivity.this);
 		// 给返回按钮绑定监听器
 		setContentView(R.layout.activity_flow);
-		goBack();
-		initViewById();
+		initViews();
+		// 流程页定义自己的titleBar
 		initTitleBar();
 		initListView();
 		initGridView();
@@ -71,22 +71,21 @@ public class FlowActivity extends MyBaseActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		Log.e(TAG, "view被点击！！！！");
 		switch (v.getId()) {
 		// 展开左侧菜单
-		case R.id.title_right_btn:
+		case R.id.ivFlowTitleBarLeftMenu:
 			resideMenu.openMenu(ResideMenu.DIRECTION_LEFT);
 			break;
 
 		// 展开ListView选择列表
-		case R.id.head_center_text:
+		case R.id.tvTitleBarCenter:
 			toggleListView();
 			break;
 
-			// 跳转隐私声明
-			case R.id.privacy:
-				startActivity(new Intent(context, PrivacyActivity.class));
-				break;
+		// 跳转隐私声明
+		case R.id.privacy:
+			startActivity(PrivacyActivity.class);
+			break;
 		}
 
 	}
@@ -99,7 +98,7 @@ public class FlowActivity extends MyBaseActivity implements OnClickListener {
 			Intent intent = new Intent();
 			switch (v.getId()) {
 			case 1:
-				intent.setClass(context, ChatActivity.class);
+				intent.setClass(context, FriendListActivity.class);
 				break;
 
 			case 2:
@@ -131,14 +130,14 @@ public class FlowActivity extends MyBaseActivity implements OnClickListener {
 			item.setId(i);
 			resideMenu.addMenuItem(item, ResideMenu.DIRECTION_LEFT);
 		}
-		
-		//隐私声明
+
+		// 隐私声明
 		findViewById(R.id.privacy).setOnClickListener(this);
 	}
 
-	private void initViewById() {
-		btnTitleRight = (ImageView) findViewById(R.id.title_right_btn);
-		tvFlowName = (TextView) this.findViewById(R.id.head_center_text);
+	private void initViews() {
+		ivFlowTitleBarLeftMenu = (ImageView) findViewById(R.id.ivFlowTitleBarLeftMenu);
+		tvFlowName = (TextView) this.findViewById(R.id.tvTitleBarCenter);
 		listview = (ListView) this.findViewById(R.id.flow_listview);
 
 	}
@@ -146,7 +145,7 @@ public class FlowActivity extends MyBaseActivity implements OnClickListener {
 	// 初始化标题栏
 	private void initTitleBar() {
 
-		btnTitleRight.setOnClickListener(this);
+		ivFlowTitleBarLeftMenu.setOnClickListener(this);
 		tvFlowName.setOnClickListener(this);
 
 	}

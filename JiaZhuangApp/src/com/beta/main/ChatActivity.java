@@ -10,9 +10,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
+import org.jivesoftware.smack.Chat;
+
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -33,6 +34,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -40,14 +42,15 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.beta.adapter.ChatMsgViewAdapter;
+import com.beta.entity.FriendEntity;
 import com.beta.util.RecordUtil;
+import com.beta.xmpp.MChatManager;
+import com.beta.xmpp.MXmppConnManager;
 
 public class ChatActivity extends Activity implements OnClickListener {
 
-	private boolean isBig = false;
-
 	private Button mBtnSend;
-	private Button mBtnBack;
+	private ImageButton mBtnBack;
 	private ImageView mImgAddition;
 	private ImageView mImgAlbum;
 	private ImageView mImgCamera;
@@ -91,6 +94,10 @@ public class ChatActivity extends Activity implements OnClickListener {
 	// 录音存储路径
 	private static final String PATH = Environment.getExternalStorageDirectory().getAbsolutePath()+"/jiaZhuangApp/";
 	private String mRecordPath;// 录音的存储名称
+	
+	private FriendEntity userInfo;
+	private Chat mChat;
+	private MChatManager mChatManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -98,11 +105,17 @@ public class ChatActivity extends Activity implements OnClickListener {
 		CustomTitleBar.getTitleBar(this, "和他（她）聊天");
 		setContentView(R.layout.activity_chat);
 		// 启动activity时不自动弹出软键盘
-		getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		
 		initView();
 		initListener();
 		initData();
+		// 获取从上面获取来的用户数据
+		Bundle bundle = getIntent().getExtras();
+		userInfo = (FriendEntity) bundle.getSerializable("user");
+		mChatManager = new MChatManager(MXmppConnManager.getInstance().getChatManager());
+		Log.d("--->userInfo----->", userInfo.toString());
+		mChat = mChatManager.createChat(userInfo.getUid(),MXmppConnManager.getInstance().getChatMListener().new MsgProcessListener());
 	}
 
 	public void initView() {
@@ -110,7 +123,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mListView.setEmptyView(findViewById(R.id.lv_empty));
 		mBtnSend = (Button) findViewById(R.id.btn_send);
 		mBtnSend.setOnClickListener(this);
-		mBtnBack = (Button) findViewById(R.id.head_TitleBackBtn);
+		mBtnBack = (ImageButton) findViewById(R.id.btnTitleBarLeft);
 		mBtnBack.setOnClickListener(this);
 
 		mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
@@ -144,11 +157,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				togglePanelAddition();
-				// TODO 重新加载Adapter，让ListView在RelativeLayout上面
-				// LayoutParams vgLayoutParams = (LayoutParams) new
-				// RelativeLayout.LayoutParams();
-				// vgLayoutParams. = "";
-				// mListView.setLayoutParams(params);
 				mAdapter.notifyDataSetChanged();
 				mListView.setSelection(mListView.getCount() - 1);
 			}
@@ -178,7 +186,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 						Bitmap.CompressFormat.JPEG.toString());
 				intent.putExtra("noFaceDetection", true); // no face detection
 				startActivityForResult(intent, SHOW_ALBUM);
-
 			}
 		});
 
@@ -273,7 +280,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 					v.performClick();
 
 				}
-//				Log.d("debug", "5555555:-----------------------------  " + event.getAction());
 				return true;
 			}
 		});
@@ -415,7 +421,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_send:
 			send();
@@ -423,7 +428,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 			mBtnSendVisible = 0;
 			break;
 			//在 CustomTitleBar中监听了OnClick
-		case R.id.head_TitleBackBtn:
+		case R.id.btnTitleBarLeft:
 			this.finish();
 			break;
 		}
@@ -513,7 +518,6 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 	}
 
@@ -530,13 +534,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 	@Override
 	protected void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
 	}
 
-	@Override
-	protected void onDestroy() {
-		// TODO Auto-generated method stub
-		super.onDestroy();
-	}
 }

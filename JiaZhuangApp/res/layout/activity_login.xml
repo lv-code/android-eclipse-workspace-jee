@@ -79,7 +79,7 @@
 
 
     <ImageView
-        android:id="@+id/login"
+        android:id="@+id/ivLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwd"
@@ -87,7 +87,6 @@
         android:layout_marginTop="40dp"
         android:contentDescription="登陆按钮"
         android:gravity="center"
-        android:onClick="login_submit"
         android:src="@drawable/login_btn"/>
 
 

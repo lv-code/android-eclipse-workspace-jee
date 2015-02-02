@@ -1,16 +1,16 @@
 package com.beta.main;
 
-import android.app.Activity;
+import com.beta.mybase.MyBaseActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
-public class UserinfoActivity extends Activity implements OnClickListener {
+public class UserinfoActivity extends MyBaseActivity implements OnClickListener {
 	Context context = UserinfoActivity.this;
 	private TextView tvUserCollect;
 	
@@ -46,16 +46,6 @@ public class UserinfoActivity extends Activity implements OnClickListener {
 		tvUserCollect.setOnClickListener(this);
 	}
 
-	public void goBack() {
-		Button titleBackBtn = (Button) this
-				.findViewById(R.id.head_TitleBackBtn);
-		titleBackBtn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				UserinfoActivity.this.finish();
-			}
-		});
-	}
 	public void goHome(View v) {
 		UserinfoActivity.this.finish();
 	}

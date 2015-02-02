@@ -1,5 +1,7 @@
 package com.beta.main;
 
+import com.beta.mybase.MyBaseActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

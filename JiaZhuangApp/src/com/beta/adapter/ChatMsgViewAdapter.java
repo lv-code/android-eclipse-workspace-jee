@@ -3,8 +3,10 @@ package com.beta.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 
 import com.beta.main.ChatMsgEntity;
 import com.beta.main.R;
+import com.beta.main.StartActivity;
+import com.beta.main.UserinfoActivity;
 
 public class ChatMsgViewAdapter extends BaseAdapter {
 	
@@ -64,7 +68,6 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 	 	
 	}
 
-
 	@Override
 	public int getViewTypeCount() {
 		// TODO Auto-generated method stub
@@ -93,6 +96,14 @@ public class ChatMsgViewAdapter extends BaseAdapter {
 			  viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tv_chatcontent);
 			  viewHolder.ivChatimg = (ImageView) convertView.findViewById(R.id.iv_chatimg);
 			  viewHolder.isComMsg = isComMsg;
+			  //点击头像跳个人中心
+			  convertView.findViewById(R.id.iv_userhead).setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					ctx.startActivity(new Intent(ctx, UserinfoActivity.class));
+				}
+			});
 			  
 			  convertView.setTag(viewHolder);
 	    }else{

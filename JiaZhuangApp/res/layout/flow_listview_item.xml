@@ -25,7 +25,7 @@
         android:layout_toLeftOf="@+id/item_img_now"
         android:layout_centerVertical="true"
         android:text="默认文字"
-        android:textColor="@color/flow_listview_item_text"
+        android:textColor="@color/common_text"
         android:textSize="20sp" />
 
     <ImageView

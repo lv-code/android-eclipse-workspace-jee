@@ -46,5 +46,6 @@
 
     &#160;&#160;&#160;&#160;蓝景家装工具用户可以通过设定的密码来保护账户和资料安全。用户应当对其密码的保密负全部责任。请不要和他人分享此信息。</string>
     <string name="title_activity_smsauth_code">SMSAuthCodeActivity</string>
+    <string name="title_activity_friend_list">FriendListActivity</string>
 
 </resources>
