@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.XMPPException;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -23,10 +24,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
@@ -34,32 +35,38 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beta.adapter.ChatAdapter;
 import com.beta.adapter.ChatMsgViewAdapter;
+import com.beta.entity.CommonMessage;
 import com.beta.entity.FriendEntity;
+import com.beta.main.MsgEume.MSG_CONTENT_TYPE;
+import com.beta.main.MsgEume.MSG_DERATION;
+import com.beta.main.MsgEume.MSG_STATE;
 import com.beta.util.RecordUtil;
+import com.beta.view.CommonChatListView;
+import com.beta.view.EmotionEditText;
 import com.beta.xmpp.MChatManager;
 import com.beta.xmpp.MXmppConnManager;
+import com.whf.pilin.R;
 
-public class ChatActivity extends Activity implements OnClickListener {
+public class ChatActivity extends MyBaseChatActivity {
 
+	private SwipeRefreshLayout mRfLayout;
+	
+	private CommonMessage message;
 	private Button mBtnSend;
-	private ImageButton mBtnBack;
-	private ImageView mImgAddition;
-	private ImageView mImgAlbum;
-	private ImageView mImgCamera;
-	private ImageView mImgMic;
 
-	private RelativeLayout mLayout;
 	private LinearLayout mPanelAddition;
 	private RelativeLayout chatVoicePanel;
-	private EditText mEditTextContent;
+	private EditText mEmtMsg;
 	private ListView mListView;
 	private ChatMsgViewAdapter mAdapter;
 	private List<ChatMsgEntity> mDataArrays = new ArrayList<ChatMsgEntity>();
@@ -106,8 +113,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_chat);
 		// 启动activity时不自动弹出软键盘
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		
-		initView();
+		goBack();
+		initViews();
 		initListener();
 		initData();
 		// 获取从上面获取来的用户数据
@@ -118,98 +125,53 @@ public class ChatActivity extends Activity implements OnClickListener {
 		mChat = mChatManager.createChat(userInfo.getUid(),MXmppConnManager.getInstance().getChatMListener().new MsgProcessListener());
 	}
 
-	public void initView() {
-		mListView = (ListView) findViewById(R.id.listview);
-		mListView.setEmptyView(findViewById(R.id.lv_empty));
-		mBtnSend = (Button) findViewById(R.id.btn_send);
+	public void initViews() {
+		//表情多媒体布局
+//		mLayoutEmotionMedia = (FrameLayout)findViewById(R.id.fl_emotion_media);
+		mLoPlusBarPic = (View)findViewById(R.id.include_chat_plus_pic);
+		mLoPlusBarCarema = (View)findViewById(R.id.include_chat_plus_camera);
+		mIvPlusBarPic = (ImageView)mLoPlusBarPic.findViewById(R.id.iv_chat_plus_image);
+		mIvPlusBarCarema = (ImageView)mLoPlusBarCarema.findViewById(R.id.iv_chat_plus_image);
+		mTvPlusBarPic = (TextView)findViewById(R.id.include_chat_plus_pic).findViewById(R.id.tv_chat_plus_description);
+		mTvPlusBarCarema = (TextView)findViewById(R.id.include_chat_plus_camera).findViewById(R.id.tv_chat_plus_description);
+		mTvPlusBarLocation = (TextView)findViewById(R.id.include_chat_plus_location).findViewById(R.id.tv_chat_plus_description);
+		
+		mTvPlusBarCarema.setText("拍照");
+		mTvPlusBarPic.setText("图片");
+		mTvPlusBarLocation.setText("名片");
+		
+		mRfLayout = (SwipeRefreshLayout)findViewById(R.id.srfl_chat);
+		mRfLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
+		mBtnMsgSend = (Button) findViewById(R.id.btn_chat_send);
+		mEmtMsg = (EmotionEditText) findViewById(R.id.et_chat_msg);
+		mIvEmotion = (ImageView) findViewById(R.id.iv_chat_biaoqing);
+		//开启多媒体按钮
+		mIvMedia = (ImageView)findViewById(R.id.iv_chat_media);
+		//消息列表ListView
+		mLvCommonMsg = (CommonChatListView) findViewById(R.id.lv_chat);
+		mGvEmotion = (GridView)findViewById(R.id.gv_chat_biaoqing);
+		mLayoutEmotionMedia.setVisibility(View.GONE);
+		mLayoutEmotion = (LinearLayout)findViewById(R.id.ll_chat_face);
+		mLayoutMedia = (LinearLayout)findViewById(R.id.ll_chat_plusbar);
+		loadImage();
+		
+		mAdapter = new ChatAdapter(this, messages);
+		mLvCommonMsg.setAdapter(mAdapter);
+		//表情
+//		mGvEmotion.setAdapter(new FaceGridViewAdapter(this));
+		
+		mRfLayout = (SwipeRefreshLayout)findViewById(R.id.srfl_chat);
+		
+		
+		mBtnSend = (Button) findViewById(R.id.btnChatSend);
 		mBtnSend.setOnClickListener(this);
-		mBtnBack = (ImageButton) findViewById(R.id.btnTitleBarLeft);
-		mBtnBack.setOnClickListener(this);
 
-		mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
-		mImgAddition = (ImageView) findViewById(R.id.btn_addition_menu);
-		mLayout = (RelativeLayout) findViewById(R.id.rl_bottom);
-		mImgAlbum = (ImageView) findViewById(R.id.chat_phone_album);
-		mImgCamera = (ImageView) findViewById(R.id.chat_camera);
-
-		mPanelAddition = (LinearLayout) findViewById(R.id.chat_panel_addition);
-
-		mImgMic = (ImageView) findViewById(R.id.chat_microphone);
-
-		chatVoicePanel = (RelativeLayout) findViewById(R.id.chat_voicepanel);
-		microhandler = (ImageView) findViewById(R.id.chat_microhandler);
+		mEmtMsg = (EditText) findViewById(R.id.et_chat_msg);
 	}
 
 	private void initListener() {
 
-		mListView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				mListView.requestFocus();
-				mEditTextContent.clearFocus();
-			}
-
-		});
-
-		mImgAddition.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				togglePanelAddition();
-				mAdapter.notifyDataSetChanged();
-				mListView.setSelection(mListView.getCount() - 1);
-			}
-		});
-
-		mImgAlbum.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-
-				Intent intent = new Intent(
-						Intent.ACTION_PICK,
-						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-				// intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-				intent.setType("image/*");
-				intent.putExtra("crop", "true");
-				intent.putExtra("aspectX", 2);
-				intent.putExtra("aspectY", 2);
-				intent.putExtra("outputX", 280);
-				intent.putExtra("outputY", 280);
-				intent.putExtra("return-data", true);
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-				intent.putExtra("outputFormat",
-						Bitmap.CompressFormat.JPEG.toString());
-				intent.putExtra("noFaceDetection", true); // no face detection
-				startActivityForResult(intent, SHOW_ALBUM);
-			}
-		});
-
-		mImgCamera.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-				photoUri = getContentResolver().insert(EXTERNAL_CONTENT_URI,
-						new ContentValues());
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-				startActivityForResult(intent, TAKE_PHOTO);
-			}
-		});
-
-		mImgMic.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				togglePanleVoice();
-			}
-		});
-
-		mEditTextContent.setOnFocusChangeListener(new OnFocusChangeListener() {
+		mEmtMsg.setOnFocusChangeListener(new OnFocusChangeListener() {
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
@@ -223,17 +185,28 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 			}
 		});
-		mListView.setOnFocusChangeListener(new OnFocusChangeListener() {
+//		mListView.setOnFocusChangeListener(new OnFocusChangeListener() {
+//
+//			@Override
+//			public void onFocusChange(View v, boolean hasFocus) {
+//				Toast.makeText(getApplicationContext(), "ListView focuse",
+//						Toast.LENGTH_SHORT).show();
+//				mListView.requestFocus();
+//				mEmtMsg.clearFocus();
+//			}
+//		});
+		
+		mLvCommonMsg.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				Toast.makeText(getApplicationContext(), "ListView focuse",
-						Toast.LENGTH_SHORT).show();
-				mListView.requestFocus();
-				mEditTextContent.clearFocus();
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				mLvCommonMsg.requestFocus();
+				mEmtMsg.clearFocus();
 			}
-		});
 
+		});
+		
 		microhandler.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -286,6 +259,24 @@ public class ChatActivity extends Activity implements OnClickListener {
 		chkSDStatus();
 	}
 
+	/**
+	 * 加载多媒体框内的图片
+	 */
+	private void loadImage() {
+		//添加多媒体窗口内的多媒体图表--图片
+		Bitmap bitmap = getBitmap(getString(R.string.plusbar_pic),R.drawable.ic_chat_plusbar_pic_normal);
+		mIvPlusBarPic.setImageBitmap(bitmap);
+		
+		//添加多媒体窗口内的多媒体图表--拍照
+		bitmap = getBitmap(getString(R.string.plusbar_camera),R.drawable.ic_chat_plusbar_camera_normal);
+		mIvPlusBarCarema.setImageBitmap(bitmap);
+		
+		//添加多媒体窗口内的多媒体图表--位置
+		bitmap = getBitmap(getString(R.string.plusbar_location),R.drawable.ic_chat_plusbar_location_normal);
+		mIvPlusBarLocation.setImageBitmap(bitmap);
+		
+	}
+	
 	private void togglePanleVoice() {
 
 		if (mVoicePanelVisible == 0) {
@@ -311,7 +302,7 @@ public class ChatActivity extends Activity implements OnClickListener {
 		 * // MyHelper.setSoftInputMode(ChatActivity.this); InputMethodManager
 		 * imm = (InputMethodManager)
 		 * getSystemService(Context.INPUT_METHOD_SERVICE);
-		 * imm.hideSoftInputFromWindow(mEditTextContent.getWindowToken(), 0); //
+		 * imm.hideSoftInputFromWindow(mEmtMsg.getWindowToken(), 0); //
 		 * 强制隐藏键盘 RelativeLayout.LayoutParams layoutParams =
 		 * (RelativeLayout.LayoutParams) mLayout .getLayoutParams(); int a = 0;
 		 * if (layoutParams.bottomMargin < 0) { layoutParams.bottomMargin = 0; a
@@ -375,6 +366,18 @@ public class ChatActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	private Bitmap decodeUriAsBitmap(Uri uri) {
+		Bitmap bitmap = null;
+		try {
+			bitmap = BitmapFactory.decodeStream(getContentResolver()
+					.openInputStream(uri));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return bitmap;
+	}
+	
 	// 对分辨率较大的图片进行缩放
 	public Bitmap zoomBitmap(Bitmap bitmap, float width, float height) {
 		int w = bitmap.getWidth();
@@ -416,55 +419,121 @@ public class ChatActivity extends Activity implements OnClickListener {
 		}
 
 		mAdapter = new ChatMsgViewAdapter(this, mDataArrays);
-		mListView.setAdapter(mAdapter);
+		mLvCommonMsg.setAdapter(mAdapter);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		//发送消息
 		case R.id.btn_send:
 			send();
 			mBtnSend.setVisibility(View.INVISIBLE);
 			mBtnSendVisible = 0;
 			break;
-			//在 CustomTitleBar中监听了OnClick
-		case R.id.btnTitleBarLeft:
-			this.finish();
+			
+		case R.id.btn_addition_menu:
+			togglePanelAddition();
+			mAdapter.notifyDataSetChanged();
+			mLvCommonMsg.setSelection(mLvCommonMsg.getCount() - 1);
+			break;
+			
+		case R.id.chat_phone_album:
+			// Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+			Intent intent = new Intent(
+					Intent.ACTION_PICK,
+					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			// intent.addCategory(Intent.CATEGORY_OPENABLE);
+			intent.setType("image/*");
+			intent.putExtra("crop", "true");
+			intent.putExtra("aspectX", 2);
+			intent.putExtra("aspectY", 2);
+			intent.putExtra("outputX", 280);
+			intent.putExtra("outputY", 280);
+			intent.putExtra("return-data", true);
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+			intent.putExtra("outputFormat",
+					Bitmap.CompressFormat.JPEG.toString());
+			intent.putExtra("noFaceDetection", true); // no face detection
+			startActivityForResult(intent, SHOW_ALBUM);
+			break;
+		case R.id.chat_camera:
+			Intent intent2 = new Intent("android.media.action.IMAGE_CAPTURE");
+			photoUri = getContentResolver().insert(EXTERNAL_CONTENT_URI,
+					new ContentValues());
+			intent2.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+			startActivityForResult(intent2, TAKE_PHOTO);
+			break;
+		case R.id.chat_microphone:
+			togglePanleVoice();
 			break;
 		}
+
 	}
-
+	
+	//向XMPPServer openfire发送消息
 	private void send() {
-		String contString = mEditTextContent.getText().toString();
-		if (contString.length() > 0) {
-			ChatMsgEntity entity = new ChatMsgEntity();
-			entity.setDate(getDate());
-			entity.setName(MY_NAME);
-			entity.setMsgType(false);
-			entity.setText(contString);
-			entity.setImgBitmap(imgBitmap);
-
-			mDataArrays.add(entity);
-			mAdapter.notifyDataSetChanged();
-			mEditTextContent.setText("");
-			mListView.setSelection(mListView.getCount() - 1);
+		String contString = mEmtMsg.getText().toString();
+		String prevMsg;
+		
+		if ("".equals(contString)) {
+			Toast.makeText(this, "先输入信息", Toast.LENGTH_SHORT).show();
+		} else {
+			prevMsg = mEmtMsg.getText().toString();
+			mEmtMsg.setText("");
+			try {
+				mChat.sendMessage(prevMsg);
+			} catch (XMPPException e) {
+				e.printStackTrace();
+			}
+			
+			message = new CommonMessage(
+					userInfo.getUid().trim(),
+					"nearby_people_other",
+					System.currentTimeMillis(),
+					"0.12km",
+					prevMsg,
+					MSG_STATE.ARRIVED,
+					MSG_CONTENT_TYPE.TEXT,
+					MSG_DERATION.SEND,
+					userInfo.getName()
+					) ;
+			
+//			messageDAO.save(message,hostUid);
+			messages.add(message);
+			refreshAdapter();
 		}
-
-		if (imgBitmap != null) {
-			ChatMsgEntity entity = new ChatMsgEntity();
-			entity.setDate(getDate());
-			entity.setName(MY_NAME);
-			entity.setMsgType(false);
-			entity.setText("");
-			entity.setImgBitmap(imgBitmap);
-
-			mDataArrays.add(entity);
-			mAdapter.notifyDataSetChanged();
-			mEditTextContent.setText("");
-			mListView.setSelection(mListView.getCount() - 1);
-			System.out.println("ListView Count is : " + mListView.getCount());
-			imgBitmap = null;
-		}
+//		
+//		if (contString.length() > 0) {
+//			ChatMsgEntity entity = new ChatMsgEntity();
+//			entity.setDate(getDate());
+//			entity.setName(MY_NAME);
+//			entity.setMsgType(false);
+//			entity.setText(contString);
+//			entity.setImgBitmap(imgBitmap);
+//
+//			mDataArrays.add(entity);
+//			mAdapter.notifyDataSetChanged();
+//			mEmtMsg.setText("");
+//			mListView.setSelection(mListView.getCount() - 1);
+//		}
+//
+//		if (imgBitmap != null) {
+//			ChatMsgEntity entity = new ChatMsgEntity();
+//			entity.setDate(getDate());
+//			entity.setName(MY_NAME);
+//			entity.setMsgType(false);
+//			entity.setText("");
+//			entity.setImgBitmap(imgBitmap);
+//
+//			mDataArrays.add(entity);
+//			mAdapter.notifyDataSetChanged();
+//			mEmtMsg.setText("");
+//			mListView.setSelection(mListView.getCount() - 1);
+//			System.out.println("ListView Count is : " + mListView.getCount());
+//			imgBitmap = null;
+//		}
+		
 	}
 
 	private void sendVoice() {
@@ -479,20 +548,8 @@ public class ChatActivity extends Activity implements OnClickListener {
 
 		mDataArrays.add(entity);
 		mAdapter.notifyDataSetChanged();
-		mEditTextContent.setText("");
+		mEmtMsg.setText("");
 		mListView.setSelection(mListView.getCount() - 1);
-	}
-
-	private Bitmap decodeUriAsBitmap(Uri uri) {
-		Bitmap bitmap = null;
-		try {
-			bitmap = BitmapFactory.decodeStream(getContentResolver()
-					.openInputStream(uri));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return bitmap;
 	}
 
 	private String getDate() {
@@ -516,6 +573,83 @@ public class ChatActivity extends Activity implements OnClickListener {
 		// startActivity(intent);
 	}
 
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+//
+//		switch (v.getId()) {
+//		case R.id.et_chat_msg:
+//			if (event.getAction() == MotionEvent.ACTION_UP) {
+//				if (mLayoutEmotionMedia.isShown()) {
+//					mLayoutEmotionMedia.setVisibility(View.GONE);
+//				}
+//			}
+//			break;
+//
+//		case R.id.lv_chat:
+//			if (event.getAction() == MotionEvent.ACTION_UP) {
+//				if (mLayoutEmotionMedia.isShown()) {
+//					mLayoutEmotionMedia.setVisibility(View.GONE);
+//				}
+//				mInputManager.hideSoftInputFromWindow(
+//						mEmtMsg.getWindowToken(), 0);
+//			}
+//			break;
+//		}
+
+		return false;
+	}
+//
+//	Handler handler = new Handler() {
+//
+//		public void handleMessage(android.os.Message msg) {
+//			
+//			switch(msg.what){
+//				case CustomConst.HANDLER_MGS_ADD:
+////					long rowid = (long)msg.obj;
+//					Long rowid = (Long)msg.obj;
+//					message = messageDAO.findByRownum(rowid,hostUid);
+//					messages.add(message);
+//					refreshAdapter();
+//					break;
+//				
+//				case CustomConst.HANDLER_MSG_FILE_SUCCESS:
+//					Long mills = (Long)msg.obj;
+//					updateMsgByMills(mills);
+//					refreshAdapter();
+//					break;
+//			}
+//		};
+//	};
+	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long mills) {
+		
+//		String text = PilinApplication.mEmotions_Zme.get(position);
+//		if(!TextUtils.isEmpty(text)){
+//			int start = mEmtMsg.getSelectionStart();
+//			CharSequence content = mEmtMsg.getText().insert(start, text);
+//			mEmtMsg.setText(content);
+//			//定位光标
+//			CharSequence info = mEmtMsg.getText();
+//			if(info instanceof Spannable){
+//				Spannable spanText = (Spannable)info;
+//				Selection.setSelection(spanText, start + text.length());
+//			}
+//		}
+	}
+	public void refreshAdapter() {
+		mAdapter.notifyDataSetChanged();
+		mLvCommonMsg.setSelection(messages.size()-1);
+	}
+	
+	@Override
+	protected void onDestroy() {
+//		messageDAO.closeDB();
+//		PilinApplication.removeHandler(userInfo.getUid(),handler);
+		super.onDestroy();
+	}
+
+	
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);

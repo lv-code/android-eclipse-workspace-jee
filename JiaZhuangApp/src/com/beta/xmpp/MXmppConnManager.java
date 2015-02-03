@@ -264,9 +264,8 @@ public class MXmppConnManager {
 		if (MXmppConnManager.getInstance().getChatManager().getChatListeners()
 				.isEmpty()) {
 
-			// chatManagerListener = new MReceiveChatListener();
-
-			// MXmppConnManager.getInstance().getChatManager().addChatListener(chatManagerListener);
+			 chatManagerListener = new MReceiveChatListener();
+			 MXmppConnManager.getInstance().getChatManager().addChatListener(chatManagerListener);
 
 		}
 
@@ -276,9 +275,7 @@ public class MXmppConnManager {
 	 * 停止会话监听
 	 */
 	public void stopChatListener() {
-
-		// chatManager.removeChatListener(chatManagerListener);
-
+		 chatManager.removeChatListener(chatManagerListener);
 	}
 
 	/**

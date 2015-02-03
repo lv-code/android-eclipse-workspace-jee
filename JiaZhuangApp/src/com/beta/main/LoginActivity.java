@@ -25,12 +25,14 @@ import com.beta.mybase.MyBaseActivity;
 import com.beta.mybase.MyBaseApplication;
 import com.beta.util.CustomConst;
 import com.beta.util.MyHelper;
+import com.beta.view.CommonDialog;
 import com.beta.xmpp.MXmppConnManager;
 import com.igexin.sdk.PushManager;
 
 public class LoginActivity extends MyBaseActivity implements OnClickListener {
 	private Activity activity = LoginActivity.this;
 	private SharedPreferences sharedPreferences;
+	private CommonDialog dialog;
 	private String username="123", passwd="123";
 	
 	private EditText mUser; // 帐号编辑框
@@ -119,6 +121,7 @@ public class LoginActivity extends MyBaseActivity implements OnClickListener {
 		case R.id.forgetPwd:
 			startActivity(SMSAuthCodeActivity.class);
 			break;
+		// 登录
 		case R.id.ivLogin:
 			login_submit(v);
 			break;
@@ -132,6 +135,10 @@ public class LoginActivity extends MyBaseActivity implements OnClickListener {
 		if (username.equals(inputUserName)
 				&& passwd.equals(inputPwd)) // 判断 帐号和密码
 		{
+			dialog = new CommonDialog(this, R.style.Loading_Dialog,
+					R.layout.common_loading_dialog_layout);
+
+			dialog.show();
 			handler.postDelayed(new loginXMPPServerRunable(), 1000);
 		} else if ("".equals(inputUserName)
 				|| "".equals(inputPwd)) // 判断 帐号和密码

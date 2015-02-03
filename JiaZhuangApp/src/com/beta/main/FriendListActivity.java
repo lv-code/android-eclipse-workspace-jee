@@ -88,7 +88,7 @@ public class FriendListActivity extends MyBaseActivity {
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("user", userInfo);
 				// 调用MyBaseActivity方法
-				startActivity(ChatActivity.class);
+				startActivity(ChatActivity.class, bundle);
 				finish();
 			}
 		});
