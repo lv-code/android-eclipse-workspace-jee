@@ -40,7 +40,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MyCustomTheme"
-        android:name="com.beta.mybase.MyBaseApplication" >
+        android:name="com.beta.jiazhuang.mybase.MyBaseApplication" >
 
         <!-- 个推SDK配置开始 -->
         <!-- 配置的第三方参数属性 -->
@@ -137,12 +137,12 @@
         <!-- ====================================================== -->
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.beta.jiazhuang.main.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".FlowActivity"
+            android:name="com.beta.jiazhuang.main.FlowActivity"
             android:label="@string/title_activity_next"
             android:screenOrientation="portrait" >
         </activity>
@@ -157,7 +157,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.beta.jiazhuang.main.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -167,67 +167,67 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WhatsnewActivity"
+            android:name="com.beta.jiazhuang.main.WhatsnewActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".StartActivity"
+            android:name="com.beta.jiazhuang.main.StartActivity"
             android:label="@string/title_activity_start"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".UserinfoActivity"
+            android:name="com.beta.jiazhuang.main.UserinfoActivity"
             android:label="@string/title_activity_userinfo"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".ChatActivity"
+            android:name="com.beta.jiazhuang.main.ChatActivity"
             android:label="@string/title_activity_chat"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".MediaRecordTest"
+            android:name="com.beta.jiazhuang.main.MediaRecordTest"
             android:label="@string/title_activity_media_record_test"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".Html5Activity"
+            android:name="com.beta.jiazhuang.main.Html5Activity"
             android:label="@string/title_activity_html5"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".PasswdResetActivity"
+            android:name="com.beta.jiazhuang.main.PasswdResetActivity"
             android:label="@string/title_activity_passwd_reset"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".PasswdChangeActivity"
+            android:name="com.beta.jiazhuang.main.PasswdChangeActivity"
             android:label="@string/title_activity_passwd_change"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".UserCollectActivity"
+            android:name="com.beta.jiazhuang.main.UserCollectActivity"
             android:label="@string/title_activity_user_collect"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".PasswdChangeSuccessActivity"
+            android:name="com.beta.jiazhuang.main.PasswdChangeSuccessActivity"
             android:label="@string/title_activity_forget_pwd"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".PrivacyActivity"
+            android:name="com.beta.jiazhuang.main.PrivacyActivity"
             android:label="@string/title_activity_privacy"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".SMSAuthCodeActivity"
+            android:name="com.beta.jiazhuang.main.SMSAuthCodeActivity"
             android:label="@string/title_activity_smsauth_code"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".FriendListActivity"
+            android:name="com.beta.jiazhuang.main.FriendListActivity"
             android:label="@string/title_activity_friend_list"
             android:screenOrientation="portrait" >
         </activity>

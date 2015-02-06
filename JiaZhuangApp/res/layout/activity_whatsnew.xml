@@ -42,6 +42,7 @@
             android:layout_marginLeft="10dp"
             android:scaleType="matrix"
             android:src="@drawable/page" />
+         
     </LinearLayout>
 
 </FrameLayout>

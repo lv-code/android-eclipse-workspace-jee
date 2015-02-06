@@ -9,6 +9,8 @@
     <color name="common_list_bg">#f1f1f1</color>
     <color name="common_list_divider">#dadbdb</color>
     <color name="common_list_item_bg">#fff</color>
+    <color name="font_value">#585858</color>
+    <color name="timestampline">#333</color>
     <!-- 公共对话框 -->
     <color name="bg_dialog">#88585858</color>
     <!-- 标题栏 -->

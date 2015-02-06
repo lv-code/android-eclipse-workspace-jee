@@ -12,7 +12,7 @@
          android:layout_gravity="bottom"
          android:layout_margin="5dp"
          android:id="@+id/srfl_chat">
-        <com.beta.view.CommonChatListView
+        <com.beta.jiazhuang.view.CommonChatListView
             android:id="@+id/lv_chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,17 +28,17 @@
             android:listSelector="#00000000"
             android:scrollingCache="false"
             android:scrollbars="none" >
-        </com.beta.view.CommonChatListView>
+        </com.beta.jiazhuang.view.CommonChatListView>
      </android.support.v4.widget.SwipeRefreshLayout>   
 
      <include android:id="@+id/rl_chat_sendbar"  layout="@layout/include_msg_sendbar_layout"/>
      
-     <FrameLayout 
+     <FrameLayout
+	     android:id="@+id/fl_emotion_media" 
 	     android:layout_height="0dp"
-	     android:layout_weight="10"
-	     android:background="@color/chat_footer_bg"
 	     android:layout_width="match_parent"
-	     android:id="@+id/fl_emotion_media">
+	     android:layout_weight="10"
+	     android:background="@color/chat_footer_bg">
 	     
 	     <LinearLayout 
 	         android:layout_width="match_parent"
@@ -49,6 +49,7 @@
 	         <include android:id="@+id/include_chat_plus_camera" layout="@layout/include_chat_media_layout"/>
 	         <include android:id="@+id/include_chat_plus_location" layout="@layout/include_chat_media_layout"/>
 	     </LinearLayout>
+	     <!-- 表情布局 -->
 	     <include 
 	          android:layout_width="match_parent"
 	          android:layout_height="match_parent" 

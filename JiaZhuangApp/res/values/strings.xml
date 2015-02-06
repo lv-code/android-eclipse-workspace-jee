@@ -48,4 +48,15 @@
     <string name="title_activity_smsauth_code">SMSAuthCodeActivity</string>
     <string name="title_activity_friend_list">FriendListActivity</string>
 
+    <!-- 发送信息栏 -->
+    <string name="chat_msg_hint">请输入信息</string>
+    <string name="chat_msg_send">发送</string>
+
+    <!-- 聊天应用栏图标对应的图片缓存名 -->
+    <string name="chatbar_emotion">CAHTBAR_EMOTION</string>
+    <string name="chatbar_plus">CAHTBAR_EMOTION</string>
+    <string name="plusbar_pic">PLUSBAR_PIC</string>
+    <string name="plusbar_camera">PLUSBAR_CAMERA</string>
+    <string name="plusbar_card">PLUSBAR_LOCATION</string>
+
 </resources>

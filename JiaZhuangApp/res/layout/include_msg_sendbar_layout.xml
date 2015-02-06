@@ -29,7 +29,7 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/chat_phone_album" />
 
-    <com.beta.view.EmotionEditText
+    <com.beta.jiazhuang.view.EmotionEditText
         android:id="@+id/et_chat_msg"
         android:layout_width="0dp"
         android:layout_height="match_parent"
