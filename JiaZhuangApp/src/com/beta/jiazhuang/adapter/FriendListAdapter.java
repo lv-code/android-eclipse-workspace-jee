@@ -10,36 +10,40 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.beta.jiazhuang.entity.FriendEntity;
+import com.beta.jiazhuang.entity.OneFriendEntity;
 import com.beta.jiazhuang.util.CustomConst;
 import com.beta.main.R;
 
 /**
+ * @author zg
+ * 
  * 好友列表项适配器
- * @author WHF 2014-03-24
  *
  */
 public class FriendListAdapter extends BaseListViewAdapter{
 	
-	private List<FriendEntity> mFriends;
+	//聊天联系人组
+	private List<OneFriendEntity> mFriendList;
 	
-	public FriendListAdapter(Context context,List<FriendEntity> mFriends){
-		super(context, mFriends);
+	public FriendListAdapter(Context context,List<OneFriendEntity> mFriendList){
+		super(context, mFriendList);
 		this.context = context;
-		FriendEntity [] arr = mFriends.toArray(new FriendEntity[mFriends.size()]);
+		OneFriendEntity [] arr = mFriendList.toArray(new OneFriendEntity[mFriendList.size()]);
 		// 将好友按照拼音排序
 //		Arrays.sort(arr, new PinYinComparator());
-		this.mFriends = (List<FriendEntity>)Arrays.asList(arr);
+		this.mFriendList = (List<OneFriendEntity>)Arrays.asList(arr);
 	}
 	
-	public List<FriendEntity> getFriends(){
-		return mFriends;
+	public List<OneFriendEntity> getFriends(){
+		return mFriendList;
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		ViewHolder holder = null;
+		OneFriendEntity mUsrmessage = mFriendList.get(position);
+		
 		if(view == null){
 			view = LayoutInflater.from(context).inflate(R.layout.friend_list_item, null);
 			holder = new ViewHolder();
@@ -47,15 +51,42 @@ public class FriendListAdapter extends BaseListViewAdapter{
 			holder.avatar = (ImageView)view.findViewById(R.id.ivAvatar);
 			holder.job = (TextView)view.findViewById(R.id.tvJob);
 			holder.name = (TextView)view.findViewById(R.id.tvName);
+			holder.tv_msgState = (TextView)view.findViewById(R.id.tv_usr_sex);
+			holder.tv_msgState.setTextColor(0xff000000);
 		}else{
 			holder = (ViewHolder)convertView.getTag();
 		}
 		
 		holder.avatar.setBackgroundResource(R.drawable.tmp_touxiang01);
-		holder.name.setText(mFriends.get(position).getName());
-		holder.job.setText(mFriends.get(position).getIndustry());
+		holder.name.setText(mUsrmessage.getName());
+		holder.job.setText(mUsrmessage.getIndustry());
+
+		if(mUsrmessage.getMsgNotReadCount()> 0){
+			holder.tv_msgState.setTextColor(0xffffffff);
+			holder.tv_msgState.setBackgroundResource(R.drawable.chatmsg_not_read_background);
+			holder.tv_msgState.setText(mUsrmessage.getMsgNotReadCount()+"");
+			
+		}else{
+			holder.tv_msgState.setBackgroundColor(0x00000000);;
+			holder.tv_msgState.setText("99");
+		}
 		
 		return view;
+	}
+	
+	@Override
+	public int getCount() {
+		return mFriendList.size();
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return mFriendList.get(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position;
 	}
 	
 	private String setStateStr(int code){
@@ -93,8 +124,10 @@ public class FriendListAdapter extends BaseListViewAdapter{
 		 ImageView avatar;
 		 TextView job;
 		 TextView name;
+		 //未读消息数
+		 TextView tv_msgState;
 	}
-
+	
 	@Override
 	protected void initImageFetcher() {
 		

@@ -50,11 +50,11 @@
 	         <include android:id="@+id/include_chat_plus_location" layout="@layout/include_chat_media_layout"/>
 	     </LinearLayout>
 	     <!-- 表情布局 -->
-	     <include 
+	     <include
+	          layout="@layout/include_emotion_layout" 
 	          android:layout_width="match_parent"
 	          android:layout_height="match_parent" 
-	          android:visibility="gone"
-	          layout="@layout/include_emotion_layout"/>
+	          android:visibility="gone"/>
 	 </FrameLayout>
 
 </LinearLayout>

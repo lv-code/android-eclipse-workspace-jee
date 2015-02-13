@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.beta.jiazhuang.dao.MessageDAO;
 import com.beta.jiazhuang.mybase.MyBaseApplication;
 import com.beta.jiazhuang.util.CustomConst;
 
@@ -169,19 +170,17 @@ public class MXmppConnManager {
 			Handler handler) {
 		if (connection == null || !connection.isConnected()) {
 			new InitXmppConnectionTask(handler).execute();
-			Log.i("日志", "1111 ----> ");
 			return false;
 		}
 		try {
 			connection.login(name, pwd);
 			if (connection.getUser() == null) {
-				Log.i("日志", "2222 ----> ");
 				return false;
 			}
 			offlineMessageManager = new OfflineMessageManager(connection);
 			hostUid = connection.getUser();
-			// fileTranListener = new MFileTranListener();
-			// // transferManager.addFileTransferListener(fileTranListener);
+			fileTranListener = new MFileTranListener();
+			transferManager.addFileTransferListener(fileTranListener);
 			startChatLinstener();
 			OfflineMessageSendBrocast.sendBrocast(context,
 					OfflineMessageSendBrocast.getOfflineMegs());
@@ -191,7 +190,6 @@ public class MXmppConnManager {
 			if (e.getMessage().equals("not-authorized(401)")) {
 				handler.sendEmptyMessage(CustomConst.XMPP_ERROR_LOGINFAIL);
 			}
-			Log.i("日志", "3333 ----> ");
 			return false;
 		}
 	}
@@ -287,7 +285,7 @@ public class MXmppConnManager {
 	 */
 	public synchronized void sendFile(final long mills,final long rowid,String type,String file,final Handler handler,final String toUserId){
 		
-//		final MessageDAO messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
+		final MessageDAO messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
 		Presence presence = connection.getRoster().getPresence(toUserId);
 		final OutgoingFileTransfer transfer = transferManager.createOutgoingFileTransfer(presence.getFrom());
 		try {
@@ -299,7 +297,7 @@ public class MXmppConnManager {
 					while(!transfer.isDone()){
 						while(!transfer.isDone()){
 						}
-//						messageDAO.updateStateByRowid(rowid, hostUid, 1);
+						messageDAO.updateStateByRowid(rowid, hostUid, 1);
 						Message msg = handler.obtainMessage(CustomConst.HANDLER_MSG_FILE_SUCCESS, mills);
 						handler.sendMessage(msg);
 						MFileTranListener.handRefreshSession(toUserId);
@@ -339,7 +337,6 @@ public class MXmppConnManager {
 			try {
 
 				connection = null;
-
 				MyBaseApplication.xmppConnection = getInstance()
 						.getConnection();
 				// initConnection();
@@ -352,13 +349,11 @@ public class MXmppConnManager {
 				if (e.getMessage().contains("XMPPError connection to")) {
 
 					msg.what = CustomConst.XMPP_HANDLER_ERROR;
-
 					msg.arg1 = CustomConst.XMPP_ERROR_CONNETERROR;
 
 				} else {
 
 					msg.what = CustomConst.XMPP_HANDLER_ERROR;
-
 					msg.arg1 = CustomConst.XMPP_ERROR_CONNETERROR;
 
 				}
@@ -372,7 +367,6 @@ public class MXmppConnManager {
 					&& chatManager != null) {
 
 				handler.sendEmptyMessage(CustomConst.XMPP_HANDLER_SUCCESS);
-
 				return true;
 
 			}

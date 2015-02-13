@@ -12,6 +12,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/tmp_touxiang01" />
+    
+    <TextView
+        android:id="@+id/tv_usr_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivAvatar"
+        android:layout_alignRight="@+id/ivAvatar"
+        android:layout_marginLeft="19dp"
+        android:text="99" />
+    
 
     <TextView
         android:id="@+id/tvJob"

@@ -10,7 +10,7 @@
     <color name="common_list_divider">#dadbdb</color>
     <color name="common_list_item_bg">#fff</color>
     <color name="font_value">#585858</color>
-    <color name="timestampline">#333</color>
+    <color name="timestampline">#c5c4c4</color>
     <!-- 公共对话框 -->
     <color name="bg_dialog">#88585858</color>
     <!-- 标题栏 -->
@@ -39,10 +39,11 @@
     <!-- 个人中心 -->
     <color name="userinfo_bg">#c8c8c8</color>
     <!-- 聊天 -->
-    <color name="chat_bg">#c8c8c8</color>
+    <color name="chat_bg">#fff</color>
     <color name="chat_footer_bg">#585858</color>
     <color name="chat_send_btn">#ccc</color>
     <color name="login_edit_normal">#fff</color>
+    <color name="chat_timestamp">#c5c4c4</color>
     <!-- 用户收藏 -->
     <color name="user_collect_list_bg">#f1f1f1</color>
     <color name="user_collect_txt">#282828</color>

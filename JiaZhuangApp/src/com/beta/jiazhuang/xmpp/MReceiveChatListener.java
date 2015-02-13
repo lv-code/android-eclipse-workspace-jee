@@ -12,6 +12,8 @@ import org.jivesoftware.smack.packet.Message;
 import android.os.Handler;
 import android.util.Log;
 
+import com.beta.jiazhuang.dao.ChattingPeopleDAO;
+import com.beta.jiazhuang.dao.MessageDAO;
 import com.beta.jiazhuang.entity.CommonMessage;
 import com.beta.jiazhuang.main.MsgEume.MSG_CONTENT_TYPE;
 import com.beta.jiazhuang.main.MsgEume.MSG_DERATION;
@@ -31,20 +33,18 @@ public class MReceiveChatListener implements ChatManagerListener{
 
 	XmppFriendManager xManager;
 
-//	MessageDAO messageDAO;
-//	ChattingPeopleDAO cPeopleDAO;
+	MessageDAO messageDAO;
+	ChattingPeopleDAO cPeopleDAO;
 	
 	String hostUid;
 	
 	public MReceiveChatListener() {
 
 		this.xManager = XmppFriendManager.getInstance();
-
 		this.hostUid = MXmppConnManager.hostUid;
 		
-//		messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
-//		cPeopleDAO = (ChattingPeopleDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_CHATTING);
-		
+		messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
+		cPeopleDAO = (ChattingPeopleDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_CHATTING);
 	}
 	
 	@Override
@@ -67,27 +67,23 @@ public class MReceiveChatListener implements ChatManagerListener{
 				
 				String uid = msg.getFrom().split("/")[0];
 				CommonMessage mMsg = null;
-//				long rowid = 0;
+				long rowid = 0;
 				
-				//try {
+				try {
+					mMsg = new CommonMessage(uid.trim(), xManager
+							.getUserIconAvatar(uid),
+							System.currentTimeMillis(), "0.32km",
+							msg.getBody(), MSG_STATE.ARRIVED,
+							MSG_CONTENT_TYPE.TEXT, MSG_DERATION.RECEIVE,
+							TypeConverter.nullStringDefaultValue(
+									MyBaseApplication.friendsNames.get(uid.trim()), uid.split("@")[0]));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (XMPPException e) {
+					e.printStackTrace();
+				}
 					
-					try {
-						mMsg = new CommonMessage(uid.trim(), xManager
-								.getUserIconAvatar(uid),
-								System.currentTimeMillis(), "0.12km",
-								msg.getBody(), MSG_STATE.ARRIVED,
-								MSG_CONTENT_TYPE.TEXT, MSG_DERATION.RECEIVE,
-								TypeConverter.nullStringDefaultValue(
-										MyBaseApplication.friendsNames.get(uid.trim()), uid.split("@")[0]));
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (XMPPException e) {
-						e.printStackTrace();
-					}
-					
-					///messags.add(mMsg); 
-					
-//				rowid = messageDAO.save(mMsg,hostUid);
+				rowid = messageDAO.save(mMsg,hostUid);
 				if(!MyBaseApplication.mJIDChats.containsKey(uid)){
 					MyBaseApplication.mJIDChats.put(uid, chat);
 				}
@@ -96,7 +92,7 @@ public class MReceiveChatListener implements ChatManagerListener{
 //					android.os.Message om = new android.os.Message();
 //					om.what = CustomConst.HANDLER_CHATPEOPLE_LIST_ADD;
 //					om.obj = uid;
-//					MyBaseApplication.getHandlers("MsgFragment").get(0).sendMessage(om);
+//					MyBaseApplication.getHandlers("FriendListActivity").get(0).sendMessage(om);
 //				}
 				
 				handRefreshSession(uid);
@@ -107,25 +103,20 @@ public class MReceiveChatListener implements ChatManagerListener{
 				for(Handler hand : handlers){
 					
 					Log.i("MReceiveChatListener", hand.getClass().toString().split("$")[0]);
-					
 					if(hand.getClass().toString().contains("ChatActivity")){
-//						handChatActivity(hand,rowid);
+						handChatActivity(hand,rowid);
 					}
-					
-					
 				}
-				
 			}
-			///
+			
+			//
 			public void handRefreshSession(String uid) {
 				
 				android.os.Message om = new android.os.Message();
-				
-				om.what = CustomConst.HANDLER_CHATPEOPLE_LIST_UPDATE;
-				
+				om.what = CustomConst.HANDLER_FRIEND_LIST_UPDATE;
 				om.obj = uid;
 				
-				MyBaseApplication.getHandlers("MsgFragment").get(0).sendMessage(om);
+				MyBaseApplication.getHandlers("FriendListActivity").get(0).sendMessage(om);
 				
 			}
 
@@ -137,13 +128,9 @@ public class MReceiveChatListener implements ChatManagerListener{
 			public void handChatActivity(Handler handler,long mMsg){
 				
 				android.os.Message osMsg = new android.os.Message();
-				
 				osMsg.what = 0;
-				
 				osMsg.obj = mMsg;
-				
 				handler.sendMessage(osMsg);
-				
 			}
 	}
 	

@@ -6,16 +6,15 @@ import android.view.View.OnLongClickListener;
 
 import com.beta.jiazhuang.bitmap.cache.ImageFetcher;
 import com.beta.jiazhuang.entity.CommonMessage;
+import com.beta.jiazhuang.view.EmotionTextView;
 import com.beta.main.R;
 
 public class ChatTextMessage extends ChatCommonMessage implements OnLongClickListener{
 	
-//	private EmotionTextView mEtvContent;
+	private EmotionTextView mEtvContent;
 	
 	public ChatTextMessage(CommonMessage mMsg,Context context,ImageFetcher imageFetcher){
-		
 		super(mMsg,context,imageFetcher);
-		
 	}
 
 	@Override
@@ -24,9 +23,9 @@ public class ChatTextMessage extends ChatCommonMessage implements OnLongClickLis
 		View view = mInflater.inflate(R.layout.message_text, null);
 		
 		mLayoutMessageContainer.addView(view);
-//		mEtvContent = (EmotionTextView)view.findViewById(R.id.message_etv_msgtext);
-//		mEtvContent.setText(mMsg.getContent());
-		//mEtvContent.setOnClickListener(this);
+		mEtvContent = (EmotionTextView)view.findViewById(R.id.message_etv_msgtext);
+		mEtvContent.setText(mMsg.getContent());
+//		mEtvContent.setOnClickListener(this);
 		mLayoutMessageContainer.setOnLongClickListener(this);
 	}
 

@@ -11,13 +11,11 @@ import com.beta.jiazhuang.mybase.MyBaseApplication;
 public class MChatManager {
 	
 	private ChatManager chatManager;
-	
 	private Map<String, Object> mJIDChats;
 	
 	public MChatManager(ChatManager chatManager){
 		
 		this.chatManager = chatManager;
-		
 		this.mJIDChats = MyBaseApplication.mJIDChats;
 		
 	}
@@ -31,13 +29,9 @@ public class MChatManager {
 	public Chat createChat(String threadId,String jid,MessageListener listener){
 		
 		if(threadId == null || chatManager.getThreadChat(threadId) == null){
-			
 			return chatManager.createChat(jid, jid, listener);
-			
 		}else{
-			
 			return chatManager.getThreadChat(threadId);
-			
 		}
 		
 	}
@@ -53,15 +47,12 @@ public class MChatManager {
 		if(mJIDChats.get(jid) == null){
 			
 			Chat chat = chatManager.createChat(jid, listener);
-			
 			MyBaseApplication.mJIDChats.put(jid, chat);
-			
 			return chat;
 			
 		}else{
 			
 			listener = null;
-			
 			return (Chat)mJIDChats.get(jid);
 			
 		}

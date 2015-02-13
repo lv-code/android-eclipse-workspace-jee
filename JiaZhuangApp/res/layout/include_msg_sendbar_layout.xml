@@ -16,18 +16,7 @@
         android:layout_marginLeft="5dp"
         android:clickable="true"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/chat_btn_addition_menu" />
-
-    <ImageView
-        android:id="@+id/iv_chat_biaoqing"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:clickable="true"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/chat_phone_album" />
+        android:src="@drawable/ic_chat_plus_normal" />
 
     <com.beta.jiazhuang.view.EmotionEditText
         android:id="@+id/et_chat_msg"

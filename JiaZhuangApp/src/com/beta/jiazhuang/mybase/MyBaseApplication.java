@@ -21,6 +21,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.beta.jiazhuang.dao.BaseDAO;
+import com.beta.jiazhuang.dao.impl.ChattingPeopleDaoImpl;
+import com.beta.jiazhuang.dao.impl.MessageDaoImpl;
 import com.beta.jiazhuang.db.DBHelper;
 import com.beta.jiazhuang.util.CustomConst;
 import com.beta.jiazhuang.util.ToastUtils;
@@ -93,22 +95,22 @@ public class MyBaseApplication extends Application {
 	@Override
     public void onCreate() {
 	    super.onCreate();
-	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+//	    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		mInstance = this;
-//		initDataBase();
+		initDataBase();
 //		initEmotions();
-//		dbHelper= new DBHelper(mInstance);
+		dbHelper= new DBHelper(mInstance);
 		//初始化XMPP服务器连接
 		MXmppConnManager.getInstance().new InitXmppConnectionTask(handler).execute();
 	}
 	
-	/*
+	
 	private void initDataBase(){
 		dabatases = new HashMap<String,BaseDAO>();
 		dabatases.put(CustomConst.DAO_MESSAGE, new MessageDaoImpl(this));
-		dabatases.put(CustomConst.DAO_NEARBY, new NearByPeopleDaoImpl(this));
+//		dabatases.put(CustomConst.DAO_NEARBY, new NearByPeopleDaoImpl(this));
 		dabatases.put(CustomConst.DAO_CHATTING, new ChattingPeopleDaoImpl(this));
-	}*/
+	}
 	
 	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler(){
@@ -137,15 +139,10 @@ public class MyBaseApplication extends Application {
 		for(int i = 1;i < 66;i++){
 			
 			String emotionName = "[zme" + i + "]";
-			
 			//int emotionId = getResources().getIdentifier("zme" + i, "drawable", getPackageName());
-			
 			mEmotions.add(emotionName);
-			
 			mEmotions_Zme.add(emotionName);
-			
 			mEmotions_Id.put(emotionName, FaceGridViewAdapter.faces[i-1]);
-			
 		}
 		
 	} */
@@ -198,11 +195,8 @@ public class MyBaseApplication extends Application {
 //	public boolean isExistMainActivity(){
 //		
 //		for(Activity ac:getInstance().activities){
-//			
 //			if(ac instanceof MainFragmentActivity){
-//				
 //				return true;
-//				
 //			}
 //		}
 //		return false;

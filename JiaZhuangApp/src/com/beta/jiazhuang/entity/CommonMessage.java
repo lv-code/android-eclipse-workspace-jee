@@ -5,6 +5,8 @@ import java.io.Serializable;
 import com.beta.jiazhuang.main.MsgEume.MSG_CONTENT_TYPE;
 import com.beta.jiazhuang.main.MsgEume.MSG_DERATION;
 import com.beta.jiazhuang.main.MsgEume.MSG_STATE;
+import com.beta.jiazhuang.mybase.MyBaseApplication;
+import com.beta.jiazhuang.util.TypeConverter;
 
 public class CommonMessage extends Entity implements Serializable{
 	
@@ -32,6 +34,7 @@ public class CommonMessage extends Entity implements Serializable{
 	private MSG_DERATION msgComeFromType;
 	
 	private MSG_STATE state;
+
 	
 	public CommonMessage(int id,String uid, String avatar, long time, String distance,
 			String content, MSG_STATE state,MSG_CONTENT_TYPE contentType,
@@ -48,6 +51,7 @@ public class CommonMessage extends Entity implements Serializable{
 		this.msgComeFromType = msgComeFromType;
 		this.name = name;
 	}
+	
 	public CommonMessage(String uid, String avatar, long time, String distance,
 			String content, MSG_STATE state,MSG_CONTENT_TYPE contentType,
 			MSG_DERATION msgComeFromType,String name) {

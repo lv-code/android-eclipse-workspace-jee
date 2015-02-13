@@ -72,7 +72,7 @@ public class MFileTranListener implements FileTransferListener {
 				if(!cPeopleDAO.peopleChatting(uid,hostId)){
 					
 					android.os.Message om = new android.os.Message();
-					om.what = CustomConst.HANDLER_CHATPEOPLE_LIST_ADD;
+					om.what = CustomConst.HANDLER_FRIEND_LIST_ADD;
 					om.obj = uid;
 					MyBaseApplication.getHandlers("MsgFragment").get(0).sendMessage(om);
 					
@@ -113,7 +113,7 @@ public class MFileTranListener implements FileTransferListener {
 			
 			while(!accept.isDone()){
 			}
-//			messageDAO.updateStateByRowid(rowid, hostId, 1);
+			messageDAO.updateStateByRowid(rowid, hostId, 1);
 			refreshChatImageMsg(uid, mills,CustomConst.HANDLER_MSG_FILE_SUCCESS);
 			handRefreshSession(uid);
 		}
@@ -124,7 +124,7 @@ public class MFileTranListener implements FileTransferListener {
 	public static void handRefreshSession(String uid) {
 		
 		android.os.Message om = new android.os.Message();
-		om.what = CustomConst.HANDLER_CHATPEOPLE_LIST_UPDATE;
+		om.what = CustomConst.HANDLER_FRIEND_LIST_UPDATE;
 		om.obj = uid;
 		MyBaseApplication.getHandlers("MsgFragment").get(0).sendMessage(om);
 		

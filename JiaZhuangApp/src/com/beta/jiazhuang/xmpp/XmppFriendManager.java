@@ -9,13 +9,17 @@ import java.util.List;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.RosterGroup;
+import org.jivesoftware.smack.RosterListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.provider.ProviderManager;
 import org.jivesoftware.smackx.packet.VCard;
 
-import com.beta.jiazhuang.entity.FriendEntity;
+import com.beta.jiazhuang.dao.MessageDAO;
+import com.beta.jiazhuang.entity.OneFriendEntity;
 import com.beta.jiazhuang.mybase.MyBaseApplication;
+import com.beta.jiazhuang.util.CustomConst;
 import com.beta.jiazhuang.util.TypeConverter;
 
 /**
@@ -29,7 +33,7 @@ public class XmppFriendManager {
 	XMPPConnection connection = MyBaseApplication.xmppConnection;
 	
 	Roster roster;
-	
+	MessageDAO messageDAO;
 	VCard vCard;
 	
 //	ImageCache imageCache;
@@ -53,9 +57,9 @@ public class XmppFriendManager {
 	 * @throws FileNotFoundException
 	 * @throws XMPPException
 	 */
-	public List<FriendEntity> getFriends(){
+	public List<OneFriendEntity> getFriends(){
 		
-		List<FriendEntity> friends = new ArrayList<FriendEntity>();
+		List<OneFriendEntity> friends = new ArrayList<OneFriendEntity>();
 		
 		if(connection!=null){
 			friends = getFriendOnHasNetWork(friends);
@@ -71,15 +75,10 @@ public class XmppFriendManager {
 	public List<RosterGroup> getGroups(Roster roster){
 		
 		List<RosterGroup> groups = new ArrayList<RosterGroup>();
-		
 		Collection<RosterGroup> rosterGroups = roster.getGroups();
-	
 		Iterator<RosterGroup> ite = rosterGroups.iterator();
-		
 		while(ite.hasNext()){
-			
 			groups.add(ite.next());
-			
 		}
 		
 		return groups;
@@ -106,28 +105,22 @@ public class XmppFriendManager {
 	 * @param friends
 	 * @return
 	 */
-	public List<FriendEntity> getFriendOnHasNetWork(List<FriendEntity> friends){
+	public List<OneFriendEntity> getFriendOnHasNetWork(List<OneFriendEntity> friends){
 		// 中文意为“名册”
 		roster = connection.getRoster();
-		
-//		roster.addRosterListener(new MRosterListener());
-		
+		roster.addRosterListener(new MRosterListener());
 		List<RosterGroup> groups = getGroups(roster);
-		
-		FriendEntity friend;
-		
+		OneFriendEntity friend;
+		messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
 		for(RosterGroup group : groups){
 			
 			List<RosterEntry> entries = getEntiesByGroup(roster, group.getName());
- 			
 			for(RosterEntry entry:entries){
 				
 				String avatar = null;
-				
 				try {
 					// 获取头像文件名
 					avatar = getUserIconAvatar(entry.getUser());
-					
 				} catch (XMPPException e) {
 					e.printStackTrace();
 					return friends;
@@ -137,22 +130,18 @@ public class XmppFriendManager {
 				}
 				MyBaseApplication.friendsNames.put(entry.getUser(), TypeConverter.nullStringDefaultValue(vCard.getNickName(), entry.getName()));
 				// 实例化好友类
-				friend = new FriendEntity(entry.getUser(),
+				friend = new OneFriendEntity(entry.getUser(),
 						avatar,
-						0,
-						0,
 						"设计师", //职业"姓名", //
 						TypeConverter.nullStringDefaultValue(vCard.getNickName(), entry.getName()),
-						TypeConverter.nullStringDefaultValue(entry.getStatus()==null?null:entry.getStatus().toString(),"正在YY一个NB的签名..."),
-						roster.getPresence(entry.getUser()).isAvailable()?0:1
+						roster.getPresence(entry.getUser()).isAvailable()?0:1,
+						messageDAO.findReceiveButNotReadByUid(entry.getUser(),MyBaseApplication.xmppConnection.getUser())
 						);
 				friends.add(friend);
 			}
 			
 		}
-		
 		return friends;
-		
 	}
 	
 	/**
@@ -192,72 +181,72 @@ public class XmppFriendManager {
 		return fileName;
 	}
 	
-//	public class MRosterListener implements RosterListener {
-//		
-//		@Override
-//		public void presenceChanged(Presence presence) {
+	public class MRosterListener implements RosterListener {
+		
+		@Override
+		public void presenceChanged(Presence presence) {
+			
+			String uid = presence.getFrom().split("/")[0];
+			
+			int type = 0;
+			
+			if(presence.getType().equals(Presence.Type.unavailable)){
+				
+				//删除与该人的当前会话，防止下次再通讯时导致会话不一致
+				MyBaseApplication.mJIDChats.remove(uid);
+				
+				type = CustomConst.USER_STATE_OFFLINE;
+				
+			}else if(presence.getType().equals(Presence.Type.available)){
+				
+				Presence.Mode mode = presence.getMode();
+				
+				if(mode.equals(Presence.Mode.chat)){
+					
+					type = CustomConst.USER_STATE_Q_ME;
+					
+				}else if(mode.equals(Presence.Mode.dnd)){
+					
+					type = CustomConst.USER_STATE_BUSY;
+					
+				}else if(mode.equals(Presence.Mode.away)){
+					
+					type = CustomConst.USER_STATE_AWAY;
+					
+				}else{
+					
+					type = CustomConst.USER_STATE_ONLINE;
+					
+				}
+			}
+			
+//			FriendsFragment fragment = (FriendsFragment)((MainFragmentActivity)context).getFragments()[2];
 //			
-//			String uid = presence.getFrom().split("/")[0];
+//			Message message = new Message();
 //			
-//			int type = 0;
+//			message.what = 0;
 //			
-//			if(presence.getType().equals(Presence.Type.unavailable)){
-//				
-//				//删除与该人的当前会话，防止下次再通讯时导致会话不一致
-//				MyBaseApplication.mJIDChats.remove(uid);
-//				
-//				type = CustomConst.USER_STATE_OFFLINE;
-//				
-//			}else if(presence.getType().equals(Presence.Type.available)){
-//				
-//				Presence.Mode mode = presence.getMode();
-//				
-//				if(mode.equals(Presence.Mode.chat)){
-//					
-//					type = CustomConst.USER_STATE_Q_ME;
-//					
-//				}else if(mode.equals(Presence.Mode.dnd)){
-//					
-//					type = CustomConst.USER_STATE_BUSY;
-//					
-//				}else if(mode.equals(Presence.Mode.away)){
-//					
-//					type = CustomConst.USER_STATE_AWAY;
-//					
-//				}else{
-//					
-//					type = CustomConst.USER_STATE_ONLINE;
-//					
-//				}
-//			}
+//			message.obj = uid;
 //			
-////			FriendsFragment fragment = (FriendsFragment)((MainFragmentActivity)context).getFragments()[2];
-////			
-////			Message message = new Message();
-////			
-////			message.what = 0;
-////			
-////			message.obj = uid;
-////			
-////			message.arg1 = type;
-////			
-////			fragment.getHandler().sendMessage(message);
+//			message.arg1 = type;
 //			
-//		}
-//		
-//		@Override
-//		public void entriesUpdated(Collection<String> arg0) {
-//			
-//		}
-//		
-//		@Override
-//		public void entriesDeleted(Collection<String> arg0) {
-//			
-//		}
-//		
-//		@Override
-//		public void entriesAdded(Collection<String> arg0) {
-//		}
-//	}
+//			fragment.getHandler().sendMessage(message);
+			
+		}
+		
+		@Override
+		public void entriesUpdated(Collection<String> arg0) {
+			
+		}
+		
+		@Override
+		public void entriesDeleted(Collection<String> arg0) {
+			
+		}
+		
+		@Override
+		public void entriesAdded(Collection<String> arg0) {
+		}
+	}
 	
 }

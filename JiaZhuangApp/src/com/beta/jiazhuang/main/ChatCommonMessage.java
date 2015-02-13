@@ -24,11 +24,10 @@ public abstract class ChatCommonMessage {
 	protected ImageFetcher mImageFetcher;
 	
 	/**
-	 * 每条信息上提示的时间与距离
+	 * 每条信息上提示的时间
 	 */
 	private RelativeLayout mLayoutTimeStampContainer;
 	private TextView mHtvTimeStampTime;
-	private TextView mHtvTimeStampDistance;
 	
 	/**
 	 * 左边消息送达情况
@@ -98,12 +97,12 @@ public abstract class ChatCommonMessage {
 		switch (type) {
 		
 		case RECEIVE:
-//			mBackground = R.drawable.chat_from_msg_background_selector;
+			mBackground = R.drawable.chat_from_msg_background_selector;
 			mRootView = mInflater.inflate(R.layout.message_group_receive_template, null);
 			break;
 
 		case SEND:
-//			mBackground = R.drawable.chat_to_msg_background_selector;
+			mBackground = R.drawable.chat_to_msg_background_selector;
 			mRootView = mInflater.inflate(R.layout.message_group_send_template, null);
 			break;
 		}
@@ -116,10 +115,9 @@ public abstract class ChatCommonMessage {
 
 	protected void initView(View view) {
 		
-//		mLayoutTimeStampContainer = (RelativeLayout)view.findViewById(R.id.message_layout_timecontainer);
-//		mHtvTimeStampTime = (TextView)view.findViewById(R.id.message_timestamp_htv_time);
-//		mHtvTimeStampDistance = (TextView)view.findViewById(R.id.message_timestamp_htv_distance);
-//		
+		mLayoutTimeStampContainer = (RelativeLayout)view.findViewById(R.id.message_layout_timecontainer);
+		mHtvTimeStampTime = (TextView)view.findViewById(R.id.message_timestamp_htv_time);
+		
 		mLayoutLeftContainer = (RelativeLayout)view.findViewById(R.id.message_layout_leftcontainer);
 		mLayoutStatus = (LinearLayout)view.findViewById(R.id.message_layout_status);
 		mHtvStatus = (TextView)view.findViewById(R.id.message_htv_status);
@@ -152,11 +150,6 @@ public abstract class ChatCommonMessage {
 		
 		if(mMsg.getTime() != 0){
 			mHtvTimeStampTime.setText(TypeConverter.formatDate(new Date(mMsg.getTime()), "MM-dd HH:mm:ss"));
-		}
-		if(mMsg.getDistance() != null){
-			mHtvTimeStampDistance.setText(mMsg.getDistance());
-		}else{
-			mHtvTimeStampDistance.setText("未知");
 		}
 	}
 	/**

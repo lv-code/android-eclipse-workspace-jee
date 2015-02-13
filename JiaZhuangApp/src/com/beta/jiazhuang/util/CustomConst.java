@@ -85,11 +85,11 @@ public class CustomConst {
 	/**
 	 * 添加
 	 */
-	public static final int HANDLER_CHATPEOPLE_LIST_ADD = 0;
+	public static final int HANDLER_FRIEND_LIST_ADD = 0;
 	/**
 	 * 更新
 	 */
-	public static final int HANDLER_CHATPEOPLE_LIST_UPDATE = 1;
+	public static final int HANDLER_FRIEND_LIST_UPDATE = 1;
 	
 	/**
 	 * 发送文件类型：图片

@@ -9,10 +9,13 @@ import android.widget.BaseAdapter;
 
 import com.beta.jiazhuang.bitmap.cache.CacheUtils;
 import com.beta.jiazhuang.bitmap.cache.ImageFetcher;
+import com.beta.jiazhuang.dao.MessageDAO;
 import com.beta.jiazhuang.entity.CommonMessage;
 import com.beta.jiazhuang.main.ChatCommonMessage;
 import com.beta.jiazhuang.main.MsgEume.MSG_DERATION;
 import com.beta.jiazhuang.main.MsgEume.MSG_STATE;
+import com.beta.jiazhuang.mybase.MyBaseApplication;
+import com.beta.jiazhuang.util.CustomConst;
 import com.beta.jiazhuang.xmpp.MXmppConnManager;
 import com.beta.main.R;
 
@@ -20,14 +23,14 @@ public class ChatAdapter extends BaseAdapter {
 	
 	private Context context;
 	private List<CommonMessage> messages;
-//	private MessageDAO messageDAO;
+	private MessageDAO messageDAO;
 	private String uid;
 	private ImageFetcher mImageFetcher;
 	
 	public ChatAdapter(Context context,List<CommonMessage> messages){
 		
-//		messageDAO = (MessageDAO)PilinApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
-		 uid = MXmppConnManager.hostUid;
+		messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
+		uid = MXmppConnManager.hostUid;
 		this.context = context;
 		this.messages = messages;
 		initImageFetcher();
@@ -48,7 +51,7 @@ public class ChatAdapter extends BaseAdapter {
 		   !state.equals(MSG_STATE.RECEIVEING) && 
 		   !state.equals(MSG_STATE.SENDDING) && 
 		   msgs.getMsgComeFromType().equals(MSG_DERATION.RECEIVE)){
-//			messageDAO.updateById(msgs.getId(),uid,0);
+			messageDAO.updateById(msgs.getId(),uid,0);
 		}
 		return msgs;
 	}

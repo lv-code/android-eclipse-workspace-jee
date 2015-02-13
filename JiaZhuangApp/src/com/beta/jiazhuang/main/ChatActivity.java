@@ -2,19 +2,15 @@ package com.beta.jiazhuang.main;
 
 import java.io.IOException;
 import java.lang.ref.SoftReference;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPException;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -24,16 +20,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +36,7 @@ import com.beta.jiazhuang.bitmap.cache.CacheUtils;
 import com.beta.jiazhuang.bitmap.cache.ImageResizer;
 import com.beta.jiazhuang.dao.MessageDAO;
 import com.beta.jiazhuang.entity.CommonMessage;
-import com.beta.jiazhuang.entity.FriendEntity;
+import com.beta.jiazhuang.entity.OneFriendEntity;
 import com.beta.jiazhuang.main.MsgEume.MSG_CONTENT_TYPE;
 import com.beta.jiazhuang.main.MsgEume.MSG_DERATION;
 import com.beta.jiazhuang.main.MsgEume.MSG_STATE;
@@ -50,7 +44,6 @@ import com.beta.jiazhuang.mybase.MyBaseApplication;
 import com.beta.jiazhuang.util.CustomConst;
 import com.beta.jiazhuang.util.FileUtils;
 import com.beta.jiazhuang.util.PictureViewUtils;
-import com.beta.jiazhuang.util.RecordUtil;
 import com.beta.jiazhuang.util.ToastUtils;
 import com.beta.jiazhuang.util.TypeConverter;
 import com.beta.jiazhuang.view.CommonChatListView;
@@ -66,43 +59,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 	private CommonMessage message;
 	private MessageDAO messageDAO;
 
-	private LinearLayout mPanelAddition;
-	private RelativeLayout chatVoicePanel;
-	private EditText mEmtMsg;
-	private ListView mListView;
-	private List<ChatMsgEntity> mDataArrays = new ArrayList<ChatMsgEntity>();
-
-	// 从相册选择照片后，裁剪保存的路径
-	private static final String IMAGE_FILE_LOCATION = "file:///sdcard/temp.jpg"; // temp
-																					// file
-	private static final int SHOW_ALBUM = 11;
-	private Uri imageUri = Uri.parse(IMAGE_FILE_LOCATION);// The Uri to store
-	private Bitmap imgBitmap; // 获取发送的图片转化为Bitmap
-
-	private Uri photoUri;
-	private final static int TAKE_PHOTO = 10;
-	private final static String PHOTO_URI = "photoUri";
-
-	private final String MY_NAME = "麦兜";
-
-	private int mVoicePanelVisible = 0;
-	private int mLayoutVisible = 0;
-
-	private ImageView microhandler;
-	private MediaPlayer mMediaPlayer;
-	private RecordUtil mRecordUtil;
-
-	private static final int RECORD_NO = 0; // 不在录音
-	private static final int RECORD_ING = 1; // 正在录音
-	private static final int RECORD_ED = 2; // 完成录音
-	private int mRecord_State = 0; // 录音的状态
-	private double mRecord_Volume;// 麦克风获取的音量值
-
-	// 录音存储路径
-	private static final String PATH = Environment.getExternalStorageDirectory().getAbsolutePath()+"/jiaZhuangApp/";
-	private String mRecordPath;// 录音的存储名称
-	
-	private FriendEntity userInfo;
+	private OneFriendEntity userInfo;
 	private Chat mChat;
 	private MChatManager mChatManager;
 	
@@ -116,33 +73,43 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		CustomTitleBar.getTitleBar(this, "和他（她）聊天");
+		mInputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		setContentView(R.layout.activity_chat);
+
 		// 启动activity时不自动弹出软键盘
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		goBack();
-		initViews();
-		initListener();
+//		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 		// 获取从上面获取来的用户数据
 		Bundle bundle = getIntent().getExtras();
-		userInfo = (FriendEntity) bundle.getSerializable("user");
+		userInfo = (OneFriendEntity) bundle.getSerializable("user");
+//		getActionBar().setTitle("与 " + userInfo.getName() + " 聊天中");
 		mChatManager = new MChatManager(MXmppConnManager.getInstance().getChatManager());
-		Log.d("--->userInfo----->", userInfo.toString());
 		mChat = mChatManager.createChat(userInfo.getUid(),MXmppConnManager.getInstance().getChatMListener().new MsgProcessListener());
+		messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
+
 		// 定义当前好友的消息页数
 		if(MyBaseApplication.mUsrChatMsgPage.get(userInfo.getUid())== null){
 			MyBaseApplication.mUsrChatMsgPage.put(userInfo.getUid(), 1);
 		}else{
 			page = MyBaseApplication.mUsrChatMsgPage.get(userInfo.getUid());
 		}
+		Log.i("----userInfo----hostUid--->", userInfo.toString()+hostUid);
+		maxPage = messageDAO.getMaxPage(userInfo.getUid(),CustomConst.MESSAGE_PAGESIZE,hostUid);
+		
+		messages.addAll(messageDAO.
+				findMessageByUid(1,CustomConst.MESSAGE_PAGESIZE*page, userInfo.getUid().trim(),hostUid));
+		
+		MyBaseApplication.putHandler(userInfo.getUid() , handler);
+		
+		goBack();		
 		initViews();
 		initEvents();
 		refreshAdapter();
-		
 	}
 
 	public void initViews() {
 		//表情多媒体布局
-//		mLayoutEmotionMedia = (FrameLayout)findViewById(R.id.fl_emotion_media);
+		mLayoutEmotionMedia = (FrameLayout)findViewById(R.id.fl_emotion_media);
 		mLoPlusBarPic = (View)findViewById(R.id.include_chat_plus_pic);
 		mLoPlusBarCarema = (View)findViewById(R.id.include_chat_plus_camera);
 		mIvPlusBarPic = (ImageView)mLoPlusBarPic.findViewById(R.id.iv_chat_plus_image);
@@ -161,13 +128,12 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		mRfLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
 		mBtnMsgSend = (Button) findViewById(R.id.btn_chat_send);
 		mEmtMsg = (EmotionEditText) findViewById(R.id.et_chat_msg);
-		mIvEmotion = (ImageView) findViewById(R.id.iv_chat_biaoqing);
 		//开启多媒体按钮
 		mIvMedia = (ImageView)findViewById(R.id.iv_chat_media);
 		//消息列表ListView
 		mLvCommonMsg = (CommonChatListView) findViewById(R.id.lv_chat);
 		mGvEmotion = (GridView)findViewById(R.id.gv_chat_biaoqing);
-//		mLayoutEmotionMedia.setVisibility(View.GONE);
+		mLayoutEmotionMedia.setVisibility(View.GONE);
 		mLayoutEmotion = (LinearLayout)findViewById(R.id.ll_chat_face);
 		mLayoutMedia = (LinearLayout)findViewById(R.id.ll_chat_plusbar);
 		loadImage();
@@ -177,9 +143,6 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		//表情
 //		mGvEmotion.setAdapter(new FaceGridViewAdapter(this));
 		
-		mRfLayout = (SwipeRefreshLayout)findViewById(R.id.srfl_chat);
-		
-		mEmtMsg = (EditText) findViewById(R.id.et_chat_msg);
 	}
 
 	//通过图片得到对应缓存应用栏图标的图片
@@ -196,8 +159,6 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		}
 		return bitmap;
 	}
-	
-
 
 	/**
 	 * 加载多媒体框内的图片
@@ -220,7 +181,6 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 	protected void initEvents() {
 		mRfLayout.setOnRefreshListener(this);
 		mBtnMsgSend.setOnClickListener(this);
-		mIvEmotion.setOnClickListener(this);
 		mEmtMsg.setOnTouchListener(this);
 		mLvCommonMsg.setOnTouchListener(this);
 		mGvEmotion.setOnItemClickListener(this);
@@ -259,7 +219,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 						userInfo.getName()
 						) ;
 				
-//			sendRowid = messageDAO.save(message, hostUid);
+			sendRowid = messageDAO.save(message, hostUid);
 			messages.add(message);
 			new SendFileThread(mills,sendRowid,newPath, userInfo.getUid(),CustomConst.FILETYPE_IMAGE).start();
 			refreshAdapter();
@@ -306,6 +266,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 			"2012-09-01 18:50" };
 	private final static int COUNT = 8;
 
+	/*
 	public void initData() {
 		for (int i = 0; i < COUNT; i++) {
 			ChatMsgEntity entity = new ChatMsgEntity();
@@ -324,7 +285,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 
 //		mAdapter = new ChatMsgViewAdapter(this, mDataArrays);
 //		mLvCommonMsg.setAdapter(mAdapter);
-	}
+	}*/
 
 	@Override
 	public void onClick(View v) {
@@ -333,30 +294,30 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 			/*
 			 * 如果素材库框显示
 			 */
-//			if(mLayoutEmotionMedia.isShown()){
-//				/*
-//				 * 如果表情框是可视的，这时只需跳到多媒体框来显示
-//				 * 否则就证明当前打开的是多媒体框，就隐藏整个素材库;
-//				 */
-//				if(mLayoutEmotion.isShown()){
-//					mLayoutEmotion.setVisibility(View.GONE);
-//					mLayoutMedia.setVisibility(View.VISIBLE);
-//				}else{
-//					mLayoutEmotionMedia.setVisibility(View.GONE);
-//				}
+			if(mLayoutEmotionMedia.isShown()){
+				/*
+				 * 如果表情框是可视的，这时只需跳到多媒体框来显示
+				 * 否则就证明当前打开的是多媒体框，就隐藏整个素材库;
+				 */
+				if(mLayoutEmotion.isShown()){
+					mLayoutEmotion.setVisibility(View.GONE);
+					mLayoutMedia.setVisibility(View.VISIBLE);
+				}else{
+					mLayoutEmotionMedia.setVisibility(View.GONE);
+				}
 			/*
 			 * 如果素材库当前不显示
 			 * 无论怎样，先把表情框隐藏，然后设置	
 			 * 多媒体框为显示
 			 */
-//			}else{
-//				mLayoutEmotion.setVisibility(View.GONE);
-//				mLvCommonMsg.setSelection(messages.size() - 1);
-//				mInputManager.hideSoftInputFromWindow(mEmtMsg.getWindowToken(),
-//						0);
-//				mLayoutEmotionMedia.setVisibility(View.VISIBLE);
-//				mLayoutMedia.setVisibility(View.VISIBLE);
-//			}
+			}else{
+				mLayoutEmotion.setVisibility(View.GONE);
+				mLvCommonMsg.setSelection(messages.size() - 1);
+				mInputManager.hideSoftInputFromWindow(mEmtMsg.getWindowToken(),
+						0);
+				mLayoutEmotionMedia.setVisibility(View.VISIBLE);
+				mLayoutMedia.setVisibility(View.VISIBLE);
+			}
 			
 			break;
 			
@@ -401,7 +362,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 					userInfo.getName()
 					) ;
 			
-//			messageDAO.save(message,hostUid);
+			messageDAO.save(message,hostUid);
 			messages.add(message);
 			refreshAdapter();
 		}
@@ -410,21 +371,22 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-
+Log.i("------>","onTouch -------");
 		switch (v.getId()) {
 		case R.id.et_chat_msg:
 			if (event.getAction() == MotionEvent.ACTION_UP) {
-//				if (mLayoutEmotionMedia.isShown()) {
-//					mLayoutEmotionMedia.setVisibility(View.GONE);
-//				}
+				if (mLayoutEmotionMedia.isShown()) {
+					mLayoutEmotionMedia.setVisibility(View.GONE);
+				}
 			}
+			Log.i("------>","1111111 -------");
 			break;
 
 		case R.id.lv_chat:
 			if (event.getAction() == MotionEvent.ACTION_UP) {
-//				if (mLayoutEmotionMedia.isShown()) {
-//					mLayoutEmotionMedia.setVisibility(View.GONE);
-//				}
+				if (mLayoutEmotionMedia.isShown()) {
+					mLayoutEmotionMedia.setVisibility(View.GONE);
+				}
 				mInputManager.hideSoftInputFromWindow(
 						mEmtMsg.getWindowToken(), 0);
 			}
@@ -441,7 +403,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 			switch(msg.what){
 				case CustomConst.HANDLER_MGS_ADD:
 					Long rowid = (Long)msg.obj;
-//					message = messageDAO.findByRownum(rowid,hostUid);
+					message = messageDAO.findByRownum(rowid,hostUid);
 					messages.add(message);
 					refreshAdapter();
 					break;
@@ -490,8 +452,8 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		
 		if(page <= maxPage){
 			MyBaseApplication.mUsrChatMsgPage.put(userInfo.getUid(), page);
-//			messages.addAll(0,messageDAO.
-//					findMessageByUid(page, CustomConst.MESSAGE_PAGESIZE, userInfo.getUid().trim(),hostUid));
+			messages.addAll(0,messageDAO.
+					findMessageByUid(page, CustomConst.MESSAGE_PAGESIZE, userInfo.getUid().trim(),hostUid));
 			handler.postDelayed(new Runnable() {
 				@Override
 				public void run() {
@@ -525,16 +487,16 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		super.onSaveInstanceState(outState);
 	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-
-		try {
-			if(null!=mRecordUtil) mRecordUtil.stop();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	protected void onPause() {
+//		super.onPause();
+//
+//		try {
+//			if(null!=mRecordUtil) mRecordUtil.stop();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	@Override
 	protected void onStop() {
