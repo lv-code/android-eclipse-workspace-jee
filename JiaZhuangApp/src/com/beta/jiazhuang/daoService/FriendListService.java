@@ -14,13 +14,14 @@ import com.beta.jiazhuang.util.CustomConst;
  * 后台服务程序，监听消息列表的好友未读消息
  *
  */
-public class ChattPeopleService {
+public class FriendListService {
 	
 	private MessageDAO messageDAO;
 	
-	public ChattPeopleService(){
+	public FriendListService(){
 		messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
 	}
+	
 	/**
 	 * 获取消息列表的成员
 	 * @param uids
@@ -33,20 +34,22 @@ public class ChattPeopleService {
 			if(oneFriendEnt!=null){
 				cPeoples.add(oneFriendEnt);
 			}
-			
 		}
 		return cPeoples;
-		
 	}
 	
-	//获取有未读消息的用户
+	/**
+	 * 获取有未读消息的用户
+	 * @param uid
+	 * @param hostUid
+	 * @return
+	 */
 	public OneFriendEntity findByUid(String uid,String hostUid){
 		
 		long count = messageDAO.findReceiveButNotReadByUid(uid,hostUid);
 		OneFriendEntity oneFriendEnt = null;
 		oneFriendEnt = new OneFriendEntity(uid, count);
 		return oneFriendEnt;
-		
 	}
  	
 }

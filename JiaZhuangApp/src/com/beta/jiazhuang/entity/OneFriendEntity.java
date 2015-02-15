@@ -27,6 +27,11 @@ public class OneFriendEntity extends Entity implements Serializable{
 	private String name;// 姓名
 	private int state;//在线状态 0-在线，1-隐身
 	
+	public OneFriendEntity(String uid, long msgNotReadCount) {
+		super();
+		this.msgNotReadCount = msgNotReadCount;
+	}
+	
 	public OneFriendEntity(String uid, String avatar, String industry, String name, int state, long msgNotReadCount) {
 		super();
 		this.uid = uid;

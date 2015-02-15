@@ -82,7 +82,7 @@ public class MReceiveChatListener implements ChatManagerListener{
 				} catch (XMPPException e) {
 					e.printStackTrace();
 				}
-					
+				
 				rowid = messageDAO.save(mMsg,hostUid);
 				if(!MyBaseApplication.mJIDChats.containsKey(uid)){
 					MyBaseApplication.mJIDChats.put(uid, chat);

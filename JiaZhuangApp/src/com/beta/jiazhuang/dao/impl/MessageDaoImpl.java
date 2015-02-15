@@ -168,11 +168,11 @@ public class MessageDaoImpl implements MessageDAO {
 		
 		switch (mState) {
 		
-		case READED:
+		case ARRIVED:
 			state = 0;
 			break;
 
-		case ARRIVED:
+		case READED:
 			state = 1;
 			break;
 			

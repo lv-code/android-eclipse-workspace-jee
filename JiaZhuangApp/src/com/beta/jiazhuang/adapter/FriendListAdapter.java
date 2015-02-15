@@ -23,7 +23,7 @@ import com.beta.main.R;
 public class FriendListAdapter extends BaseListViewAdapter{
 	
 	//聊天联系人组
-	private List<OneFriendEntity> mFriendList;
+	public List<OneFriendEntity> mFriendList;
 	
 	public FriendListAdapter(Context context,List<OneFriendEntity> mFriendList){
 		super(context, mFriendList);
@@ -42,7 +42,7 @@ public class FriendListAdapter extends BaseListViewAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
 		ViewHolder holder = null;
-		OneFriendEntity mUsrmessage = mFriendList.get(position);
+		OneFriendEntity mOneFriendEntity = mFriendList.get(position);
 		
 		if(view == null){
 			view = LayoutInflater.from(context).inflate(R.layout.friend_list_item, null);
@@ -58,13 +58,13 @@ public class FriendListAdapter extends BaseListViewAdapter{
 		}
 		
 		holder.avatar.setBackgroundResource(R.drawable.tmp_touxiang01);
-		holder.name.setText(mUsrmessage.getName());
-		holder.job.setText(mUsrmessage.getIndustry());
+		holder.name.setText(mOneFriendEntity.getName());
+		holder.job.setText(mOneFriendEntity.getIndustry());
 
-		if(mUsrmessage.getMsgNotReadCount()> 0){
+		if(mOneFriendEntity.getMsgNotReadCount()> 0){
 			holder.tv_msgState.setTextColor(0xffffffff);
 			holder.tv_msgState.setBackgroundResource(R.drawable.chatmsg_not_read_background);
-			holder.tv_msgState.setText(mUsrmessage.getMsgNotReadCount()+"");
+			holder.tv_msgState.setText(mOneFriendEntity.getMsgNotReadCount()+"");
 			
 		}else{
 			holder.tv_msgState.setBackgroundColor(0x00000000);;

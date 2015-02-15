@@ -16,7 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.beta.jiazhuang.adapter.FriendListAdapter;
-import com.beta.jiazhuang.daoService.ChattPeopleService;
+import com.beta.jiazhuang.daoService.FriendListService;
 import com.beta.jiazhuang.entity.OneFriendEntity;
 import com.beta.jiazhuang.mybase.MyBaseActivity;
 import com.beta.jiazhuang.mybase.MyBaseApplication;
@@ -28,7 +28,8 @@ import com.beta.main.R;
 public class FriendListActivity extends MyBaseActivity {
 
 	//聊天后台服务
-	private ChattPeopleService chattPeopleService;
+//	private ChattPeopleService chattPeopleService;
+	private FriendListService mFriendListService;
 	//好友列表
 	private List<OneFriendEntity> mFriendList;
 	// FriendList适配器
@@ -51,7 +52,8 @@ public class FriendListActivity extends MyBaseActivity {
 		if(MyBaseApplication.xmppConnection != null){
 			MyBaseApplication.getInstance().dbHelper.CreateSelfTable(MyBaseApplication.xmppConnection.getUser().split("@")[0]);
 		}
-		chattPeopleService = new ChattPeopleService();
+//		chattPeopleService = new ChattPeopleService();
+		mFriendListService = new FriendListService();
 		
 		//从XMPPServer获取好友列表
 		XmppFriendManager xManager = XmppFriendManager.getInstance();
@@ -73,6 +75,7 @@ public class FriendListActivity extends MyBaseActivity {
 			if (msg.what == CustomConst.HANDLER_FRIEND_LIST_UPDATE){
 				
 				String uid = (String)msg.obj;
+				adapter.mFriendList = mFriendListService.findAll(getUids(), hostUid);
 				adapter.notifyDataSetChanged();
 				
 				new Toast(context).makeText(context, "正在 更新聊天记录ing", Toast.LENGTH_LONG).show();
@@ -109,8 +112,11 @@ public class FriendListActivity extends MyBaseActivity {
 
 	@Override
 	protected void onResume() {
-		resumeAction();
+//		resumeAction();
 		super.onResume();
+//		adapter.getFriends().clear();
+//		adapter.getFriends().addAll(mFriendList);
+//		adapter.notifyDataSetChanged();
 	}
 	
 	@Override
@@ -141,7 +147,7 @@ public class FriendListActivity extends MyBaseActivity {
 		
 		List<String> uids = getUids();
 		String user = MyBaseApplication.xmppConnection.getUser();
-		mFriendList = chattPeopleService.findAll(uids,user);
+		mFriendList = mFriendListService.findAll(uids,user);
 		
 	}
 	
@@ -151,7 +157,7 @@ public class FriendListActivity extends MyBaseActivity {
 			
 			if(people.getUid().equals(uid)){
 				adapter.getFriends().remove(people);
-				people = chattPeopleService.findByUid(uid,hostUid);
+				people = mFriendListService.findByUid(uid,hostUid);
 				adapter.getFriends().add(0,people);
 				
 				break;
