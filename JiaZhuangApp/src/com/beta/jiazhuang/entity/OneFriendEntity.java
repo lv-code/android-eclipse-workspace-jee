@@ -39,6 +39,7 @@ public class OneFriendEntity extends Entity implements Serializable{
 		this.industry = industry;
 		this.name = name;
 		this.state = state;
+		this.msgNotReadCount = msgNotReadCount;
 	}
 
 	public String getUid() {

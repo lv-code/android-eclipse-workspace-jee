@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.beta.jiazhuang.dao.MessageDAO;
 import com.beta.jiazhuang.db.DBHelper;
@@ -46,9 +47,7 @@ public class MessageDaoImpl implements MessageDAO {
 		long rowid = db.insert(TABLE + uid.split("@")[0], null, values);
 		
 		System.out.println("MESSAGE INSERT " + rowid);
-		
 		db.setTransactionSuccessful();
-		
 		db.endTransaction();
 		
 		return rowid;
@@ -58,18 +57,18 @@ public class MessageDaoImpl implements MessageDAO {
 	public List<CommonMessage> findMessageByUid(int page,int pageSize ,String uid,String hostUid) {
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		
 		List<CommonMessage> megs = new ArrayList<CommonMessage>();
 		
 		Cursor cursor = db.query(TABLE + hostUid.split("@")[0], null, "uid = ?", new String[]{uid}, null, null, "msgtime desc", 
 						page==1?(0+","+pageSize):((((page-1)*pageSize) + "")+ ","+(pageSize)+""));
+		String n = page==1?(0+","+pageSize):((((page-1)*pageSize) + "")+ ","+(pageSize));
+		Log.d("------>", TABLE + hostUid.split("@")[0]+"uid = ?  "+new String[]{uid}+ " msgtime desc "+ 
+						n+"");
 		
 		while(cursor.moveToNext()){
 			
 			int state = cursor.getInt(4);
-			
 			int contextType = cursor.getInt(2);
-			
 			int msgDirection = cursor.getInt(7);
 			
 			megs.add(new CommonMessage(cursor.getInt(0),
@@ -97,21 +96,17 @@ public class MessageDaoImpl implements MessageDAO {
 		
 		switch (state) {
 		case 0:
-			mState = MSG_STATE.READED;
-			break;
-
-		case 1:
 			mState = MSG_STATE.ARRIVED;
 			break;
-		
+		case 1:
+			mState = MSG_STATE.READED;
+			break;
 		case 2:
 			mState = MSG_STATE.FAILED;
 			break;
-			
 		case 3:
 			mState = MSG_STATE.RECEIVEING;
 			break;	
-			
 		case 4:
 			mState = MSG_STATE.SENDDING;
 			break;
@@ -125,23 +120,18 @@ public class MessageDaoImpl implements MessageDAO {
 		MSG_CONTENT_TYPE mState = MSG_CONTENT_TYPE.TEXT;
 		
 		switch (state) {
-		
 		case 0:
 			mState = MSG_CONTENT_TYPE.TEXT;
 			break;
-
 		case 1:
 			mState = MSG_CONTENT_TYPE.IMAGE;
 			break;
-		
 		case 2:
 			mState = MSG_CONTENT_TYPE.MAP;
 			break;	
-			
 		case 3:
 			mState = MSG_CONTENT_TYPE.VOICE;
 			break;		
-			
 		}
 		return mState;
 	}
@@ -152,11 +142,10 @@ public class MessageDaoImpl implements MessageDAO {
 		
 		switch (state) {
 		case 0:
-			mState = MSG_DERATION.SEND;
-			break;
-
-		case 1:
 			mState = MSG_DERATION.RECEIVE;
+			break;
+		case 1:
+			mState = MSG_DERATION.SEND;
 			break;
 		}
 		return mState;
@@ -167,27 +156,21 @@ public class MessageDaoImpl implements MessageDAO {
 		int state = 0;
 		
 		switch (mState) {
-		
 		case ARRIVED:
 			state = 0;
 			break;
-
 		case READED:
 			state = 1;
 			break;
-			
 		case FAILED:
 			state = 2;
 			break;
-			
 		case RECEIVEING:
 			state = 3;
 			break;
-		
 		case SENDDING:
 			state = 4;
 			break;
-			
 		}
 		return state;
 	}
@@ -197,29 +180,17 @@ public class MessageDaoImpl implements MessageDAO {
 		int type = 0;
 		
 		switch (mType) {
-		
 		case TEXT:
-			
 			type = 0;
-			
 			break;
-
 		case IMAGE:
-			
 			type = 1;
-			
 			break;
-			
 		case MAP:
-			
 			type = 2;
-			
 			break;
-			
 		case VOICE:
-			
 			type = 3;
-			
 			break;
 		}
 		return type;
@@ -230,19 +201,12 @@ public class MessageDaoImpl implements MessageDAO {
 		int state = 0;
 		
 		switch (mState) {
-		
-		case SEND:
-			
-			state = 0;
-			
-			break;
-
 		case RECEIVE:
-			
-			state = 1;
-			
+			state = 0;
 			break;
-			
+		case SEND:
+			state = 1;
+			break;
 		}
 		
 		return state;
@@ -251,13 +215,12 @@ public class MessageDaoImpl implements MessageDAO {
 	public long findReceiveButNotReadByUid(String uid,String hostUid) {
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor cursor = db.rawQuery("SELECT COUNT(1) FROM " + TABLE + hostUid.split("@")[0] + " WHERE uid = ? and state != ? and msgDirection = 1 ", new String [] {uid,0+""});	
+		String sql = "SELECT COUNT(1) FROM " + TABLE + hostUid.split("@")[0] + " WHERE uid = ? and state != 1 and msgDirection = 0 ";
+		Cursor cursor = db.rawQuery(sql, new String [] {uid});	
 		cursor.moveToNext();
-		
 		long count = cursor.getLong(0);
-		
+		Log.e("----->----", "WHERE uid = "+uid+" and state != "+MSG_STATE.READED+" and msgDirection = 0 , count is "+count);
 		cursor.close();
-		
 		return count;
 	}
 	
@@ -270,17 +233,13 @@ public class MessageDaoImpl implements MessageDAO {
 	public CommonMessage findLastMesgByUid(String uid,String hostUid) {
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		
 		Cursor cursor = db.query(TABLE + hostUid.split("@")[0], null , "uid = ?", new String [] {uid},null, null, " id desc","0,1");
-		
 		CommonMessage commonMessage = null;
 		
 		if(cursor.moveToNext()){
 			
 			int state = cursor.getInt(4);
-			
 			int contextType = cursor.getInt(2);
-			
 			int msgDirection = cursor.getInt(7);
 			
 			commonMessage = new CommonMessage(cursor.getInt(0),
@@ -294,7 +253,6 @@ public class MessageDaoImpl implements MessageDAO {
 					  convertToMsgDirectionEnum(msgDirection),
 					  cursor.getString(9)
 					  );
-			
 		}
 		
 		return commonMessage;
@@ -304,17 +262,13 @@ public class MessageDaoImpl implements MessageDAO {
 	public CommonMessage findByRownum(long rowid,String uid) {
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		
 		Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + uid.split("@")[0] + " WHERE rowid = ? ", new String[]{rowid+""});
-		
 		CommonMessage commonMessage = null;
 		
 		while(cursor.moveToNext()){
 			
 			int state = cursor.getInt(4);
-			
 			int contextType = cursor.getInt(2);
-			
 			int msgDirection = cursor.getInt(7);
 			
 			commonMessage = new CommonMessage(cursor.getInt(0),
@@ -328,11 +282,9 @@ public class MessageDaoImpl implements MessageDAO {
 					  convertToMsgDirectionEnum(msgDirection),
 					  cursor.getString(9)
 					  );
-			
 		}
 		
 		cursor.close();
-		
 		return commonMessage;
 	}
 
@@ -340,13 +292,11 @@ public class MessageDaoImpl implements MessageDAO {
 	public void updateById(int id ,String uid,int state) {
 		
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		
 		db.beginTransaction();
+//		db.execSQL("UPDATE " + TABLE + uid.split("@")[0] +" SET state = ? WHERE id = ?", new String[]{state+"",id+""});
+		db.execSQL("UPDATE " + TABLE + uid.split("@")[0] +" SET state = ? WHERE id = ?", new Object[]{state, id});
 		
-		db.execSQL("UPDATE " + TABLE + uid.split("@")[0] +" SET state = ? WHERE id = ?", new String[]{state+"",id+""});
-	
 		db.setTransactionSuccessful();
-		
 		db.endTransaction();
 	}
 
@@ -354,15 +304,11 @@ public class MessageDaoImpl implements MessageDAO {
 	public int getMaxPage(String uid, int pageSize,String hostUid) {
 		
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		
 		Cursor cursor = db.rawQuery("SELECT COUNT(1) FROM " + TABLE + hostUid.split("@")[0] + " WHERE uid = ? ", new String [] {uid});
-		
 		cursor.moveToNext();
 		
 		long num = cursor.getLong(0);
-		
 		int maxPage = ((int)num/pageSize) + (num%pageSize==0?0:1);
-		
 		return maxPage;
 	}
 

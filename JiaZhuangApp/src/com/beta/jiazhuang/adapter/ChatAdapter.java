@@ -12,6 +12,7 @@ import com.beta.jiazhuang.bitmap.cache.ImageFetcher;
 import com.beta.jiazhuang.dao.MessageDAO;
 import com.beta.jiazhuang.entity.CommonMessage;
 import com.beta.jiazhuang.main.ChatCommonMessage;
+import com.beta.jiazhuang.main.MsgEume;
 import com.beta.jiazhuang.main.MsgEume.MSG_DERATION;
 import com.beta.jiazhuang.main.MsgEume.MSG_STATE;
 import com.beta.jiazhuang.mybase.MyBaseApplication;
@@ -51,7 +52,7 @@ public class ChatAdapter extends BaseAdapter {
 		   !state.equals(MSG_STATE.RECEIVEING) && 
 		   !state.equals(MSG_STATE.SENDDING) && 
 		   msgs.getMsgComeFromType().equals(MSG_DERATION.RECEIVE)){
-			messageDAO.updateById(msgs.getId(),uid,0);
+			messageDAO.updateById(msgs.getId(),uid,1);
 		}
 		return msgs;
 	}

@@ -72,9 +72,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		CustomTitleBar.getTitleBar(this, "和他（她）聊天");
 		mInputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		setContentView(R.layout.activity_chat);
 
 		// 启动activity时不自动弹出软键盘
 //		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -82,20 +80,20 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		// 获取从上面获取来的用户数据
 		Bundle bundle = getIntent().getExtras();
 		userInfo = (OneFriendEntity) bundle.getSerializable("user");
+		CustomTitleBar.getTitleBar(this, "和"+userInfo.getIndustry()+"："+userInfo.getName()+" 聊天");
 //		getActionBar().setTitle("与 " + userInfo.getName() + " 聊天中");
 		mChatManager = new MChatManager(MXmppConnManager.getInstance().getChatManager());
 		mChat = mChatManager.createChat(userInfo.getUid(),MXmppConnManager.getInstance().getChatMListener().new MsgProcessListener());
 		messageDAO = (MessageDAO)MyBaseApplication.getInstance().dabatases.get(CustomConst.DAO_MESSAGE);
-
+		setContentView(R.layout.activity_chat);
 		// 定义当前好友的消息页数
 		if(MyBaseApplication.mUsrChatMsgPage.get(userInfo.getUid())== null){
 			MyBaseApplication.mUsrChatMsgPage.put(userInfo.getUid(), 1);
 		}else{
 			page = MyBaseApplication.mUsrChatMsgPage.get(userInfo.getUid());
 		}
-		Log.i("----userInfo----hostUid--->", userInfo.toString()+hostUid);
 		maxPage = messageDAO.getMaxPage(userInfo.getUid(),CustomConst.MESSAGE_PAGESIZE,hostUid);
-		
+		//获取与该用户的消息
 		messages.addAll(messageDAO.
 				findMessageByUid(1,CustomConst.MESSAGE_PAGESIZE*page, userInfo.getUid().trim(),hostUid));
 		
@@ -211,7 +209,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 						userInfo.getUid().trim(),
 						"nearby_people_other",
 						mills,
-						"0.12km",
+						"0.12km-FromChatAct",
 						newPath,
 						MSG_STATE.SENDDING,
 						MSG_CONTENT_TYPE.IMAGE,
@@ -371,7 +369,6 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-Log.i("------>","onTouch -------");
 		switch (v.getId()) {
 		case R.id.et_chat_msg:
 			if (event.getAction() == MotionEvent.ACTION_UP) {

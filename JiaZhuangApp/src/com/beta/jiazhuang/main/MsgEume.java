@@ -8,7 +8,7 @@ public class MsgEume {
 	 * FAILED  - 2;
 	 * RECEIVEING - 3;
 	 * SENDDING - 4;
-	 * @author WHF
+	 * @author zg
 	 */
 	public enum MSG_STATE{
 		//到达
@@ -27,7 +27,7 @@ public class MsgEume {
 	 * 信息流向
 	 * RECEIVE - 0;
 	 * SEND - 1;
-	 * @author WHF
+	 * @author zg
 	 *
 	 */
 	public enum MSG_DERATION{
@@ -43,7 +43,7 @@ public class MsgEume {
 	 * IMAGE - 1;
 	 * VOICE - 2;
 	 * MAP - 3;
-	 * @author WHF
+	 * @author zg
 	 *
 	 */
 	public enum MSG_CONTENT_TYPE{
@@ -60,7 +60,7 @@ public class MsgEume {
 	
 	/**
 	 * 用户信息界面类型
-	 * @author WHF
+	 * @author zg
 	 *
 	 */
 	public enum USERINFO_TYPE{
@@ -72,7 +72,7 @@ public class MsgEume {
 	}
 	/**
 	 * 提示广播类型
-	 * @author WHF
+	 * @author zg
 	 *
 	 */
 	public enum BORCAST_RECEIVER{
@@ -80,7 +80,6 @@ public class MsgEume {
 		GROUP,
 		//单人
 		SINGLE_PEOPLE
-		
 	}
 	
 }

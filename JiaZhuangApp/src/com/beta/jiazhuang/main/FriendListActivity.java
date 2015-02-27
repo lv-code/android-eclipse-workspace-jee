@@ -1,9 +1,6 @@
 package com.beta.jiazhuang.main;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.beta.jiazhuang.adapter.FriendListAdapter;
 import com.beta.jiazhuang.daoService.FriendListService;
@@ -55,15 +51,10 @@ public class FriendListActivity extends MyBaseActivity {
 //		chattPeopleService = new ChattPeopleService();
 		mFriendListService = new FriendListService();
 		
-		//从XMPPServer获取好友列表
-		XmppFriendManager xManager = XmppFriendManager.getInstance();
-		mFriendList = xManager.getFriends();
-		//初始化 chattingPeoples
-//		resumeAction();
-		
+		//初始化组件
 		initViews();
 		initListVew();
-
+		
 		MyBaseApplication.putHandler("FriendListActivity", handler);
 	}
 	
@@ -75,10 +66,11 @@ public class FriendListActivity extends MyBaseActivity {
 			if (msg.what == CustomConst.HANDLER_FRIEND_LIST_UPDATE){
 				
 				String uid = (String)msg.obj;
-				adapter.mFriendList = mFriendListService.findAll(getUids(), hostUid);
+				XmppFriendManager xManager = XmppFriendManager.getInstance();
+				adapter.mFriendList = xManager.getFriends();
+//				adapter.mFriendList = mFriendListService.findAll(getUids(), hostUid);
 				adapter.notifyDataSetChanged();
-				
-				new Toast(context).makeText(context, "正在 更新聊天记录ing", Toast.LENGTH_LONG).show();
+//				new Toast(context).makeText(context, "正在 更新聊天记录ing", Toast.LENGTH_LONG).show();
 			}
 		}
 	};
@@ -88,14 +80,7 @@ public class FriendListActivity extends MyBaseActivity {
 	}
 
 	public void initListVew() {
-		
-//		SimpleAdapter sa = new SimpleAdapter(context, getData(),
-//				R.layout.friend_list_item, new String[] { "avatar", "job", "name" },
-//				new int[] { R.id.ivAvatar, R.id.tvJob, R.id.tvName });
-		
-		adapter = new FriendListAdapter(context, mFriendList);
-		
-		lv.setAdapter(adapter);
+
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -112,11 +97,17 @@ public class FriendListActivity extends MyBaseActivity {
 
 	@Override
 	protected void onResume() {
-//		resumeAction();
 		super.onResume();
-//		adapter.getFriends().clear();
-//		adapter.getFriends().addAll(mFriendList);
-//		adapter.notifyDataSetChanged();
+		resumeAction();
+		adapter = new FriendListAdapter(context, mFriendList);
+		lv.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+//		if (adapter!=null) {
+//			//刷新列表
+//			adapter.getFriends().clear();
+//			adapter.getFriends().addAll(mFriendList);
+//			adapter.notifyDataSetChanged();
+//		}
 	}
 	
 	@Override
@@ -133,48 +124,16 @@ public class FriendListActivity extends MyBaseActivity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-	
-	private List<String>  getUids(){
-		
-		List<String> uids = new ArrayList<String>();
-		for(OneFriendEntity cByPeople : mFriendList){
-			uids.add(cByPeople.getUid());
-		}
-		return uids;
-	}
-	
+
+	/**
+	 * 从XMPPServer获取好友列表
+	 */
 	private void resumeAction(){
-		
-		List<String> uids = getUids();
-		String user = MyBaseApplication.xmppConnection.getUser();
-		mFriendList = mFriendListService.findAll(uids,user);
-		
+		XmppFriendManager xManager = XmppFriendManager.getInstance();
+		mFriendList = xManager.getFriends();
 	}
 	
-	public void refreshSession(String uid){
-		
-		for(OneFriendEntity people : adapter.getFriends()){
-			
-			if(people.getUid().equals(uid)){
-				adapter.getFriends().remove(people);
-				people = mFriendListService.findByUid(uid,hostUid);
-				adapter.getFriends().add(0,people);
-				
-				break;
-			}
-		}
-	}
+
 	
-	private ArrayList<Map<String, Object>> getData() {
-		ArrayList<Map<String, Object>> mData = new ArrayList<Map<String, Object>>();
-		
-		for (OneFriendEntity friend : mFriendList) {
-			HashMap<String, Object> item = new HashMap<String, Object>();
-			item.put("job", friend.getIndustry());
-			item.put("name", friend.getName());
-			item.put("avatar", R.drawable.tmp_touxiang01);
-			mData.add(item);
-		}
-		return mData;
-	}
+
 }

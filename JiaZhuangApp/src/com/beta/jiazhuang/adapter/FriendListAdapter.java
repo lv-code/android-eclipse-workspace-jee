@@ -61,14 +61,14 @@ public class FriendListAdapter extends BaseListViewAdapter{
 		holder.name.setText(mOneFriendEntity.getName());
 		holder.job.setText(mOneFriendEntity.getIndustry());
 
-		if(mOneFriendEntity.getMsgNotReadCount()> 0){
+		if(mOneFriendEntity.getMsgNotReadCount()> 0 && mOneFriendEntity.getMsgNotReadCount()< 100){
 			holder.tv_msgState.setTextColor(0xffffffff);
 			holder.tv_msgState.setBackgroundResource(R.drawable.chatmsg_not_read_background);
 			holder.tv_msgState.setText(mOneFriendEntity.getMsgNotReadCount()+"");
 			
 		}else{
 			holder.tv_msgState.setBackgroundColor(0x00000000);;
-			holder.tv_msgState.setText("99");
+			holder.tv_msgState.setText("");
 		}
 		
 		return view;

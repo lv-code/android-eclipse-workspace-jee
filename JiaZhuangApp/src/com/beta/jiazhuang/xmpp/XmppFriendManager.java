@@ -135,7 +135,7 @@ public class XmppFriendManager {
 						"设计师", //职业"姓名", //
 						TypeConverter.nullStringDefaultValue(vCard.getNickName(), entry.getName()),
 						roster.getPresence(entry.getUser()).isAvailable()?0:1,
-						messageDAO.findReceiveButNotReadByUid(entry.getUser(),MyBaseApplication.xmppConnection.getUser())
+						messageDAO.findReceiveButNotReadByUid(entry.getUser(), MyBaseApplication.xmppConnection.getUser())
 						);
 				friends.add(friend);
 			}

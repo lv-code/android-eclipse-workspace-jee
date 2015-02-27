@@ -215,9 +215,7 @@ public class MyBaseApplication extends Application {
 	public void exit(){
 		
 		for(Activity activity : getInstance().activities){
-			
 			activity.finish();
-			
 		}
 		getInstance().activities.clear();
 		

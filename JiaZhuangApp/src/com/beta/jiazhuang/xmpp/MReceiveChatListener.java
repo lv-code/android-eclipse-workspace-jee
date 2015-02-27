@@ -32,11 +32,10 @@ import com.beta.jiazhuang.util.TypeConverter;
 public class MReceiveChatListener implements ChatManagerListener{
 
 	XmppFriendManager xManager;
+	String hostUid;
 
 	MessageDAO messageDAO;
 	ChattingPeopleDAO cPeopleDAO;
-	
-	String hostUid;
 	
 	public MReceiveChatListener() {
 
@@ -55,6 +54,11 @@ public class MReceiveChatListener implements ChatManagerListener{
 		
 	}
 	
+	/**
+	 * @author zg
+	 *
+	 * 消息监听执行者
+	 */
 	public class MsgProcessListener implements MessageListener{
 			
 			@Override
@@ -95,7 +99,7 @@ public class MReceiveChatListener implements ChatManagerListener{
 //					MyBaseApplication.getHandlers("FriendListActivity").get(0).sendMessage(om);
 //				}
 				
-				handRefreshSession(uid);
+				handFriendListActivity(uid);
 				
 				//聊天对话框内刷新
 				List<Handler> handlers = MyBaseApplication.getHandlers(uid);
@@ -109,8 +113,11 @@ public class MReceiveChatListener implements ChatManagerListener{
 				}
 			}
 			
-			//
-			public void handRefreshSession(String uid) {
+			/**
+			 * 刷新好友列表
+			 * @param uid
+			 */
+			public void handFriendListActivity(String uid) {
 				
 				android.os.Message om = new android.os.Message();
 				om.what = CustomConst.HANDLER_FRIEND_LIST_UPDATE;
