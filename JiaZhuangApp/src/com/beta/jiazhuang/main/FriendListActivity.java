@@ -24,14 +24,13 @@ import com.beta.main.R;
 public class FriendListActivity extends MyBaseActivity {
 
 	//聊天后台服务
-//	private ChattPeopleService chattPeopleService;
-	private FriendListService mFriendListService;
+//	private FriendListService mFriendListService;
 	//好友列表
 	private List<OneFriendEntity> mFriendList;
 	// FriendList适配器
 	private FriendListAdapter adapter;
 	
-	private String hostUid = MXmppConnManager.hostUid;
+//	private String hostUid = MXmppConnManager.hostUid;
 	
 	Context context = FriendListActivity.this;
 	ListView lv;
@@ -49,7 +48,7 @@ public class FriendListActivity extends MyBaseActivity {
 			MyBaseApplication.getInstance().dbHelper.CreateSelfTable(MyBaseApplication.xmppConnection.getUser().split("@")[0]);
 		}
 //		chattPeopleService = new ChattPeopleService();
-		mFriendListService = new FriendListService();
+//		mFriendListService = new FriendListService();
 		
 		//初始化组件
 		initViews();
@@ -102,12 +101,6 @@ public class FriendListActivity extends MyBaseActivity {
 		adapter = new FriendListAdapter(context, mFriendList);
 		lv.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
-//		if (adapter!=null) {
-//			//刷新列表
-//			adapter.getFriends().clear();
-//			adapter.getFriends().addAll(mFriendList);
-//			adapter.notifyDataSetChanged();
-//		}
 	}
 	
 	@Override
@@ -132,8 +125,6 @@ public class FriendListActivity extends MyBaseActivity {
 		XmppFriendManager xManager = XmppFriendManager.getInstance();
 		mFriendList = xManager.getFriends();
 	}
-	
-
 	
 
 }
