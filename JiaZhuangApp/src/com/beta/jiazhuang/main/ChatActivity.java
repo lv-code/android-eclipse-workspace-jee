@@ -195,7 +195,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		if(requestCode == CustomConst.MEDIA_CODE_PICTURE && resultCode == RESULT_OK){
 				
 			String path = FileUtils.getPictureSelectedPath(intent, this);
-			String newPath = CacheUtils.getImagePath(mApplication, "sendImage/" + TypeConverter.getUUID() + ".pilin");
+			String newPath = CacheUtils.getImagePath(mApplication, "sendImage/" + TypeConverter.getUUID() + ".jiazhuangApp");
 			try {
 			Bitmap bitmap = ImageResizer.decodeSampledBitmapFromFile(path, 400, 800);
 			FileUtils.compressAndWriteFile(bitmap, mApplication, newPath);

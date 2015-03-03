@@ -1,7 +1,5 @@
 package com.beta.jiazhuang.main;
 
-import org.jivesoftware.smack.XMPPException;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
@@ -22,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beta.jiazhuang.mybase.MyBaseActivity;
-import com.beta.jiazhuang.mybase.MyBaseApplication;
 import com.beta.jiazhuang.util.CustomConst;
 import com.beta.jiazhuang.util.MyHelper;
 import com.beta.jiazhuang.view.CommonDialog;
@@ -30,6 +27,7 @@ import com.beta.jiazhuang.xmpp.MXmppConnManager;
 import com.beta.main.R;
 
 public class LoginActivity extends MyBaseActivity implements OnClickListener {
+
 	private Activity activity = LoginActivity.this;
 	private SharedPreferences sharedPreferences;
 	private CommonDialog dialog;
@@ -49,18 +47,8 @@ public class LoginActivity extends MyBaseActivity implements OnClickListener {
 		MyHelper.setNoTitle(activity);
 		// 加载配置
 		sharedPreferences = getSharedPreferences("config", MODE_PRIVATE);
-		try {
-			// 如果登录过，就自动登录
-			if (autoLogin()) {
-				startActivity(FlowActivity.class);
-				finish();
-				return;
-			}
-		} catch (XMPPException e) {
-			e.printStackTrace();
-		}
-		
 		setContentView(R.layout.activity_login);
+
 		initViews();
 		initEvents();
 
@@ -83,37 +71,42 @@ public class LoginActivity extends MyBaseActivity implements OnClickListener {
 	Handler handler = new Handler() {
 
 		public void handleMessage(android.os.Message msg) {
+
 			//登录XMPPServer成功
 			if (msg.what == CustomConst.XMPP_HANDLER_SUCCESS) {
-				if (dialog != null)
-					dialog.dismiss();
-
 				if (mUser != null) {
-
 					Editor editor = sharedPreferences.edit();
 					editor.putString("n", mUser.getText().toString().trim());
 					editor.putString("p", mPassword.getText().toString().trim());
 					editor.commit();
-
 				}
 				startActivity(FlowActivity.class);
+				if (dialog != null)
+					dialog.dismiss();
 				finish();
 			} else if (msg.what == CustomConst.XMPP_HANDLER_ERROR) {
 				if (msg.arg1 == CustomConst.XMPP_ERROR_LOGINFAIL) {
+					if (dialog != null)
+						dialog.dismiss();
 					Toast.makeText(LoginActivity.this, "账号或者密码错误",
 							Toast.LENGTH_SHORT).show();
 				} else {
+					if (dialog != null)
+						dialog.dismiss();
 					Toast.makeText(LoginActivity.this, "网络存在异常,请检查",
 							Toast.LENGTH_SHORT).show();
 
-					handler.postDelayed(new loginXMPPServerRunable(), 60000);
+					handler.postDelayed(new loginXMPPServerRunable(), 10000);
 				}
 			}
 		};
 
 	};
 	
-	
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
 
 	private void initViews() {
 		mUser = (EditText) findViewById(R.id.phone);
@@ -162,7 +155,7 @@ public class LoginActivity extends MyBaseActivity implements OnClickListener {
 				R.layout.common_loading_dialog_layout);
 
 		dialog.show();
-		handler.postDelayed(new loginXMPPServerRunable(), 10000);
+		handler.postDelayed(new loginXMPPServerRunable(), 1000);
 	}
 
 	// 链接XMPPServer
@@ -171,10 +164,8 @@ public class LoginActivity extends MyBaseActivity implements OnClickListener {
 			String name = "";
 			String pwd = "";
 			if (mUser != null) {
-
 				name = mUser.getText().toString().trim();
 				pwd = mPassword.getText().toString().trim();
-
 			} else {
 				name = sharedPreferences.getString("n", "");
 				pwd = sharedPreferences.getString("p", "");
@@ -192,44 +183,5 @@ public class LoginActivity extends MyBaseActivity implements OnClickListener {
 			}
 		}
 	}
-	
-	private boolean autoLogin() throws XMPPException {
-		if (sharedPreferences.getString("n", "").equals("")
-				&& sharedPreferences.getString("p", "").equals("")) {
-			return false;
-		} else {
-			try {
-				if (MyBaseApplication.xmppConnection == null
-						|| !MyBaseApplication.xmppConnection.isConnected()) {
-					
-					MXmppConnManager.getInstance().new InitXmppConnectionTask(
-							handler).execute().get();
-					
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							
-							while (!success) {
-								try {
-									Thread.sleep(100);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-							}
-							
-						}
-					}).start();
 
-				}
-				MXmppConnManager.getInstance().mXmppLogin(
-						sharedPreferences.getString("n", ""),sharedPreferences.getString("p", ""),
-						getApplicationContext(),handler);
-			} catch (Exception e) {
-				e.printStackTrace();
-				Toast.makeText(this, "账号或者密码错误", Toast.LENGTH_SHORT).show();
-			}
-			return true;
-		}
-
-	}
 }

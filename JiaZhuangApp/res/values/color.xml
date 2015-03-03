@@ -16,6 +16,8 @@
     <!-- 标题栏 -->
     <color name="title_bar_bg">#905c44</color>
     <color name="title_text">#ffffff</color>
+    <!-- 欢迎 -->
+    <color name="bg_appstart">#905c44</color>
     <!-- 登陆 -->
     <color name="login_txt_color">#918b8b</color>
     <!-- 左边菜单 -->
@@ -44,6 +46,7 @@
     <color name="chat_send_btn">#ccc</color>
     <color name="login_edit_normal">#fff</color>
     <color name="chat_timestamp">#c5c4c4</color>
+    <color name="download_progressbar_bg">#4c000000</color>
     <!-- 用户收藏 -->
     <color name="user_collect_list_bg">#f1f1f1</color>
     <color name="user_collect_txt">#282828</color>

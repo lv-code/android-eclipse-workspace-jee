@@ -30,17 +30,12 @@ public class ChatImageMessage extends ChatCommonMessage implements OnClickListen
 private ImageView mIvImage;
 	
 	private FrameLayout mLayoutLoading;
-	
 	private ImageView mIvLoading;
-	
 	private TextView mHtvLoadingText;
-	
 	private AnimationDrawable mAnimation;
-	
 	private ImageView mIvDefault;
 	
 	private int mProcess;
-	
 	private Bitmap mBitmap;
 	
 	public ChatImageMessage(CommonMessage message, Context context,ImageFetcher imageFetcher) {
@@ -53,22 +48,19 @@ private ImageView mIvImage;
 		mImageFetcher.setImageCache(CacheUtils.getImageCache(mContext, "imageCache/"));
 		mImageFetcher.setLoadingImage(R.drawable.people_icon_selector);
 		mImageFetcher.setImageFadeIn(true);
-		
 	}
 	
 	@Override
 	protected void onInitViews() {
 		
 		View view = mInflater.inflate(R.layout.message_image, null);
-		
 		mLayoutMessageContainer.addView(view);
-		
 		mIvImage = (ImageView)view.findViewById(R.id.message_iv_msgimage);
 		
-//		mLayoutLoading = (FrameLayout)view.findViewById(R.id.message_layout_loading);
-//		mIvDefault = (ImageView)view.findViewById(R.id.message_iv_def_pic);
-//		mIvLoading = (ImageView)view.findViewById(R.id.message_iv_loading);
-//		mHtvLoadingText = (TextView)view.findViewById(R.id.message_htv_loading_text);
+		mLayoutLoading = (FrameLayout)view.findViewById(R.id.message_layout_loading);
+		mIvDefault = (ImageView)view.findViewById(R.id.message_iv_def_pic);
+		mIvLoading = (ImageView)view.findViewById(R.id.message_iv_loading);
+		mHtvLoadingText = (TextView)view.findViewById(R.id.message_htv_loading_text);
 		
 		mIvImage.setOnClickListener(this);
 		mIvImage.setOnLongClickListener(this);
@@ -83,11 +75,9 @@ private ImageView mIvImage;
 			case 0:
 				startLoadingAnimation();
 				break;
-
 			case 1:
 				updateLoadingProcess();
 				break;
-				
 			case 2:
 				stopLoadingAnimation();
 				break;
@@ -129,11 +119,8 @@ private ImageView mIvImage;
 	private void stopLoadingAnimation(){
 		
 		if(mAnimation != null){
-			
 			mAnimation.stop();
-			
 			mAnimation = null;
-			
 		}
 		mLayoutLoading.setVisibility(View.GONE);
 		mHtvLoadingText.setVisibility(View.GONE);

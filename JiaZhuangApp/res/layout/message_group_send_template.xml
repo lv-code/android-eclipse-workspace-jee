@@ -57,8 +57,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:id="@+id/message_layout_messagecontainer"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/left_margin_view"

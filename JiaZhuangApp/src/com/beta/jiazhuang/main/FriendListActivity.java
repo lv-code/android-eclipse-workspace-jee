@@ -12,12 +12,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.beta.jiazhuang.adapter.FriendListAdapter;
-import com.beta.jiazhuang.daoService.FriendListService;
 import com.beta.jiazhuang.entity.OneFriendEntity;
 import com.beta.jiazhuang.mybase.MyBaseActivity;
 import com.beta.jiazhuang.mybase.MyBaseApplication;
 import com.beta.jiazhuang.util.CustomConst;
-import com.beta.jiazhuang.xmpp.MXmppConnManager;
 import com.beta.jiazhuang.xmpp.XmppFriendManager;
 import com.beta.main.R;
 

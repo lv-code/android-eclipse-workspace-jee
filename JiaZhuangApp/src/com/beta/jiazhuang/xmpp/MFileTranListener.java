@@ -95,11 +95,8 @@ public class MFileTranListener implements FileTransferListener {
 	class updateStatusthread extends Thread{
 		
 		private long rowid;
-		
 		private IncomingFileTransfer accept;
-		
 		private String uid;
-		
 		private long mills;
 		
 		public updateStatusthread(long mills,long rowid,IncomingFileTransfer accept,String uid){
@@ -126,7 +123,7 @@ public class MFileTranListener implements FileTransferListener {
 		android.os.Message om = new android.os.Message();
 		om.what = CustomConst.HANDLER_FRIEND_LIST_UPDATE;
 		om.obj = uid;
-		MyBaseApplication.getHandlers("MsgFragment").get(0).sendMessage(om);
+		MyBaseApplication.getHandlers("FriendListActivity").get(0).sendMessage(om);
 		
 	}
 	/**
