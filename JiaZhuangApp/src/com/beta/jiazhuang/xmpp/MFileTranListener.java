@@ -70,15 +70,13 @@ public class MFileTranListener implements FileTransferListener {
 				}
 				//刷新消息列表
 				if(!cPeopleDAO.peopleChatting(uid,hostId)){
-					
 					android.os.Message om = new android.os.Message();
-					om.what = CustomConst.HANDLER_FRIEND_LIST_ADD;
+					om.what = CustomConst.HANDLER_FRIEND_LIST_UPDATE; //HANDLER_FRIEND_LIST_ADD
 					om.obj = uid;
-					MyBaseApplication.getHandlers("MsgFragment").get(0).sendMessage(om);
-					
+					MyBaseApplication.getHandlers("FriendListActivity").get(0).sendMessage(om);
 				}
 				
-				handRefreshSession(uid);
+//				handRefreshSession(uid);
 				refreshChatDialog(uid, rowid);
 				
 			} catch (XMPPException e) {
@@ -89,7 +87,7 @@ public class MFileTranListener implements FileTransferListener {
 	}
 	/**
 	 * 文件接收状态更新线程
-	 * @author whf
+	 * @author zg
 	 *
 	 */
 	class updateStatusthread extends Thread{
@@ -148,18 +146,14 @@ public class MFileTranListener implements FileTransferListener {
 		
 		// 聊天对话框内刷新
 		List<Handler> handlers = MyBaseApplication.getHandlers(uid);
-		
 		if(handlers == null) return;
-		
 		for (Handler hand : handlers) {
 
 			Log.i("MReceiveChatListener",
 					hand.getClass().toString().split("$")[0]);
 			if (hand.getClass().toString().contains("ChatActivity")) {
 				refreshImageMsg(hand, mills,what);
-
 			}
-
 		}
 		
 	}
@@ -188,7 +182,6 @@ public class MFileTranListener implements FileTransferListener {
 		osMsg.what = CustomConst.HANDLER_MGS_ADD;
 		osMsg.obj = mMsg;
 		handler.sendMessage(osMsg);
-		
 	}
 	
 

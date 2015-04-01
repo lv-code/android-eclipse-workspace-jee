@@ -195,7 +195,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		if(requestCode == CustomConst.MEDIA_CODE_PICTURE && resultCode == RESULT_OK){
 				
 			String path = FileUtils.getPictureSelectedPath(intent, this);
-			String newPath = CacheUtils.getImagePath(mApplication, "sendImage/" + TypeConverter.getUUID() + ".jiazhuangApp");
+			String newPath = CacheUtils.getImagePath(mApplication, "sendImage/" + TypeConverter.getUUID() + ".jiazhuang");
 			try {
 			Bitmap bitmap = ImageResizer.decodeSampledBitmapFromFile(path, 400, 800);
 			FileUtils.compressAndWriteFile(bitmap, mApplication, newPath);
@@ -254,37 +254,6 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		return newbmp;
 	}
 
-	private String[] msgArray = new String[] { "我的志愿是", "做一名校长",
-			"每天收集了学生的学费之后就去吃火锅", "今天吃麻辣火锅", "明天吃酸菜鱼火锅", "后天吃猪骨头火锅", "老师直夸我：",
-			"麦兜你终于找到生命的真谛了！", };
-
-	private String[] dataArray = new String[] { "2012-09-01 18:00",
-			"2012-09-01 18:10", "2012-09-01 18:11", "2012-09-01 18:20",
-			"2012-09-01 18:30", "2012-09-01 18:35", "2012-09-01 18:40",
-			"2012-09-01 18:50" };
-	private final static int COUNT = 8;
-
-	/*
-	public void initData() {
-		for (int i = 0; i < COUNT; i++) {
-			ChatMsgEntity entity = new ChatMsgEntity();
-			entity.setDate(dataArray[i]);
-			if (i % 2 == 0) {
-				entity.setName(MY_NAME);
-				entity.setMsgType(true);
-			} else {
-				entity.setName("麦太");
-				entity.setMsgType(false);
-			}
-
-			entity.setText(msgArray[i]);
-			mDataArrays.add(entity);
-		}
-
-//		mAdapter = new ChatMsgViewAdapter(this, mDataArrays);
-//		mLvCommonMsg.setAdapter(mAdapter);
-	}*/
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -316,7 +285,6 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 				mLayoutEmotionMedia.setVisibility(View.VISIBLE);
 				mLayoutMedia.setVisibility(View.VISIBLE);
 			}
-			
 			break;
 			
 		//发送消息
@@ -499,7 +467,6 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 	protected void onStop() {
 		super.onStop();
 	}
-	
 
 	/**
 	 * 发送文件线程
@@ -524,9 +491,7 @@ public class ChatActivity extends MyBaseChatActivity implements OnRefreshListene
 		
 		@Override
 		public synchronized void run() {
-			
 			MXmppConnManager.getInstance().sendFile(mills,rowid,type,file, handler, userid);
-			
 		}
 	}
 

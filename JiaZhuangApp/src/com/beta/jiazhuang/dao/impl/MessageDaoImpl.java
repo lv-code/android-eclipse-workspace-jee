@@ -127,9 +127,6 @@ public class MessageDaoImpl implements MessageDAO {
 			mState = MSG_CONTENT_TYPE.IMAGE;
 			break;
 		case 2:
-			mState = MSG_CONTENT_TYPE.MAP;
-			break;	
-		case 3:
 			mState = MSG_CONTENT_TYPE.VOICE;
 			break;		
 		}
@@ -186,11 +183,8 @@ public class MessageDaoImpl implements MessageDAO {
 		case IMAGE:
 			type = 1;
 			break;
-		case MAP:
-			type = 2;
-			break;
 		case VOICE:
-			type = 3;
+			type = 2;
 			break;
 		}
 		return type;

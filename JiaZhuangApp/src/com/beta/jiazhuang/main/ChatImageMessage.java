@@ -89,10 +89,10 @@ private ImageView mIvImage;
 		
 		mAnimation = new AnimationDrawable();
 		
-//		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_01), 300);
-//		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_02), 300);
-//		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_03), 300);
-//		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_04), 300);
+		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_01), 300);
+		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_02), 300);
+		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_03), 300);
+		mAnimation.addFrame(getDrawable(R.drawable.ic_loading_msgplus_04), 300);
 		
 		mAnimation.setOneShot(false);
 		mIvImage.setVisibility(View.VISIBLE);
@@ -106,14 +106,10 @@ private ImageView mIvImage;
 			
 			@Override
 			public void run() {
-				
 				mAnimation.start();
-				
 			}
 		});
-		
 		//mHandler.sendEmptyMessage(1);
-		
 	}
 	
 	private void stopLoadingAnimation(){

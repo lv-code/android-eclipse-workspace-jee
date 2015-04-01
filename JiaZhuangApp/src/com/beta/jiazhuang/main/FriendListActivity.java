@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.beta.jiazhuang.adapter.FriendListAdapter;
 import com.beta.jiazhuang.entity.OneFriendEntity;
@@ -67,7 +68,7 @@ public class FriendListActivity extends MyBaseActivity {
 				adapter.mFriendList = xManager.getFriends();
 //				adapter.mFriendList = mFriendListService.findAll(getUids(), hostUid);
 				adapter.notifyDataSetChanged();
-//				new Toast(context).makeText(context, "正在 更新聊天记录ing", Toast.LENGTH_LONG).show();
+				new Toast(context).makeText(context, "正在 更新聊天记录ing", Toast.LENGTH_LONG).show();
 			}
 		}
 	};

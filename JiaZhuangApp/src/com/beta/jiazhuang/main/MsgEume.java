@@ -42,7 +42,6 @@ public class MsgEume {
 	 * TEXT - 0;
 	 * IMAGE - 1;
 	 * VOICE - 2;
-	 * MAP - 3;
 	 * @author zg
 	 *
 	 */
@@ -53,9 +52,6 @@ public class MsgEume {
 		IMAGE,
 		//语音
 		VOICE,
-		//地图
-		MAP
-		
 	}
 	
 	/**

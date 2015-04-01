@@ -36,11 +36,11 @@
     </permission>
 
     <application
+        android:name="com.beta.jiazhuang.mybase.MyBaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/MyCustomTheme"
-        android:name="com.beta.jiazhuang.mybase.MyBaseApplication" >
+        android:theme="@style/MyCustomTheme" >
 
         <!-- 个推SDK配置开始 -->
         <!-- 配置的第三方参数属性 -->
@@ -64,6 +64,13 @@
             android:label="NotificationCenter"
             android:process=":pushservice" >
         </service>
+
+        <!-- 环信 Required. AppKey copied from Portal -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="lj#9pingmi" />
+        <!-- Required SDK核心功能 -->
+        <service android:name="com.easemob.chat.EMChatService" />
 
         <receiver android:name="com.igexin.sdk.PushReceiver" >
             <intent-filter>
@@ -169,8 +176,8 @@
         <activity
             android:name="com.beta.jiazhuang.main.StartActivity"
             android:label="@string/title_activity_start"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
